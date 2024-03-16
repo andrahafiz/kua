@@ -35,40 +35,35 @@ class RegisterController extends Controller
                     'users_id' => Auth()->user()->id
                 ],
                 [
-                    'registration_number' => 'INV' ?? 'asdasd',
-                    'location_name' => $request->location_name ?? 'asdasd',
-                    'akad_date_masehi' => $request->akad_date_masehi ?? now(),
+                    'registration_number' => 'INV',
+                    'location_name' => $request->location_name,
+                    'akad_date_masehi' => $request->akad_date_masehi,
                     'akad_date_hijriah' => $request->akad_date_hijriah ??  now(),
-                    'akad_location' => $request->akad_location ?? 'asdasd',
-                    'nationality_wife' => $request->nationality_wife ?? 'asdasd',
-                    'nik_wife' => $request->nik_wife ?? 'asdasd',
-                    'name_wife' => $request->name_wife ?? 'asdasd',
-                    'location_birth_wife' => $request->location_birth_wife ?? 'asdasd',
-                    'date_birth_wife' => $request->date_birth_wife ?? now(),
+                    'akad_location' => $request->akad_location,
+                    'nationality_wife' => $request->nationality_wife,
+                    'nik_wife' => $request->nik_wife,
+                    'name_wife' => $request->name_wife,
+                    'location_birth_wife' => $request->location_birth_wife,
+                    'date_birth_wife' => $request->date_birth_wife,
                     'old_wife' => $request->old_wife ?? 1,
-                    'status_wife' => $request->status_wife ?? 'asdasd',
-                    'religion_wife' => $request->religion_wife ?? 'asdasd',
-                    'address_wife' => $request->address_wife ?? 'asdasd',
-                    'nationality_husband' => $request->nationality_husband ?? 'asdasd',
-                    'nik_husband' => $request->nik_husband ?? 'asdasd',
-                    'name_husband' => $request->name_husband ?? 'asdasd',
-                    'location_birth_husband' => $request->location_birth_husband ?? 'asdasd',
-                    'date_birth_husband' => $request->date_birth_husband ?? now(),
+                    'status_wife' => $request->status_wife,
+                    'religion_wife' => $request->religion_wife,
+                    'address_wife' => $request->address_wife,
+                    'nationality_husband' => $request->nationality_husband,
+                    'nik_husband' => $request->nik_husband,
+                    'name_husband' => $request->name_husband,
+                    'location_birth_husband' => $request->location_birth_husband,
+                    'date_birth_husband' => $request->date_birth_husband,
                     'old_husband' => $request->old_husband ?? 1,
-                    'status_husband' => $request->status_husband ?? 'asdasd',
-                    'religion_husband' => $request->religion_husband ?? 'asdasd',
-                    'address_husband' => $request->address_husband ?? 'asdasd',
-                    'status_payment' => '0' ?? 'asdasd',
-                    'status' => 0 ?? 'asdasd',
+                    'status_husband' => $request->status_husband,
+                    'religion_husband' => $request->religion_husband,
+                    'address_husband' => $request->address_husband,
+                    'status_payment' => '0',
+                    'status' => 0,
                 ]
             );
 
             $document = $this->saveDocument($merried, $request);
-            // Married::updacreate([
-            //     'category' => $params['nama'],
-            //     'slug'     => Str::slug($params['nama']),
-            //     'code'     => Str::upper($params['code']),
-            // ]);
         });
         return redirect()->route('catin.merried.index')
             ->with('success', "Data kategori produk berhasil ditambah");
@@ -161,6 +156,5 @@ class RegisterController extends Controller
             'ijazah_husband' => $path_ijazah_husband ?? null,
             'photo_husband' => $path_photo_husband ?? null
         ]);
-        // dd();
     }
 }
