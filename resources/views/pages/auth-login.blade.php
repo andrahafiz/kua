@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="text-muted mt-5 text-center">
-        Sudah punya akun? <a href="auth-register.html">Daftar</a>
+        Sudah punya akun? <a href="{{ route('register') }}">Daftar</a>
     </div>
 @endsection
 

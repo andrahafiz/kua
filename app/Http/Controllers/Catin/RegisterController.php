@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\RegisterRequest;
+use App\Models\MarriedDocument;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,55 +24,58 @@ class RegisterController extends Controller
 
     public function index()
     {
-        return view('pages.catin.pendaftaran');
+        $married = Married::where('users_id', Auth::user()->id)->first();
+        $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
+        return view('pages.catin.pendaftaran', [
+            'married' => $married,
+            'documentmarried' => $documentmarried
+        ]);
     }
 
     public function store(RegisterRequest $request)
     {
-        // try {
-        DB::transaction(function () use ($request) {
-            $merried = Married::updateOrCreate(
-                [
-                    'users_id' => Auth()->user()->id
-                ],
-                [
-                    'registration_number' => 'INV',
-                    'location_name' => $request->location_name,
-                    'akad_date_masehi' => $request->akad_date_masehi,
-                    'akad_date_hijriah' => $request->akad_date_hijriah ??  now(),
-                    'akad_location' => $request->akad_location,
-                    'nationality_wife' => $request->nationality_wife,
-                    'nik_wife' => $request->nik_wife,
-                    'name_wife' => $request->name_wife,
-                    'location_birth_wife' => $request->location_birth_wife,
-                    'date_birth_wife' => $request->date_birth_wife,
-                    'old_wife' => $request->old_wife ?? 1,
-                    'status_wife' => $request->status_wife,
-                    'religion_wife' => $request->religion_wife,
-                    'address_wife' => $request->address_wife,
-                    'nationality_husband' => $request->nationality_husband,
-                    'nik_husband' => $request->nik_husband,
-                    'name_husband' => $request->name_husband,
-                    'location_birth_husband' => $request->location_birth_husband,
-                    'date_birth_husband' => $request->date_birth_husband,
-                    'old_husband' => $request->old_husband ?? 1,
-                    'status_husband' => $request->status_husband,
-                    'religion_husband' => $request->religion_husband,
-                    'address_husband' => $request->address_husband,
-                    'status_payment' => '0',
-                    'status' => 0,
-                ]
-            );
+        try {
+            DB::transaction(function () use ($request) {
+                $merried = Married::updateOrCreate(
+                    [
+                        'users_id' => Auth()->user()->id
+                    ],
+                    [
+                        'registration_number' => 'INV',
+                        'location_name' => $request->location_name,
+                        'akad_date_masehi' => $request->akad_date_masehi,
+                        'akad_date_hijriah' => $request->akad_date_hijriah ??  now(),
+                        'akad_location' => $request->akad_location,
+                        'nationality_wife' => $request->nationality_wife,
+                        'nik_wife' => $request->nik_wife,
+                        'name_wife' => $request->name_wife,
+                        'location_birth_wife' => $request->location_birth_wife,
+                        'date_birth_wife' => $request->date_birth_wife,
+                        'old_wife' => $request->old_wife ?? 1,
+                        'status_wife' => $request->status_wife,
+                        'religion_wife' => $request->religion_wife,
+                        'address_wife' => $request->address_wife,
+                        'nationality_husband' => $request->nationality_husband,
+                        'nik_husband' => $request->nik_husband,
+                        'name_husband' => $request->name_husband,
+                        'location_birth_husband' => $request->location_birth_husband,
+                        'date_birth_husband' => $request->date_birth_husband,
+                        'old_husband' => $request->old_husband ?? 1,
+                        'status_husband' => $request->status_husband,
+                        'religion_husband' => $request->religion_husband,
+                        'address_husband' => $request->address_husband,
+                        'status_payment' => '0',
+                        'status' => 0,
+                    ]
+                );
 
-            $document = $this->saveDocument($merried, $request);
-        });
-        return redirect()->route('catin.merried.index')
-            ->with('success', "Data kategori produk berhasil ditambah");
-        // }
-        // catch (\Throwable $e) {
-        //     return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        // }
-        dd($request->all());
+                $document = $this->saveDocument($merried, $request);
+            });
+            return redirect()->route('catin.merried.index')
+                ->with('success', "Data kategori produk berhasil ditambah");
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     private function saveDocument(Married $merried, $request)

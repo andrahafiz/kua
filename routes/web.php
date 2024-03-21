@@ -19,6 +19,8 @@ use App\Http\Controllers\Catin\RegisterController;
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'login_aksi'])->name('login_aksi');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'register_aksi'])->name('register_aksi');
 });
 Route::redirect('/', '/dashboard-general-dashboard');
 

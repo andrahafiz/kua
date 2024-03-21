@@ -21,14 +21,14 @@
             </li>
             <li class="menu-header">Starter</li>
             <li class="{{ Request::is('catin/pendaftaran') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('catin.merried.index') }}"><i class="far fa-square"></i> <span>Blank
-                        Page</span></a>
+                <a class="nav-link" href="{{ route('catin.merried.index') }}"><i class="far fa-square"></i> <span>Form
+                        Pendaftaran</span></a>
             </li>
         </ul>
 
         <div class="hide-sidebar-mini mt-4 mb-4 p-3">
             <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i> Catin
+                <i class="fas fa-rocket"></i> Calon Pengantin
             </a>
         </div>
     </aside>
