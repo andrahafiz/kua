@@ -89,21 +89,21 @@ class AuthController extends Controller
         ];
 
         try {
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password')),
-            'role' => 'catin'
-        ]);
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'username' => $request->input('username'),
+                'password' => Hash::make($request->input('password')),
+                'role' => 'catin'
+            ]);
 
-        Married::create([
-            'users_id' => $user->id,
-            'registration_number' => $user->id . time()
-        ]);
+            Married::create([
+                'users_id' => $user->id,
+                'registration_number' => $user->id . time()
+            ]);
 
-        return redirect()->route('login')
-            ->with('success', "Akun anda telah berhasil didaftarkan");
+            return redirect()->route('login')
+                ->with('success', "Akun anda telah berhasil didaftarkan");
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }

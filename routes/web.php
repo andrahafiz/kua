@@ -1,10 +1,13 @@
 <?php
 
+use App\Models\Married;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Catin\HomeController;
+use App\Http\Controllers\Staff\MarriedController;
 use App\Http\Controllers\Catin\RegisterController;
+use App\Http\Controllers\Staff\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +53,16 @@ Route::middleware(['auth'])->prefix('catin')->name('catin.')->group(function () 
     );
 });
 
-
+//ROUTE STAGG
+Route::middleware(['auth'])->prefix('staff')->name('staff.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::controller(MarriedController::class)->group(
+        function () {
+            Route::get('/pernikahan', 'index')->name('merried.index');
+            Route::get('/pernikahan/{merried}',  'show')->name('merried.show');
+        }
+    );
+});
 
 
 
