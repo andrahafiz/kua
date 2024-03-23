@@ -100,7 +100,8 @@
                                                     <div class="form-group">
                                                         <label>Nikah Di</label>
                                                         <input type="text" name="location_name"
-                                                            value="{{ old('location_name') }}" class="form-control">
+                                                            value="{{ $married->location_name != null ? $married->location_name : old('location_name') }}"
+                                                            class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Tanggal Akad</label>
@@ -108,7 +109,7 @@
                                                             <div class="col-sm-5">
                                                                 <input type="date" name="akad_date_masehi"
                                                                     class="form-control"
-                                                                    value="{{ Carbon\Carbon::parse(old('akad_date_masehi'))->format('Y-m-d') }}">
+                                                                    value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('Y-m-d') : Carbon\Carbon::parse(old('akad_date_masehi'))->format('Y-m-d') }}">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 Tahun Masehi
@@ -116,14 +117,14 @@
                                                             <div class="col-sm-5">
                                                                 <input type="time" name="akad_time_masehi"
                                                                     class="form-control"
-                                                                    value="{{ old('akad_time_masehi') }}">
+                                                                    value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('H:i') : old('akad_time_masehi') }}">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-5">
                                                                 <input type="date" name="akad_date_hijriah"
                                                                     class="form-control"
-                                                                    value="{{ Carbon\Carbon::parse(old('akad_date_hijriah'))->format('Y-m-d') }}"">
+                                                                    value="{{ $married->akad_date_hijriah != null ? $married->akad_date_hijriah->format('Y-m-d') : Carbon\Carbon::parse(old('akad_date_hijriah'))->format('Y-m-d') }}">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 Tahun Hijriah
@@ -131,14 +132,14 @@
                                                             <div class="col-sm-5">
                                                                 <input type="time" name="akad_time_hijriah"
                                                                     class="form-control"
-                                                                    value="{{ old('akad_time_hijriah') }}">
+                                                                    value="{{ $married->akad_date_hijriah != null ? $married->akad_date_hijriah->format('H:i') : old('akad_time_hijriah') }}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Alamat Lokasi Akad Nikah</label>
                                                         <input type="text" name="akad_location" class="form-control"
-                                                            value="{{ old('akad_location') }}">
+                                                            value="{{ $married->akad_location != null ? $married->akad_location : old('akad_location') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,7 +164,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="nik_wife"
                                                             name="nik_wife" placeholder="NIK Istri"
-                                                            value="{{ old('nik_wife') }}">
+                                                            value="{{ $married->nik_wife != null ? $married->nik_wife : old('nik_wife') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -172,7 +173,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="name_wife"
                                                             name="name_wife" placeholder="Nama Istri"
-                                                            value="{{ old('name_wife') }}">
+                                                            value="{{ $married->akad_location != null ? $married->akad_location : old('name_wife') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -183,7 +184,7 @@
                                                         <input type="text" class="form-control"
                                                             id="location_birth_wife" name="location_birth_wife"
                                                             placeholder="Tempat Lahir Istri"
-                                                            value="{{ old('location_birth_wife') }}">
+                                                            value="{{ $married->location_birth_wife != null ? $married->location_birth_wife : old('location_birth_wife') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -193,7 +194,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="date" class="form-control" name="date_birth_wife"
                                                             id="date_birth_wife"
-                                                            value="{{ Carbon\Carbon::parse(old('date_birth_wife'))->format('Y-m-d') }}">
+                                                            value="{{ $married->date_birth_wife != null ? $married->date_birth_wife->format('Y-m-d') : Carbon\Carbon::parse(old('date_birth_wife'))->format('Y-m-d') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -202,7 +203,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="number" class="form-control" id="old_wife"
                                                             name="old_wife" placeholder="Umur Istri"
-                                                            value="{{ old('old_wife') }}">
+                                                            value="{{ $married->old_wife != null ? $married->old_wife : old('old_wife') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -211,7 +212,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="status_wife"
                                                             name="status_wife" placeholder="Status Istri"
-                                                            value="{{ old('status_wife') }}">
+                                                            value="{{ $married->status_wife != null ? $married->status_wife : old('status_wife') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -220,7 +221,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="religion_wife"
                                                             name="religion_wife" placeholder="Agama Istri"
-                                                            value="{{ old('religion_wife') }}">
+                                                            value="{{ $married->religion_wife != null ? $married->religion_wife : old('religion_wife') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -229,7 +230,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="address_wife"
                                                             name="address_wife" placeholder="Alamat Istri"
-                                                            value="{{ old('address_wife') }}">
+                                                            value="{{ $married->address_wife != null ? $married->address_wife : old('address_wife') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,7 +255,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="nik_husband"
                                                             placeholder="NIK Suami" name="nik_husband"
-                                                            value="{{ old('nik_husband') }}">
+                                                            value="{{ $married->nik_husband != null ? $married->nik_husband : old('nik_husband') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -263,7 +264,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="name_husband"
                                                             placeholder="Nama Suami" name="name_husband"
-                                                            value="{{ old('name_husband') }}">
+                                                            value="{{ $married->name_husband != null ? $married->name_husband : old('name_husband') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -274,7 +275,7 @@
                                                         <input type="text" class="form-control"
                                                             id="location_birth_husband" name="location_birth_husband"
                                                             placeholder="Tempat Lahir Suami"
-                                                            value="{{ old('location_birth_husband') }}">
+                                                            value="{{ $married->location_birth_husband != null ? $married->location_birth_husband : old('location_birth_husband') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -284,7 +285,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="date" class="form-control"
                                                             id="date_birth_husband" name="date_birth_husband"
-                                                            value="{{ Carbon\Carbon::parse(old('date_birth_husband'))->format('Y-m-d') }}">
+                                                            value="{{ $married->date_birth_husband != null ? $married->date_birth_husband->format('Y-m-d') : Carbon\Carbon::parse(old('date_birth_husband'))->format('Y-m-d') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -293,7 +294,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="number" name="old_husband" class="form-control"
                                                             id="old_husband" placeholder="Umur Suami"
-                                                            value="{{ old('old_husband') }}">
+                                                            value="{{ $married->old_husband != null ? $married->old_husband : old('old_husband') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -302,7 +303,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="status_husband"
                                                             placeholder="Status Suami" name="status_husband"
-                                                            value="{{ old('status_husband') }}">
+                                                            value="{{ $married->status_husband != null ? $married->status_husband : old('status_husband') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -311,7 +312,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="religion_husband"
                                                             placeholder="Agama Suami" name="religion_husband"
-                                                            value="{{ old('religion_husband') }}">
+                                                            value="{{ $married->religion_husband != null ? $married->religion_husband : old('religion_husband') }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -320,7 +321,7 @@
                                                     <div class="col-sm-9 col-lg-10">
                                                         <input type="text" class="form-control" id="address_husband"
                                                             placeholder="Alamat Suami" name="address_husband"
-                                                            value="{{ old('address_husband') }}">
+                                                            value="{{ $married->address_husband != null ? $married->address_husband : old('address_husband') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -335,7 +336,13 @@
                                                     <div class="col-sm-8 col-lg-9">
                                                         <input type="file" class="form-control" id="N1"
                                                             name="N1">
-                                                        <label class="" for="N1"></label>
+                                                        <label class="" for="N1">
+                                                            @if ($documentmarried?->N1 != null)
+                                                                <a href="{{ Helper::setUrlDocument($documentmarried->N1) }}"
+                                                                    target="blank">Lihat
+                                                                    Dokumen</a>
+                                                            @endif
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -345,7 +352,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="N3"
                                                         name="N3">
-                                                    <label class="" for="N3"></label>
+                                                    <label class="" for="N3">
+                                                        @if ($documentmarried?->N3 != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->N3) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -355,7 +368,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="N5"
                                                         name="N5">
-                                                    <label class="" for="N5"></label>
+                                                    <label class="" for="N5">
+                                                        @if ($documentmarried?->N5 != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->N5) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -365,7 +384,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="surat_akta_cerai"
                                                         name="surat_akta_cerai">
-                                                    <label class="" for="surat_akta_cerai"></label>
+                                                    <label class="" for="surat_akta_cerai">
+                                                        @if ($documentmarried?->surat_akta_cerai != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->surat_akta_cerai) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -376,7 +401,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="surat_izin_komandan"
                                                         name="surat_izin_komandan">
-                                                    <label class="" for="surat_izin_komandan"></label>
+                                                    <label class="" for="surat_izin_komandan">
+                                                        @if ($documentmarried?->surat_izin_komandan != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->surat_izin_komandan) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -386,7 +417,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="ktp_husband"
                                                         name="ktp_husband">
-                                                    <label class="" for="ktp_husband"></label>
+                                                    <label class="" for="ktp_husband">
+                                                        @if ($documentmarried?->ktp_husband != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->ktp_husband) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -395,7 +432,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="kk_husband"
                                                         name="kk_husband">
-                                                    <label class="" for="kk_husband"></label>
+                                                    <label class="" for="kk_husband">
+                                                        @if ($documentmarried?->kk_husband != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->kk_husband) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -404,7 +447,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="akta_husband"
                                                         name="akta_husband">
-                                                    <label class="" for="akta_husband"></label>
+                                                    <label class="" for="akta_husband">
+                                                        @if ($documentmarried?->akta_husband != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->akta_husband) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -414,7 +463,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="ijazah_husband"
                                                         name="ijazah_husband">
-                                                    <label class="" for="ijazah_husband"></label>
+                                                    <label class="" for="ijazah_husband">
+                                                        @if ($documentmarried?->ijazah_husband != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->ijazah_husband) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -423,7 +478,13 @@
                                                 <div class="col-sm-8 col-lg-9">
                                                     <input type="file" class="form-control" id="photo_husband"
                                                         name="photo_husband">
-                                                    <label class="" for="photo_husband"></label>
+                                                    <label class="" for="photo_husband">
+                                                        @if ($documentmarried?->photo_husband != null)
+                                                            <a href="{{ Helper::setUrlDocument($documentmarried->photo_husband) }}"
+                                                                target="blank">Lihat
+                                                                Dokumen</a>
+                                                        @endif
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>

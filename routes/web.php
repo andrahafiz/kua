@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Catin\RegisterController;
@@ -15,6 +16,14 @@ use App\Http\Controllers\Catin\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('reset', function () {
+    Artisan::call('route:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+});
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');

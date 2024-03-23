@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('married_id');
             $table->string('N1');
             $table->string('N3');
-            $table->string('N5');
+            $table->string('N5')->nullable();
             $table->string('surat_izin_komandan')->nullable();
             $table->string('surat_akta_cerai')->nullable();
             $table->string('ktp_wife')->nullable();

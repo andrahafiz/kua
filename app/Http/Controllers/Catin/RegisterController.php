@@ -24,27 +24,36 @@ class RegisterController extends Controller
 
     public function index()
     {
-        $married = Married::where('users_id', Auth::user()->id)->first();
-        $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
-        return view('pages.catin.pendaftaran', [
-            'married' => $married,
-            'documentmarried' => $documentmarried
-        ]);
+        try {
+            $married = Married::where('users_id', Auth::user()->id)->first();
+            // if ($married == null) {
+            //     return redirect()->route('catin.merried.index')->withErrors(['error' => 'Data tidak ditemukan']);
+            // }
+            $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
+            return view('pages.catin.pendaftaran', [
+                'married' => $married,
+                'documentmarried' => $documentmarried
+            ]);
+        } catch (\Throwable $e) {
+            return 'error';
+        }
     }
 
     public function store(RegisterRequest $request)
     {
         try {
             DB::transaction(function () use ($request) {
+                $akad_masehi = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_masehi . ' ' . $request->akad_time_masehi)->format('Y-m-d H:i');
+                $akad_hijriah = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_hijriah . ' ' . $request->akad_time_hijriah)->format('Y-m-d H:i');
+
                 $merried = Married::updateOrCreate(
                     [
                         'users_id' => Auth()->user()->id
                     ],
                     [
-                        'registration_number' => 'INV',
                         'location_name' => $request->location_name,
-                        'akad_date_masehi' => $request->akad_date_masehi,
-                        'akad_date_hijriah' => $request->akad_date_hijriah ??  now(),
+                        'akad_date_masehi' => $akad_masehi,
+                        'akad_date_hijriah' => $akad_hijriah,
                         'akad_location' => $request->akad_location,
                         'nationality_wife' => $request->nationality_wife,
                         'nik_wife' => $request->nik_wife,
@@ -148,7 +157,7 @@ class RegisterController extends Controller
             $file->storeAs('public/documents', $path_surat_akta_cerai);
         }
 
-        $merried->married_documents()->updateOrCreate([
+        $merried->married_documents()->updateOrCreate(['married_id' => $merried->id], [
             'N1' => $path_n1 ?? null,
             'N3' => $path_n3 ?? null,
             'N5' => $path_n5 ?? null,

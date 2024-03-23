@@ -18,6 +18,13 @@ class Helper
         }
     }
 
+    public static function setUrlDocument($url, $default = 'example-image.jpg')
+    {
+        if ($url != null) {
+            return asset('storage/documents/' . str_replace('public/documents/', '', $url));
+        }
+    }
+
     public static function AdminOrUser($route = null)
     {
         if (auth()->user()->roles == 'ADMIN') {

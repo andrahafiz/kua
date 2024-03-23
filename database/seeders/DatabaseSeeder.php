@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Married;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,12 +18,39 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        $user = \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'username' => 'user',
             'password' => Hash::make('111'),
             'role' => 'catin'
+        ]);
+
+        Married::create([
+            'registration_number' => rand(),
+            'users_id' => $user->id,
+            'location_name' => 'Medan',
+            'akad_date_masehi' => '2024-03-23 14:30:04',
+            'akad_date_hijriah' => '2024-03-30 14:30:04',
+            'akad_location' => 'Medan',
+            'nationality_wife' => 'Indonesia',
+            'nik_wife' => '123456',
+            'name_wife' => 'Laura',
+            'location_birth_wife' => 'Medan',
+            'date_birth_wife' => '1999-03-23',
+            'old_wife' => '25',
+            'status_wife' => 'Lajang',
+            'religion_wife' => 'Islam',
+            'address_wife' => 'Jl. Gatot Subroto',
+            'nationality_husband' => 'Indonesia',
+            'nik_husband' => '654321',
+            'name_husband' => 'Riky',
+            'location_birth_husband' => 'Medan',
+            'date_birth_husband' => '1999-01-23',
+            'old_husband' => '25',
+            'status_husband' => 'Lajang',
+            'religion_husband' => 'Islam',
+            'address_husband' => 'Jl. Setia Budi'
         ]);
     }
 }

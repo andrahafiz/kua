@@ -48,16 +48,16 @@ class RegisterRequest extends FormRequest
             "status_husband" => ['required', 'string'],
             "religion_husband" => ['required', 'string'],
             "address_husband" => ['required', 'string'],
-            "N1" => ['required', 'mimes:pdf'],
-            "N3" => ['required', 'mimes:pdf'],
+            "N1" => ['sometimes', 'mimes:pdf'],
+            "N3" => ['sometimes', 'mimes:pdf'],
             "N5" => ['sometimes', 'nullable', 'mimes:pdf'],
             "surat_akta_cerai" =>  ['sometimes', 'nullable', 'mimes:pdf'],
             "surat_izin_komandan" =>  ['sometimes', 'nullable', 'mimes:pdf'],
-            "ktp_husband" => ['required', 'mimes:pdf'],
-            "kk_husband" => ['required', 'mimes:pdf'],
-            "akta_husband" => ['required', 'mimes:pdf'],
-            "ijazah_husband" => ['required', 'mimes:pdf'],
-            "photo_husband" => ['required', 'mimes:pdf'],
+            "ktp_husband" => ['sometimes', 'mimes:pdf'],
+            "kk_husband" => ['sometimes', 'mimes:pdf'],
+            "akta_husband" => ['sometimes', 'mimes:pdf'],
+            "ijazah_husband" => ['sometimes', 'mimes:pdf'],
+            "photo_husband" => ['sometimes', 'mimes:pdf'],
         ];
     }
 }
