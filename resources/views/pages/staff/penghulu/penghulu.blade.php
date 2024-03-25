@@ -1,6 +1,6 @@
 @extends('layouts.app-staff')
 
-@section('title', 'Data Pernikahan')
+@section('title', 'Penghulu')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -12,9 +12,9 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data Pernikahan</h1>
+                <h1>Penghulu</h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item">Data Pernikahan</div>
+                    <div class="breadcrumb-item">Penghulu</div>
                 </div>
             </div>
             @if (session()->has('success'))
@@ -46,8 +46,11 @@
                     <div class="col-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Data Pernikahan</h4>
+                                <h4>Data Penghulu</h4>
                                 <div class="card-header-action">
+                                    <a href="{{ route('staff.penghulu.create') }}" class="btn btn-primary">
+                                        Tambah Data Penghulu
+                                    </a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -58,40 +61,40 @@
                                                 <th class="text-center">
                                                     No
                                                 </th>
-                                                <th>Nomor Pendaftaran</th>
-                                                <th>Nama Suami</th>
-                                                <th>Nama Istri</th>
-                                                <th>No Akta Nikah</th>
-                                                <th>Tanggal Nikah</th>
-                                                <th>Status</th>
+                                                <th>Photo</th>
+                                                <th>Nama</th>
+                                                <th>No HP</th>
+                                                <th>Alamat</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($marrieds as $married)
+                                            @foreach ($penghulus as $penghulu)
                                                 <tr>
                                                     <td class="text-center align-middle">
                                                         {{ $loop->iteration }}
                                                     </td>
-                                                    <td class="align-middle">{{ $married->registration_number }}</td>
-                                                    <td class="align-middle">{{ $married->name_husband }}</td>
-                                                    <td class="align-middle">{{ $married->name_wife }}</td>
-                                                    <td class="align-middle">{{ '123' }}</td>
                                                     <td class="align-middle">
-                                                        {{ $married->akad_date_masehi?->isoFormat('dddd, D MMMM Y') }}</td>
-                                                    <td class="align-middle"><x-status-pernikahan
-                                                            status="{{ $married->status }}" />
+                                                        <div class="chocolat-parent">
+                                                            <a href="{{ $penghulu->photo == 'avatar-1.png' ? asset('img/avatar/avatar-1.png') : Helper::setUrlImage($penghulu->photo, 'avatar/avatar-1.png') }}"
+                                                                class="chocolat-image">
+                                                                <img alt="{{ 'Photo ' . $penghulu->name_penghulu }}"
+                                                                    src="{{ $penghulu->photo == 'avatar-1.png' ? asset('img/avatar/avatar-1.png') : Helper::setUrlImage($penghulu->photo, 'avatar/avatar-1.png') }}"
+                                                                    class="rounded-circle" data-toggle="tooltip"
+                                                                    title="Wildan Ahdian" width="50">
+                                                            </a>
+                                                        </div>
                                                     </td>
+                                                    <td class="align-middle">{{ $penghulu->name_penghulu }}</td>
+                                                    <td class="align-middle">{{ $penghulu->phone }}</td>
+                                                    <td class="align-middle">{{ $penghulu->address }}</td>
                                                     <td width="10%" class="align-middle">
-                                                        <a href="" class="btn btn-icon btn-sm btn-primary">
-                                                            <i class="fas fa-circle-info"></i>
-                                                        </a>
-                                                        {{--  <a href="{{ route('admin.married.detail', $married->slug) }}"
-                                                            class="btn btn-icon btn-sm btn-info">
-                                                            <i class="fas fa-circle-info"></i>
+                                                        <a href="{{ route('staff.penghulu.edit', $penghulu->id) }}"
+                                                            class="btn btn-icon btn-sm btn-primary">
+                                                            <i class="fas fa-edit"></i>
                                                         </a>
                                                         <form method="POST"
-                                                            action="{{ route('admin.married.destroy', $married->id) }}"
+                                                            action="{{ route('staff.penghulu.destroy', $penghulu->id) }}"
                                                             class="d-inline">
                                                             @csrf
                                                             {{ method_field('delete') }}
@@ -100,7 +103,6 @@
                                                                 onclick="return confirm('Data ini akan di hapus, anda yakin?')">
                                                                 <i class="fas fa-trash"></i></button>
                                                         </form>
-                                                        --}}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -119,12 +121,13 @@
 @push('scripts')
     <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/page/modules-datatables.js') }}"></script> --}}
     <script src="{{ asset('library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
     <script>
         $("#table-1").dataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [0, 6, 7]
+                "targets": [0, 1, 5]
             }]
         });
     </script>

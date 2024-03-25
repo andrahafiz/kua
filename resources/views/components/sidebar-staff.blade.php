@@ -20,9 +20,13 @@
                 </ul>
             </li>
             <li class="menu-header">Starter</li>
-            <li class="{{ Request::is('staff/pernikahan') ? 'active' : '' }}">
+            <li class="{{ Request::routeIs('staff.merried.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('staff.merried.index') }}"><i class="fas fa-list"></i>
                     <span>Data Pernikahan</span></a>
+            </li>
+            <li class="{{ Request::routeIs('staff.penghulu.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('staff.penghulu.index') }}"><i class="fas fa-user"></i>
+                    <span>Penghulu</span></a>
             </li>
         </ul>
 

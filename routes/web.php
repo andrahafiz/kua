@@ -8,6 +8,7 @@ use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Staff\MarriedController;
 use App\Http\Controllers\Catin\RegisterController;
 use App\Http\Controllers\Staff\DashboardController;
+use App\Http\Controllers\Staff\PenghuluController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,17 @@ Route::middleware(['auth'])->prefix('staff')->name('staff.')->group(function () 
         function () {
             Route::get('/pernikahan', 'index')->name('merried.index');
             Route::get('/pernikahan/{merried}',  'show')->name('merried.show');
+        }
+    );
+    Route::controller(PenghuluController::class)->group(
+        function () {
+            Route::get('/penghulu', 'index')->name('penghulu.index');
+            Route::post('/penghulu',  'store')->name('penghulu.store');
+            Route::get('/penghulu/tambah',  'create')->name('penghulu.create');
+            Route::get('/penghulu/{penghulu}',  'show')->name('penghulu.show');
+            Route::put('/penghulu/{penghulu}',  'update')->name('penghulu.update');
+            Route::delete('/penghulu/{penghulu}',  'destroy')->name('penghulu.destroy');
+            Route::get('/penghulu/{penghulu}/edit',  'edit')->name('penghulu.edit');
         }
     );
 });
