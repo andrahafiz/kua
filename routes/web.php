@@ -39,7 +39,7 @@ Route::redirect('/', '/login');
 
 
 //ROUTE CATIN
-Route::middleware(['auth'])->prefix('catin')->name('catin.')->group(function () {
+Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('catin.')->group(function () {
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     Route::controller(RegisterController::class)->group(
         function () {
@@ -52,10 +52,11 @@ Route::middleware(['auth'])->prefix('catin')->name('catin.')->group(function () 
             Route::get('/pendaftaran/{merried}/edit',  'edit')->name('merried.edit');
         }
     );
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 //ROUTE STAGG
-Route::middleware(['auth'])->prefix('staff')->name('staff.')->group(function () {
+Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('staff.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::controller(MarriedController::class)->group(
         function () {
@@ -74,6 +75,7 @@ Route::middleware(['auth'])->prefix('staff')->name('staff.')->group(function () 
             Route::get('/penghulu/{penghulu}/edit',  'edit')->name('penghulu.edit');
         }
     );
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 

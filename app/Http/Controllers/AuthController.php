@@ -35,10 +35,11 @@ class AuthController extends Controller
         ];
 
         if (Auth::Attempt(['username' => $data['username'], 'password' => $data['password']])) {
+            // dump(Auth()->user()->role);
             if (Auth()->user()->role === 'catin') {
                 return redirect()->intended('catin/beranda');
             } elseif (Auth()->user()->role === 'staff') {
-                return redirect()->intended('staff/dashboard');
+                return redirect()->intended('staff/pernikahan');
             } elseif (Auth()->user()->role === 'kakua') {
                 return redirect()->intended('kakua/dashboard');
             } else {

@@ -19,11 +19,19 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $user = \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'username' => 'user',
-            'password' => Hash::make('111'),
+            'name' => 'Catin',
+            'email' => 'catin@example.com',
+            'username' => 'catin',
+            'password' => Hash::make('password'),
             'role' => 'catin'
+        ]);
+
+        $staff = \App\Models\User::factory()->create([
+            'name' => 'Staff',
+            'email' => 'staff@example.com',
+            'username' => 'staff',
+            'password' => Hash::make('password'),
+            'role' => 'staff'
         ]);
 
         Married::create([
