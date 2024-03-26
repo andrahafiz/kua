@@ -35,7 +35,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'register_aksi'])->name('register_aksi');
 });
-Route::redirect('/', '/dashboard-general-dashboard');
+Route::redirect('/', '/login');
 
 
 //ROUTE CATIN
@@ -98,7 +98,6 @@ Route::middleware(['auth'])->prefix('staff')->name('staff.')->group(function () 
 
 
 
-Route::redirect('/', '/dashboard-general-dashboard');
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
