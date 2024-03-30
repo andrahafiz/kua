@@ -84,6 +84,7 @@ class AuthController extends Controller
     {
         $data = [
             'name' => $request->input('name'),
+            'nik' => $request->input('nik'),
             'email' => $request->input('email'),
             'username' => $request->input('username'),
             'password' => Hash::make($request->input('password')),
@@ -92,6 +93,7 @@ class AuthController extends Controller
         try {
             $user = User::create([
                 'name' => $request->input('name'),
+                'nik' => $request->input('nik'),
                 'email' => $request->input('email'),
                 'username' => $request->input('username'),
                 'password' => Hash::make($request->input('password')),

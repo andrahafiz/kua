@@ -32,6 +32,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="nik">NIK</label>
+                    <input id="nik" type="text" class="form-control" name="nik">
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="username">Username</label>
                     <input id="username" type="text" class="form-control" name="username">
                     <div class="invalid-feedback">

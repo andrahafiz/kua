@@ -25,8 +25,9 @@ class RegisterAccountRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'nik' => ['required', 'unique:users,nik'],
             'username' => ['required', 'unique:users,username'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'unique:users,email'],
             'password' => ['required', 'min:3'],
         ];
     }
