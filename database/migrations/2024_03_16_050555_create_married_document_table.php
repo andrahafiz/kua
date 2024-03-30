@@ -22,15 +22,15 @@ return new class extends Migration
             $table->string('surat_izin_komandan')->nullable();
             $table->string('surat_akta_cerai')->nullable();
             $table->string('ktp_wife')->nullable();
-            $table->string('ktp_husband')->nullable();
+            $table->string('ktp_husband');
             $table->string('kk_wife')->nullable();
-            $table->string('kk_husband')->nullable();
+            $table->string('kk_husband');
             $table->string('akta_wife')->nullable();
-            $table->string('akta_husband')->nullable();
+            $table->string('akta_husband');
             $table->string('ijazah_wife')->nullable();
-            $table->string('ijazah_husband')->nullable();
+            $table->string('ijazah_husband');
             $table->string('photo_wife')->nullable();
-            $table->string('photo_husband')->nullable();
+            $table->string('photo_husband');
             $table->timestamps();
             $table->softDeletes();
 

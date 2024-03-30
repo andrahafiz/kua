@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Uppercase;
+use App\Rules\DocumentValidaiton;
+use App\Rules\DocumentValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -48,16 +51,16 @@ class RegisterRequest extends FormRequest
             "status_husband" => ['required', 'string'],
             "religion_husband" => ['required', 'string'],
             "address_husband" => ['required', 'string'],
-            "N1" => ['sometimes', 'mimes:pdf'],
-            "N3" => ['sometimes', 'mimes:pdf'],
+            "N1" => [new DocumentValidaiton(), 'mimes:pdf'],
+            "N3" => [new DocumentValidaiton(), 'mimes:pdf'],
             "N5" => ['sometimes', 'nullable', 'mimes:pdf'],
             "surat_akta_cerai" =>  ['sometimes', 'nullable', 'mimes:pdf'],
             "surat_izin_komandan" =>  ['sometimes', 'nullable', 'mimes:pdf'],
-            "ktp_husband" => ['sometimes', 'mimes:pdf'],
-            "kk_husband" => ['sometimes', 'mimes:pdf'],
-            "akta_husband" => ['sometimes', 'mimes:pdf'],
-            "ijazah_husband" => ['sometimes', 'mimes:pdf'],
-            "photo_husband" => ['sometimes', 'mimes:pdf'],
+            "ktp_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            "kk_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            "akta_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            "ijazah_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            "photo_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
         ];
     }
 }
