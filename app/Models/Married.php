@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Married
- * 
+ *
  * @property int $id
  * @property int $users_id
  * @property string $registration_number
@@ -44,7 +44,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property User $user
  * @property Collection|MarriedDocument[] $married_documents
  *
@@ -52,57 +52,57 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Married extends Model
 {
-	use SoftDeletes;
-	protected $table = 'marrieds';
+    use SoftDeletes;
+    protected $table = 'marrieds';
 
-	protected $casts = [
-		'users_id' => 'int',
-		'akad_date_masehi' => 'datetime',
-		'akad_date_hijriah' => 'datetime',
-		'date_birth_wife' => 'datetime',
-		'old_wife' => 'int',
-		'date_birth_husband' => 'datetime',
-		'old_husband' => 'int',
-		'status_payment' => 'int',
-		'status' => 'int'
-	];
+    protected $casts = [
+        'users_id' => 'int',
+        'akad_date_masehi' => 'datetime',
+        'akad_date_hijriah' => 'datetime',
+        'date_birth_wife' => 'datetime',
+        'old_wife' => 'int',
+        'date_birth_husband' => 'datetime',
+        'old_husband' => 'int',
+        'status_payment' => 'int',
+        'status' => 'int'
+    ];
 
-	protected $fillable = [
-		'users_id',
-		'registration_number',
-		'location_name',
-		'akad_date_masehi',
-		'akad_date_hijriah',
-		'akad_location',
-		'nationality_wife',
-		'nik_wife',
-		'name_wife',
-		'location_birth_wife',
-		'date_birth_wife',
-		'old_wife',
-		'status_wife',
-		'religion_wife',
-		'address_wife',
-		'nationality_husband',
-		'nik_husband',
-		'name_husband',
-		'location_birth_husband',
-		'date_birth_husband',
-		'old_husband',
-		'status_husband',
-		'religion_husband',
-		'address_husband',
-		'status_payment',
-		'status'
-	];
+    protected $fillable = [
+        'users_id',
+        'registration_number',
+        'location_name',
+        'akad_date_masehi',
+        'akad_date_hijriah',
+        'akad_location',
+        'nationality_wife',
+        'nik_wife',
+        'name_wife',
+        'location_birth_wife',
+        'date_birth_wife',
+        'old_wife',
+        'status_wife',
+        'religion_wife',
+        'address_wife',
+        'nationality_husband',
+        'nik_husband',
+        'name_husband',
+        'location_birth_husband',
+        'date_birth_husband',
+        'old_husband',
+        'status_husband',
+        'religion_husband',
+        'address_husband',
+        'status_payment',
+        'status'
+    ];
 
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'users_id');
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
 
-	public function married_documents()
-	{
-		return $this->hasMany(MarriedDocument::class);
-	}
+    public function married_documents()
+    {
+        return $this->hasOne(MarriedDocument::class);
+    }
 }

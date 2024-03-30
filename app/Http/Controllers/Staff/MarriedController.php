@@ -16,4 +16,13 @@ class MarriedController extends Controller
             'type_menu' => 'pernikahan'
         ]);
     }
+
+    public function show(Married $married)
+    {
+        $married->load(['user', 'married_documents']);
+        return view('pages.staff.married.detail-married', [
+            'married' => $married,
+            'type_menu' => 'pernikahan'
+        ]);
+    }
 }

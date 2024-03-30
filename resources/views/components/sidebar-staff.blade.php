@@ -20,8 +20,8 @@
                 </ul>
             </li>
             <li class="menu-header">Starter</li>
-            <li class="{{ Request::routeIs('staff.merried.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('staff.merried.index') }}"><i class="fas fa-list"></i>
+            <li class="{{ Request::routeIs('staff.married.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('staff.married.index') }}"><i class="fas fa-list"></i>
                     <span>Data Pernikahan</span></a>
             </li>
             <li class="{{ Request::routeIs('staff.penghulu.*') ? 'active' : '' }}">

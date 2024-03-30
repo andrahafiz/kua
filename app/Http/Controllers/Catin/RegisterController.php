@@ -27,7 +27,7 @@ class RegisterController extends Controller
         try {
             $married = Married::where('users_id', Auth::user()->id)->first();
             // if ($married == null) {
-            //     return redirect()->route('catin.merried.index')->withErrors(['error' => 'Data tidak ditemukan']);
+            //     return redirect()->route('catin.married.index')->withErrors(['error' => 'Data tidak ditemukan']);
             // }
             $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
             return view('pages.catin.pendaftaran', [
@@ -46,7 +46,7 @@ class RegisterController extends Controller
                 $akad_masehi = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_masehi . ' ' . $request->akad_time_masehi)->format('Y-m-d H:i');
                 $akad_hijriah = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_hijriah . ' ' . $request->akad_time_hijriah)->format('Y-m-d H:i');
 
-                $merried = Married::updateOrCreate(
+                $married = Married::updateOrCreate(
                     [
                         'users_id' => Auth()->user()->id
                     ],
@@ -78,16 +78,16 @@ class RegisterController extends Controller
                     ]
                 );
 
-                $document = $this->saveDocument($merried, $request);
+                $document = $this->saveDocument($married, $request);
             });
-            return redirect()->route('catin.merried.index')
+            return redirect()->route('catin.married.index')
                 ->with('success', "Data kategori produk berhasil ditambah");
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    private function saveDocument(Married $merried, $request)
+    private function saveDocument(Married $married, $request)
     {
         $path_n1 = null;
         $path_n3 = null;
@@ -102,62 +102,62 @@ class RegisterController extends Controller
 
         if ($request->N1 instanceof UploadedFile) {
             $file   = $request->file('N1');
-            $path_n1 =   $merried->registration_number . '_N1' . '.' . $file->getClientOriginalExtension();
+            $path_n1 =   $married->registration_number . '_N1' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_n1);
         }
         if ($request->N3 instanceof UploadedFile) {
             $file   = $request->file('N3');
-            $path_n3 =   $merried->registration_number . '_N3' . '.' . $file->getClientOriginalExtension();
+            $path_n3 =   $married->registration_number . '_N3' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_n3);
         }
         if ($request->N5 instanceof UploadedFile) {
             $file   = $request->file('N5');
-            $path_n5 =   $merried->registration_number . '_N5' . '.' . $file->getClientOriginalExtension();
+            $path_n5 =   $married->registration_number . '_N5' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_n5);
         }
         if ($request->surat_izin_komandan instanceof UploadedFile) {
             $file   = $request->file('surat_izin_komandan');
-            $path_surat_izin_komandan =   $merried->registration_number . '_surat-izin-komandan' . '.' . $file->getClientOriginalExtension();
+            $path_surat_izin_komandan =   $married->registration_number . '_surat-izin-komandan' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_surat_izin_komandan);
         }
 
         if ($request->ktp_husband instanceof UploadedFile) {
             $file   = $request->file('ktp_husband');
-            $path_ktp_husband =   $merried->registration_number . '_ktp' . '.' . $file->getClientOriginalExtension();
+            $path_ktp_husband =   $married->registration_number . '_ktp' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_ktp_husband);
         }
 
         if ($request->akta_husband instanceof UploadedFile) {
             $file   = $request->file('akta_husband');
-            $path_akta_husband =   $merried->registration_number . '_akta' . '.' . $file->getClientOriginalExtension();
+            $path_akta_husband =   $married->registration_number . '_akta' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_akta_husband);
         }
 
         if ($request->kk_husband instanceof UploadedFile) {
             $file   = $request->file('akta_husband');
-            $path_kk_husband =   $merried->registration_number . '_kk' . '.' . $file->getClientOriginalExtension();
+            $path_kk_husband =   $married->registration_number . '_kk' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_kk_husband);
         }
 
         if ($request->ijazah_husband instanceof UploadedFile) {
             $file   = $request->file('ijazah_husband');
-            $path_ijazah_husband =   $merried->registration_number . '_ijazah' . '.' . $file->getClientOriginalExtension();
+            $path_ijazah_husband =   $married->registration_number . '_ijazah' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_ijazah_husband);
         }
 
         if ($request->photo_husband instanceof UploadedFile) {
             $file   = $request->file('photo_husband');
-            $path_photo_husband =   $merried->registration_number . '_photo' . '.' . $file->getClientOriginalExtension();
+            $path_photo_husband =   $married->registration_number . '_photo' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_photo_husband);
         }
 
         if ($request->surat_akta_cerai instanceof UploadedFile) {
             $file   = $request->file('surat_akta_cerai');
-            $path_surat_akta_cerai =   $merried->registration_number . '_surat-akta-cerai' . '.' . $file->getClientOriginalExtension();
+            $path_surat_akta_cerai =   $married->registration_number . '_surat-akta-cerai' . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/documents', $path_surat_akta_cerai);
         }
 
-        $merried->married_documents()->updateOrCreate(['married_id' => $merried->id], [
+        $married->married_documents()->updateOrCreate(['married_id' => $married->id], [
             'N1' => $path_n1 ?? null,
             'N3' => $path_n3 ?? null,
             'N5' => $path_n5 ?? null,

@@ -43,13 +43,13 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
     Route::controller(RegisterController::class)->group(
         function () {
-            Route::get('/pendaftaran', 'index')->name('merried.index');
-            Route::post('/pendaftaran',  'store')->name('merried.store');
-            Route::get('/pendaftaran/tambah',  'create')->name('merried.create');
-            Route::get('/pendaftaran/{merried}',  'show')->name('merried.show');
-            Route::put('/pendaftaran/{merried}',  'update')->name('merried.update');
-            Route::delete('/pendaftaran/{merried}',  'destroy')->name('merried.destroy');
-            Route::get('/pendaftaran/{merried}/edit',  'edit')->name('merried.edit');
+            Route::get('/pendaftaran', 'index')->name('married.index');
+            Route::post('/pendaftaran',  'store')->name('married.store');
+            Route::get('/pendaftaran/tambah',  'create')->name('married.create');
+            Route::get('/pendaftaran/{married}',  'show')->name('married.show');
+            Route::put('/pendaftaran/{married}',  'update')->name('married.update');
+            Route::delete('/pendaftaran/{married}',  'destroy')->name('married.destroy');
+            Route::get('/pendaftaran/{married}/edit',  'edit')->name('married.edit');
         }
     );
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
@@ -60,8 +60,8 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::controller(MarriedController::class)->group(
         function () {
-            Route::get('/pernikahan', 'index')->name('merried.index');
-            Route::get('/pernikahan/{merried}',  'show')->name('merried.show');
+            Route::get('/pernikahan', 'index')->name('married.index');
+            Route::get('/pernikahan/{married}',  'show')->name('married.show');
         }
     );
     Route::controller(PenghuluController::class)->group(

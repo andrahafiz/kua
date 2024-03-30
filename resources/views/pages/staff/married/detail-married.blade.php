@@ -1,6 +1,6 @@
 @extends('layouts.app-staff')
 
-@section('title', 'Detail Data User')
+@section('title', 'Detail Data Pernikahan')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -8,6 +8,10 @@
     <style>
         .text-default {
             color: #34395e;
+        }
+
+        .w-65 {
+            width: 65%;
         }
     </style>
 @endpush
@@ -19,15 +23,17 @@
                 <div class="section-header-back">
                     <a href="{{ url()->previous() }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
-                <h1>Detail Data User</h1>
+                <h1>Detail Data Pernikahan
+                    <br><span class="text-muted">{{ $married->name_husband . ' & ' . $married->name_wife }}</span>
+                </h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item"><a href="{{ route('admin.produk.index') }}">User</a></div>
-                    <div class="breadcrumb-item">Detail Data User</div>
+                    <div class="breadcrumb-item"><a href="{{ route('staff.married.index') }}">Pernikahan</a></div>
+                    <div class="breadcrumb-item">Detail Data Pernikahan</div>
                 </div>
             </div>
 
             <div class="section-body">
-                {{-- <h2 class="section-title">Detail Data User</h2>
+                {{-- <h2 class="section-title">Detail Data Pernikahan</h2>
                 <p class="section-lead">
                     On this page you can create a new post and fill in all fields.
                 </p> --}}
@@ -41,56 +47,203 @@
                                 </div>
                             </div> --}}
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="chocolat-parent">
-                                            <a href="{{ Helper::setUrlImage($product->image) }}" class="chocolat-image"
-                                                title="Foto User {{ $product->name }}">
-                                                <div>
-                                                    <img alt="image" src="{{ Helper::setUrlImage($product->image) }}"
-                                                        class="img-fluid img-thumbnail">
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 text-default">
-                                        <h1>{{ $product->name_product }}</h1>
-                                        <h6 class="">
-                                            <span class="text-muted">Kategori : </span>
-                                            {{ $product->categories->category }}
-                                        </h6>
-                                        <p>{!! $product->description !!}</p>
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <h3>
-                                                    Rp. {{ $product->price }}
-                                                    <small class="text-muted">/ Pcs</small>
-                                                </h3>
-                                            </div>
-                                            <div class="col-4">
-                                                @if ($product->stock == 0)
-                                                    <button type="button"
-                                                        class="btn btn-danger btn-icon icon-left d-inline btn-block">
-                                                        <i class="fa-solid fa-boxes-stacked"></i> Stok <span
-                                                            class="badge badge-transparent">{{ $product->stock }}</span>
-                                                    </button>
-                                                @elseif ($product->stock <= 15)
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-icon icon-left d-inline btn-block">
-                                                        <i class="fa-solid fa-boxes-stacked"></i> Stok <span
-                                                            class="badge badge-transparent">{{ $product->stock }}</span>
-                                                    </button>
-                                                @else
-                                                    <button type="button"
-                                                        class="btn btn-success btn-icon icon-left d-inline btn-block">
-                                                        <i class="fa-solid fa-boxes-stacked"></i> Stok <span
-                                                            class="badge badge-transparent">{{ $product->stock }}</span>
-                                                    </button>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="section-title mt-0">Data Pernikahan</div>
+                                <table class="w-50">
+                                    <tr>
+                                        <th class="p-3 w-50">Statu Dokumen</th>
+                                        <td><x-status-pernikahan status="{{ $married->status }}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Register Number</th>
+                                        <td>{{ $married->registration_number }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Lokasi Nikah</th>
+                                        <td>{{ $married->location_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Lokasi Akad</th>
+                                        <td>{{ $married->akad_location }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Tanggal Akad (Masehi)</th>
+                                        <td>{{ $married->akad_date_masehi }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Tanggal Akad (Hijriah)</th>
+                                        <td>{{ $married->akad_date_hijriah }}</td>
+                                    </tr>
+                                </table>
+                                <div class="section-title">Data Calon Mempelai</div>
+                                <table class="w-75">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-3 w-25"></th>
+                                            <th class="p-3">Data Suami</th>
+                                            <th class="p-3">Data Istri</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="p-3 w-25">NIK</th>
+                                            <td>{{ $married->nik_husband }}</td>
+                                            <td>{{ $married->nik_wife }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Nama</th>
+                                            <td>{{ $married->name_husband }}</td>
+                                            <td>{{ $married->name_wife }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Tempat Lahir</th>
+                                            <td>{{ $married->location_birth_husband }}</td>
+                                            <td>{{ $married->location_birth_wife }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Tangal Lahir</th>
+                                            <td>{{ $married->date_birth_husband?->isoFormat('dddd, D MMMM Y') }}</td>
+                                            <td>{{ $married->date_birth_wife?->isoFormat('dddd, D MMMM Y') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Umur</th>
+                                            <td>{{ $married->old_husband }}</td>
+                                            <td>{{ $married->old_wife }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Agama</th>
+                                            <td>{{ $married->religion_husband }}</td>
+                                            <td>{{ $married->religion_wife }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Status</th>
+                                            <td>{{ $married->status_husband }}</td>
+                                            <td>{{ $married->status_wife }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Kewarganegaraan</th>
+                                            <td>{{ $married->nationality_husband }}</td>
+                                            <td>{{ $married->nationality_wife }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Alamat</th>
+                                            <td>{{ $married->address_husband }}</td>
+                                            <td>{{ $married->address_wife }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="section-title">Dokumen</div>
+                                <table class="w-100">
+                                    <tr>
+                                        <th class="p-3 w-25">N1</th>
+                                        <td>
+                                            @if ($married->married_documents->N1 != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->N1) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                        <th class="p-3">Surat Akta Cerai</th>
+                                        <td>
+                                            @if ($married->married_documents->surat_akta_cerai != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->surat_akta_cerai) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-25">N3</th>
+                                        <td>
+                                            @if ($married->married_documents->N3 != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->N3) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                        <th class="p-3 w-25">Surat Izin Komandan</th>
+                                        <td>
+                                            @if ($married->married_documents->surat_izin_komandan != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->surat_izin_komandan) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-25">N5</th>
+                                        <td>
+                                            @if ($married->married_documents->N5 != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->N5) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                        <th class="p-3 w-25">Kartu Tanda Penduduk</th>
+                                        <td>
+                                            @if ($married->married_documents->ktp_husband != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->ktp_husband) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-25">Ijazah</th>
+                                        <td>
+                                            @if ($married->married_documents->ijazah_husband != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->ijazah_husband) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                        <th class="p-3 w-25">Kartu Keluarga</th>
+                                        <td>
+                                            @if ($married->married_documents->kk_husband != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->kk_husband) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-25">Akta</th>
+                                        <td>
+                                            @if ($married->married_documents->akta_husband != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->akta_husband) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                        <th class="p-3 w-25">Photo Latar Biru</th>
+                                        <td>
+                                            @if ($married->married_documents->photo_husband != null)
+                                                <a href="{{ Helper::setUrlDocument($married->married_documents->photo_husband) }}"
+                                                    target="blank">Lihat
+                                                    Dokumen</a>
+                                            @else
+                                                Tidak ada
+                                            @endif
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('catin.merried.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('catin.married.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (session()->has('success'))
                     <div class="alert alert-success alert-dismissible alert-has-icon show fade">

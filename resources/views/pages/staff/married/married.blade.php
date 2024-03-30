@@ -83,7 +83,8 @@
                                                             status="{{ $married->status }}" />
                                                     </td>
                                                     <td width="10%" class="align-middle">
-                                                        <a href="" class="btn btn-icon btn-sm btn-primary">
+                                                        <a href="{{ route('staff.married.show', $married->id) }}"
+                                                            class="btn btn-icon btn-sm btn-primary">
                                                             <i class="fas fa-circle-info"></i>
                                                         </a>
                                                         {{--  <a href="{{ route('admin.married.detail', $married->slug) }}"

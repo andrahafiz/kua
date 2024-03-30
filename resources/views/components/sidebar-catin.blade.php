@@ -21,7 +21,7 @@
             </li>
             <li class="menu-header">Starter</li>
             <li class="{{ Request::is('catin/pendaftaran') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('catin.merried.index') }}"><i class="far fa-square"></i> <span>Form
+                <a class="nav-link" href="{{ route('catin.married.index') }}"><i class="far fa-square"></i> <span>Form
                         Pendaftaran</span></a>
             </li>
         </ul>
