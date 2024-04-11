@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\RegisterRequest;
 use App\Models\MarriedDocument;
+use App\Models\MarriedPayment;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,9 +31,11 @@ class RegisterController extends Controller
             //     return redirect()->route('catin.married.index')->withErrors(['error' => 'Data tidak ditemukan']);
             // }
             $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
+            $paymentmarried = MarriedPayment::where('married_id', $married->id)->first();
             return view('pages.catin.pendaftaran', [
                 'married' => $married,
-                'documentmarried' => $documentmarried
+                'documentmarried' => $documentmarried,
+                'paymentmarried' => $paymentmarried
             ]);
         } catch (\Throwable $e) {
             return 'error';
@@ -79,6 +82,7 @@ class RegisterController extends Controller
             );
 
             $document = $this->saveDocument($married, $request);
+            $bukti_pembayaran = $this->uploadPayment($married, $request);
         });
         return redirect()->route('catin.married.index')
             ->with('success', "Data kategori produk berhasil ditambah");
@@ -167,6 +171,28 @@ class RegisterController extends Controller
             'akta_husband' => $path_akta_husband ?? $married->married_documents?->akta_husband,
             'ijazah_husband' => $path_ijazah_husband ?? $married->married_documents?->ijazah_husband,
             'photo_husband' => $path_photo_husband ??  $married->married_documents?->photo_husband
+        ]);
+    }
+
+    private function uploadPayment(Married $married, $request)
+    {
+
+        $path = 'public/photos/payment/';
+        $path_payment = '';
+        $photo = $request->file('proof_payment');
+        if ($photo instanceof UploadedFile) {
+            $file   = $request->file('proof_payment');
+            $path_payment =   $married->registration_number . '_proof_payment' . '.' . $file->getClientOriginalExtension();
+            $file->storeAs($path, $path_payment);
+        }
+
+        $married->update([
+            'status_payment' => 1,
+            'status' => 1
+        ]);
+
+        $married->married_payment()->updateOrCreate(['married_id' => $married->id], [
+            'proof_payment' => $path . '' . $path_payment ?? $married->married_payment?->proof_payment,
         ]);
     }
 }

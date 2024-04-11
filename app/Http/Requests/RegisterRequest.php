@@ -61,6 +61,7 @@ class RegisterRequest extends FormRequest
             "akta_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
             "ijazah_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
             "photo_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            "proof_payment" => ['sometimes', 'mimes:png,jpg']
         ];
     }
 }

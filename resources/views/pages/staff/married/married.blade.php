@@ -63,7 +63,8 @@
                                                 <th>Nama Istri</th>
                                                 <th>No Akta Nikah</th>
                                                 <th>Tanggal Nikah</th>
-                                                <th>Status</th>
+                                                <th>Status Data</th>
+                                                <th>Status Pembayaran</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -79,8 +80,11 @@
                                                     <td class="align-middle">{{ '123' }}</td>
                                                     <td class="align-middle">
                                                         {{ $married->akad_date_masehi?->isoFormat('dddd, D MMMM Y') }}</td>
-                                                    <td class="align-middle"><x-status-pernikahan
-                                                            status="{{ $married->status }}" />
+                                                    <td class="align-middle">
+                                                        <x-status-pernikahan status="{{ $married->status }}" />
+                                                    </td>
+                                                    <td>
+                                                        <x-status-pembayaran status="{{ $married->status }}" />
                                                     </td>
                                                     <td width="10%" class="align-middle">
                                                         <a href="{{ route('staff.married.show', $married->id) }}"
@@ -125,7 +129,7 @@
         $("#table-1").dataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [0, 6, 7]
+                "targets": [6, 7, 8]
             }]
         });
     </script>

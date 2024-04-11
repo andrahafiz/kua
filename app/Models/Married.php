@@ -105,4 +105,9 @@ class Married extends Model
     {
         return $this->hasOne(MarriedDocument::class);
     }
+
+    public function married_payment()
+    {
+        return $this->hasOne(MarriedPayment::class);
+    }
 }

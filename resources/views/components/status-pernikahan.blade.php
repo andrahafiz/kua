@@ -8,15 +8,15 @@
     @break
 
     @case(2)
-        <span class="badge badge-info">Penetapan Penghulu</span>
+        <span class="badge badge-danger">Perbaikan Berkas</span>
     @break
 
     @case(3)
-        <span class="badge badge-success">Selesai</span>
+        <span class="badge badge-info">Penetapan Penghulu</span>
     @break
 
     @case(4)
-        <span class="badge badge-danger">Perbaikan Berkas</span>
+        <span class="badge badge-success">Selesai</span>
     @break
 
     @case(5)

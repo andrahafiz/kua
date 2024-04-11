@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('married_payment', function (Blueprint $table) {
+        Schema::create('notification', function (Blueprint $table) {
             $table->id();
             $table->foreignId('married_id');
-            $table->string('payment_method');
-            $table->string('code_billing');
-            $table->string('proof_payment');
+            $table->string('description');
+            $table->string('type');
+            $table->string('message');
             $table->timestamps();
 
             $table->foreign('married_id')
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('married_payment');
+        Schema::dropIfExists('notification');
     }
 };
