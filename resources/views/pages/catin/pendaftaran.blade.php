@@ -541,24 +541,43 @@
                                         </div>
                                         <div class="tab-pane fade" id="pembayaran" role="tabpanel"
                                             aria-labelledby="contact-tab3">
-                                            @if ($paymentmarried == null)
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="alert alert-warning alert-has-icon">
-                                                            <div class="alert-icon"><i class="far fa-lightbulb"></i>
-                                                            </div>
-                                                            <div class="alert-body">
-                                                                <div class="alert-title">Info</div>
-                                                                Mohon diperhatikan!!! Apa bila bukti upload pembayaran telah
-                                                                diajukan, <strong>maka kami menganggap data anda telah diisi
-                                                                    dengan BENAR</strong>. Maka dari
-                                                                itu mohon sebelum mengajukan bukti pembayaran periksa
-                                                                kembali
-                                                                data yang anda isi. Terima Kasih.
+                                            @if ($paymentmarried == null || ($married->status == 2 && $married->status_payment == 3))
+                                                @if ($married->status == 2 && $married->status_payment == 3)
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="alert alert-danger alert-has-icon">
+                                                                <div class="alert-icon"><i class="far fa-lightbulb"></i>
+                                                                </div>
+                                                                <div class="alert-body">
+                                                                    <div class="alert-title">Info</div>
+                                                                    Verifikasi pembayaran anda ditolak, mohon untuk
+                                                                    melakukan transfer ulang atau mengupload ulang bukti
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                @else
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="alert alert-warning alert-has-icon">
+                                                                <div class="alert-icon"><i class="far fa-lightbulb"></i>
+                                                                </div>
+                                                                <div class="alert-body">
+                                                                    <div class="alert-title">Info</div>
+                                                                    Mohon diperhatikan!!! Apa bila bukti upload pembayaran
+                                                                    telah
+                                                                    diajukan, <strong>maka kami menganggap data anda telah
+                                                                        diisi
+                                                                        dengan BENAR</strong>. Maka dari
+                                                                    itu mohon sebelum mengajukan bukti pembayaran periksa
+                                                                    kembali
+                                                                    data yang anda isi. Terima Kasih.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="empty-state pb-0">

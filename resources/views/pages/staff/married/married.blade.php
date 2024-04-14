@@ -84,7 +84,7 @@
                                                         <x-status-pernikahan status="{{ $married->status }}" />
                                                     </td>
                                                     <td>
-                                                        <x-status-pembayaran status="{{ $married->status }}" />
+                                                        <x-status-pembayaran status="{{ $married->status_payment }}" />
                                                     </td>
                                                     <td width="10%" class="align-middle">
                                                         <a href="{{ route('staff.married.show', $married->id) }}"

@@ -38,20 +38,54 @@
                     On this page you can create a new post and fill in all fields.
                 </p> --}}
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            {{-- <div class="card-header">
-                                <h4>My Picture</h4>
+                    <div class="col-lg-4 col-sm-12  ">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h4>Aksi</h4>
                                 <div class="card-header-action">
-                                    <a href="#" class="btn btn-primary">View All</a>
+                                    <a data-collapse="#mycard-collapse" class="btn btn-icon btn-warning" href="#"><i
+                                            class="fas fa-minus"></i></a>
                                 </div>
-                            </div> --}}
+                            </div>
+                            <div class="collapse show" id="mycard-collapse">
+                                <div class="card-body">
+                                    @if ($married->married_payment()->exists() == true && $married->status == 1 && $married->status_payment == 1)
+                                        @include('pages.staff.married.action.verification-payment')
+                                    @else
+                                    @endif
+                                    {{-- @if ($married->status == 1 && $married->status_payment == 1)
+                                        <div class="alert alert-primary">
+                                            <div class="alert-title">Pemberitahuan</div>
+                                            Pembayaran anda sedang dalam proses verifikasi.
+                                        </div>
+                                    @else
+                                        <a href="{{ Helper::setUrlImage($paymentmarried?->proof_payment) }}"
+                                            class="chocolat-image">
+                                            <div>
+                                                <img alt="image"
+                                                    src="{{ Helper::setUrlImage($paymentmarried?->proof_payment) }}"
+                                                    class="img-fluid img-thumbnail w-50">
+                                            </div>
+                                        </a>
+                                    @endif --}}
+                                    {{-- @endif --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="card card-warning">
                             <div class="card-body">
                                 <div class="section-title mt-0">Data Pernikahan</div>
                                 <table class="w-50">
                                     <tr>
                                         <th class="p-3 w-50">Statu Dokumen</th>
                                         <td><x-status-pernikahan status="{{ $married->status }}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Statu Pembayaran</th>
+                                        <td><x-status-pembayaran status="{{ $married->status_payment }}" /></td>
                                     </tr>
                                     <tr>
                                         <th class="p-3 w-50">Register Number</th>
@@ -75,7 +109,7 @@
                                     </tr>
                                 </table>
                                 <div class="section-title">Data Calon Mempelai</div>
-                                <table class="w-75">
+                                <table class="w-100">
                                     <thead>
                                         <tr>
                                             <th class="p-3 w-25"></th>

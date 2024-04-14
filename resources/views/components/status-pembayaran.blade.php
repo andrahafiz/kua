@@ -8,11 +8,11 @@
     @break
 
     @case(2)
-        <span class="badge badge-danger">Diterima</span>
+        <span class="badge badge-success">Diterima</span>
     @break
 
     @case(3)
-        <span class="badge badge-info">Ditolak</span>
+        <span class="badge badge-danger">Ditolak</span>
     @break
 
     @default
