@@ -1,4 +1,5 @@
 <div id="proof_payment" class="text-center">
+    <h6>Verifikasi Pembayaran</h6>
     <a href="{{ Helper::setUrlImage($married?->married_payment?->proof_payment) }}" class="chocolat-image">
         <img alt="image" src="{{ Helper::setUrlImage($married?->married_payment?->proof_payment) }}"
             class="img-fluid img-thumbnail w-75">

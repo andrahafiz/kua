@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('married_payment', function (Blueprint $table) {
             $table->id();
             $table->foreignId('married_id');
-            $table->string('payment_method');
-            $table->string('code_billing');
+            $table->string('payment_method')->nullable();
+            $table->string('code_billing')->nullable();
             $table->string('proof_payment');
             $table->timestamps();
 
