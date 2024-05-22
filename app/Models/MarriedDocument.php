@@ -17,19 +17,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $married_id
  * @property string $N1
  * @property string $N3
- * @property string $N5
+ * @property string|null $N5
  * @property string|null $surat_izin_komandan
  * @property string|null $surat_akta_cerai
  * @property string|null $ktp_wife
- * @property string|null $ktp_husband
+ * @property string $ktp_husband
  * @property string|null $kk_wife
- * @property string|null $kk_husband
+ * @property string $kk_husband
  * @property string|null $akta_wife
- * @property string|null $akta_husband
+ * @property string $akta_husband
  * @property string|null $ijazah_wife
- * @property string|null $ijazah_husband
+ * @property string $ijazah_husband
  * @property string|null $photo_wife
- * @property string|null $photo_husband
+ * @property string $photo_husband
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at

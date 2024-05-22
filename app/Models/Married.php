@@ -17,36 +17,41 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property int $users_id
  * @property string $registration_number
- * @property string $location_name
- * @property Carbon $akad_date_masehi
- * @property Carbon $akad_date_hijriah
- * @property string $akad_location
- * @property string $nationality_wife
- * @property string $nik_wife
- * @property string $name_wife
- * @property string $location_birth_wife
- * @property Carbon $date_birth_wife
- * @property int $old_wife
- * @property string $status_wife
- * @property string $religion_wife
- * @property string $address_wife
- * @property string $nationality_husband
- * @property string $nik_husband
- * @property string $name_husband
- * @property string $location_birth_husband
- * @property Carbon $date_birth_husband
- * @property int $old_husband
- * @property string $status_husband
- * @property string $religion_husband
- * @property string $address_husband
- * @property int $status_payment
- * @property int $status
+ * @property string|null $location_name
+ * @property Carbon|null $akad_date_masehi
+ * @property Carbon|null $akad_date_hijriah
+ * @property string|null $akad_location
+ * @property string|null $nationality_wife
+ * @property string|null $nik_wife
+ * @property string|null $name_wife
+ * @property string|null $location_birth_wife
+ * @property Carbon|null $date_birth_wife
+ * @property int|null $old_wife
+ * @property string|null $status_wife
+ * @property string|null $religion_wife
+ * @property string|null $address_wife
+ * @property string|null $nationality_husband
+ * @property string|null $nik_husband
+ * @property string|null $name_husband
+ * @property string|null $location_birth_husband
+ * @property Carbon|null $date_birth_husband
+ * @property int|null $old_husband
+ * @property string|null $status_husband
+ * @property string|null $religion_husband
+ * @property string|null $address_husband
+ * @property int|null $status_payment
+ * @property int|null $status
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Carbon|null $pramarried_date
+ * @property int|null $penghulu_id
  *
+ * @property Penghulu|null $penghulu
  * @property User $user
  * @property Collection|MarriedDocument[] $married_documents
+ * @property Collection|MarriedPayment[] $married_payments
+ * @property Collection|Notification[] $notifications
  *
  * @package App\Models
  */
@@ -64,7 +69,9 @@ class Married extends Model
         'date_birth_husband' => 'datetime',
         'old_husband' => 'int',
         'status_payment' => 'int',
-        'status' => 'int'
+        'status' => 'int',
+        'pramarried_date' => 'datetime',
+        'penghulu_id' => 'int'
     ];
 
     protected $fillable = [
@@ -93,8 +100,15 @@ class Married extends Model
         'religion_husband',
         'address_husband',
         'status_payment',
-        'status'
+        'status',
+        'pramarried_date',
+        'penghulu_id'
     ];
+
+    public function penghulu()
+    {
+        return $this->belongsTo(Penghulu::class);
+    }
 
     public function user()
     {
@@ -109,5 +123,10 @@ class Married extends Model
     public function married_payment()
     {
         return $this->hasOne(MarriedPayment::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }
