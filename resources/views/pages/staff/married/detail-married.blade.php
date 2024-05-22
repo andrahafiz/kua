@@ -5,6 +5,10 @@
 @push('style')
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('library/chocolat/dist/css/chocolat.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
+
     <style>
         .text-default {
             color: #34395e;
@@ -37,11 +41,39 @@
                 <p class="section-lead">
                     On this page you can create a new post and fill in all fields.
                 </p> --}}
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible alert-has-icon show fade">
+                        <div class="alert-icon"><i class="far fa-circle-check"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            <button class="close" data-dismiss="alert">
+                                <span>&times;</span>
+                            </button>
+                            {{ session('success') }}!
+                        </div>
+                    </div>
+                @endif
+                @error('error')
+                    <div class="alert alert-danger alert-dismissible alert-has-icon show fade">
+                        <div class="alert-icon"><i class="far fa-circle-xmark"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Gagal</div>
+                            <button class="close" data-dismiss="alert">
+                                <span>&times;</span>
+                            </button>
+                            {{ $message }}.
+                        </div>
+                    </div>
+                @enderror
                 <div class="row">
                     <div class="col-lg-4 col-sm-12  ">
                         <div class="card card-warning">
                             <div class="card-header">
-                                <h4>Aksi</h4>
+                                @if ($married->status == 4)
+                                    <h4>Data Penghulu Dan Pranikah</h4>
+                                @else
+                                    <h4>Aksi</h4>
+                                @endif
                                 <div class="card-header-action">
                                     <a data-collapse="#mycard-collapse" class="btn btn-icon btn-warning" href="#"><i
                                             class="fas fa-minus"></i></a>
@@ -51,7 +83,19 @@
                                 <div class="card-body">
                                     @if ($married->married_payment()->exists() == true && $married->status == 1 && $married->status_payment == 1)
                                         @include('pages.staff.married.action.verification-payment')
-                                    @else
+                                    @elseif($married->status == 3 && $married->status_payment == 2)
+                                        @include('pages.staff.married.action.assign-penghulu')
+                                    @elseif($married->status == 4)
+                                        <table>
+                                            <tr>
+                                                <th class="p-3">Nama Penghulu</th>
+                                                <td>{{ $married->penghulu->name_penghulu }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="p-3">Tanggal Pernikahan</th>
+                                                <td>{{ $married->pramarried_date->isoFormat('dddd, D MMMM Y') }}</td>
+                                            </tr>
+                                        </table>
                                     @endif
                                     {{-- @if ($married->status == 1 && $married->status_payment == 1)
                                         <div class="alert alert-primary">
@@ -80,11 +124,11 @@
                                 <div class="section-title mt-0">Data Pernikahan</div>
                                 <table class="w-50">
                                     <tr>
-                                        <th class="p-3 w-50">Statu Dokumen</th>
+                                        <th class="p-3 w-50">Status Dokumen</th>
                                         <td><x-status-pernikahan status="{{ $married->status }}" /></td>
                                     </tr>
                                     <tr>
-                                        <th class="p-3 w-50">Statu Pembayaran</th>
+                                        <th class="p-3 w-50">Status Pembayaran</th>
                                         <td><x-status-pembayaran status="{{ $married->status_payment }}" /></td>
                                     </tr>
                                     <tr>
@@ -292,6 +336,8 @@
     <!-- JS Libraies -->
     <script src="{{ asset('library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
     <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.css') }}"></script>
+    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 
-    <!-- Page Specific JS File -->
+    <!-- JS Libraies -->
+    <script src="{{ asset('library/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 @endpush

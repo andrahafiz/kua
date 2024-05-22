@@ -5,7 +5,7 @@
             class="img-fluid img-thumbnail w-75">
     </a>
     <div class="mt-3">
-        <form method="POST" action="{{ route('staff.verification-payment', $married->id) }}">
+        <form method="POST" action="{{ route('staff.verification_payment', $married->id) }}">
             @csrf
             @method('PUT')
             <button type="submit" name="type" value="tolak" class="btn btn-icon btn-lg icon-left btn-danger"><i

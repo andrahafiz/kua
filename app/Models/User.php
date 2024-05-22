@@ -7,12 +7,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string $username
@@ -24,37 +26,38 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Collection|Married[] $marrieds
  *
  * @package App\Models
  */
-class User extends Model
+class User extends Authenticatable
 {
-	protected $table = 'users';
+    use HasFactory;
+    protected $table = 'users';
 
-	protected $casts = [
-		'email_verified_at' => 'datetime'
-	];
+    protected $casts = [
+        'email_verified_at' => 'datetime'
+    ];
 
-	protected $hidden = [
-		'password',
-		'remember_token'
-	];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
-	protected $fillable = [
-		'name',
-		'username',
-		'nik',
-		'email',
-		'email_verified_at',
-		'password',
-		'role',
-		'remember_token'
-	];
+    protected $fillable = [
+        'name',
+        'username',
+        'nik',
+        'email',
+        'email_verified_at',
+        'password',
+        'role',
+        'remember_token'
+    ];
 
-	public function marrieds()
-	{
-		return $this->hasMany(Married::class, 'users_id');
-	}
+    public function marrieds()
+    {
+        return $this->hasMany(Married::class, 'users_id');
+    }
 }

@@ -12,7 +12,7 @@
     @break
 
     @case(3)
-        <span class="badge badge-info">Penetapan Penghulu</span>
+        <span class="badge badge-info">Penetapan Penghulu<br /> Tanggal Pranikah</span>
     @break
 
     @case(4)

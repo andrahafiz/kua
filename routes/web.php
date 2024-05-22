@@ -7,9 +7,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Staff\MarriedController;
 use App\Http\Controllers\Catin\RegisterController;
-use App\Http\Controllers\Staff\DashboardController;
 use App\Http\Controllers\Staff\PenghuluController;
+use App\Http\Controllers\Staff\DashboardController;
 use App\Http\Controllers\Staff\VerificationController;
+use App\Http\Controllers\Staff\AssignPenghuluController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +78,8 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
         }
     );
 
-    Route::put('verification_payment/{married}', VerificationController::class)->name('verification-payment');
+    Route::put('verification_payment/{married}', VerificationController::class)->name('verification_payment');
+    Route::post('assign_penghulu/{married}', AssignPenghuluController::class)->name('assign_penghulu');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 

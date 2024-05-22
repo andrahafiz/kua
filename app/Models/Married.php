@@ -50,8 +50,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Penghulu|null $penghulu
  * @property User $user
  * @property Collection|MarriedDocument[] $married_documents
- * @property Collection|MarriedPayment[] $married_payments
+ * @property Collection|MarriedPayment[] $married_payment
  * @property Collection|Notification[] $notifications
+ * @property Collection|PenghuluCatin[] $penghulu_catins
  *
  * @package App\Models
  */
