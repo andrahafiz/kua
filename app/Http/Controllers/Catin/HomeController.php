@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('pages.catin.beranda', ['type_menu' => 'beranda']);
+        $married = auth()->user()->marrieds->first();
+        return view('pages.catin.beranda', ['type_menu' => 'beranda', 'married' => $married]);
     }
 }
