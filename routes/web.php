@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Staff\MarriedController;
 use App\Http\Controllers\Catin\RegisterController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Staff\PenghuluController;
 use App\Http\Controllers\Staff\DashboardController;
 use App\Http\Controllers\Staff\VerificationController;
@@ -32,12 +33,13 @@ Route::get('reset', function () {
 
 
 Route::middleware(['guest'])->group(function () {
+    Route::get('/', [LandingPageController::class, 'index'])->name('landingpage');
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'login_aksi'])->name('login_aksi');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'register_aksi'])->name('register_aksi');
 });
-Route::redirect('/', '/login');
+// Route::redirect('/', '/login');
 
 
 //ROUTE CATIN
