@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Catin\HomeController;
+use App\Http\Controllers\Catin\NotificationController;
 use App\Http\Controllers\Staff\MarriedController;
 use App\Http\Controllers\Catin\RegisterController;
 use App\Http\Controllers\LandingPageController;
@@ -54,6 +55,12 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
             Route::put('/pendaftaran/{married}',  'update')->name('married.update');
             Route::delete('/pendaftaran/{married}',  'destroy')->name('married.destroy');
             Route::get('/pendaftaran/{married}/edit',  'edit')->name('married.edit');
+        }
+    );
+    Route::controller(NotificationController::class)->group(
+        function () {
+            Route::get('/notification', 'index')->name('married.notification');
+            Route::get('/notification/read/{notification?}', 'read')->name('married.notification.read');
         }
     );
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

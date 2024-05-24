@@ -17,6 +17,11 @@
                 <a class="nav-link" href="{{ route('catin.married.index') }}"><i class="far fa-square"></i> <span>Form
                         Pendaftaran</span></a>
             </li>
+            <li class="{{ Request::is('catin/notification') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('catin.married.notification') }}"><i class="far fa-bell"></i>
+                    <span>Notifikasi</span></a>
+                {{-- <span class="badge badge-danger" style="width: 20%">5</span> --}}
+            </li>
         </ul>
 
         <div class="hide-sidebar-mini mt-4 mb-4 p-3">

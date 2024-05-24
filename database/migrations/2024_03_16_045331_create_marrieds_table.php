@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('religion_husband')->nullable();
             $table->string('address_husband')->nullable();
             $table->smallInteger('status_payment')->nullable();
-            $table->smallInteger('status')->nullable();
+            $table->smallInteger('status')->default(0)->nullable();
             $table->softDeletes();
             $table->timestamps();
 

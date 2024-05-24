@@ -10,6 +10,11 @@ class HomeController extends Controller
     public function index()
     {
         $married = auth()->user()->marrieds->first();
-        return view('pages.catin.beranda', ['type_menu' => 'beranda', 'married' => $married]);
+        $notifications = $married->notifications->take(5);
+        return view('pages.catin.beranda', [
+            'type_menu' => 'beranda',
+            'married' => $married,
+            'notifications' => $notifications
+        ]);
     }
 }

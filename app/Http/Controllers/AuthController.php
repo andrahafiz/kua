@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\User;
+use App\Models\Married;
+use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterAccountRequest;
-use App\Models\Married;
 
 class AuthController extends Controller
 {
@@ -82,32 +84,33 @@ class AuthController extends Controller
 
     public function register_aksi(RegisterAccountRequest $request)
     {
-        $data = [
-            'name' => $request->input('name'),
-            'nik' => $request->input('nik'),
-            'email' => $request->input('email'),
-            'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password')),
-        ];
+        $data = $request->only(['name', 'nik', 'email', 'username', 'password']);
+        $data['password'] = Hash::make($data['password']);
+        $data['role'] = 'catin';
+
+        DB::beginTransaction();
 
         try {
-            $user = User::create([
-                'name' => $request->input('name'),
-                'nik' => $request->input('nik'),
-                'email' => $request->input('email'),
-                'username' => $request->input('username'),
-                'password' => Hash::make($request->input('password')),
-                'role' => 'catin'
-            ]);
+            $user = User::create($data);
 
-            Married::create([
+            $married = Married::create([
                 'users_id' => $user->id,
                 'registration_number' => $user->id . time()
             ]);
 
+            $married->notifications()->create([
+                'description' => 'Akun telah berhasil dibuat',
+                'message' => 'Sukses',
+                'type' => 'success',
+                'is_read' => true
+            ]);
+
+            DB::commit();
+
             return redirect()->route('login')
-                ->with('success', "Akun anda telah berhasil didaftarkan");
+                ->with('success', 'Akun anda telah berhasil didaftarkan');
         } catch (Exception $e) {
+            DB::rollBack();
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }

@@ -46,7 +46,7 @@
                                         <h4>Tanggal Pranikah</h4>
                                     </div>
                                     <div class="ticket-info">
-                                        <h4>{{ $married?->pramarried_date->isoFormat('dddd, D MMMM Y') ?? 'Belum ditentukan' }}
+                                        <h4>{{ $married?->pramarried_date?->isoFormat('dddd, D MMMM Y') ?? 'Belum ditentukan' }}
                                         </h4>
                                     </div>
                                 </div>
@@ -66,17 +66,35 @@
                             <div class="table-responsive table-invoice">
                                 <table class="table-striped table">
                                     <tr>
-                                        <th>Tanggal</th>
-                                        <th>Pesan</th>
+                                        <th style="width:30%">Tanggal</th>
+                                        <th style="width:10%">Pesan</th>
                                         <th>Status</th>
+                                        <th>Read ?</th>
                                     </tr>
-                                    <tr>
-                                        <td><a href="#">{{ now()->isoFormat('dddd, D MMMM Y H:i') }}</a></td>
-                                        <td class="font-weight-600">Kusnadi</td>
-                                        <td>
-                                            <div class="badge badge-warning">Unpaid</div>
-                                        </td>
-                                    </tr>
+                                    @foreach ($notifications as $notification)
+                                        <tr
+                                            {{ $notification->is_read != true ? 'style=background-color:rgba(163,229,255,0.319);' : '' }}>
+                                            <td>
+                                                {{ $notification->created_at?->isoFormat('dddd, D MMMM Y H:m') }}
+                                            </td>
+                                            <td>
+                                                <div class="badge badge-{{ $notification->type }}">
+                                                    {{ $notification->message }}
+                                                </div>
+                                            </td>
+                                            <td class="font-weight-600"> {{ $notification->description }}</td>
+                                            <td>
+                                                @if ($notification->is_read == true)
+                                                    <a class="btn btn-icon btn-sm btn-primary text-center disabled"><i
+                                                            class="fas fa-envelope-open"></i></a>
+                                                @else
+                                                    <a href="{{ route('catin.married.notification.read', $notification->id) }}"
+                                                        class="btn btn-icon btn-sm btn-primary text-center"><i
+                                                            class="fas fa-envelope"></i></a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>

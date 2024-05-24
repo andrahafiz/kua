@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('type');
             $table->string('message');
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
 
             $table->foreign('married_id')
