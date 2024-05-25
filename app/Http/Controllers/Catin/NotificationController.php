@@ -13,7 +13,7 @@ class NotificationController extends Controller
     public function index()
     {
         $married = Married::where('users_id', Auth::user()->id)->first();
-        $notifications = Notification::where('married_id', $married->id)->get();
+        $notifications = Notification::where('married_id', $married->id)->latest()->get();
 
         return view(
             'pages.catin.notification',

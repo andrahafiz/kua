@@ -23,13 +23,24 @@ class VerificationController extends Controller
                 'status' => 3,
                 'status_payment' => 2
             ]);
+            $married->notifications()->create([
+                'description' => 'Pembayaran telah diverifikasi',
+                'message' => 'Sukses',
+                'type' => 'success',
+                'is_read' => false
+            ]);
         } elseif ($type == 'tolak') {
             $married->update([
                 'status' => 2,
                 'status_payment' => 3
             ]);
-        } else {
-        }
+            $married->notifications()->create([
+                'description' => 'Pembayaran gagal diverifikasi',
+                'message' => 'Gagal',
+                'type' => 'danger',
+                'is_read' => false
+            ]);
+        }d
 
         return redirect()->route('staff.married.show', $married->id)->with('success', "Status Pembayaran Berhasil Diubah");
     }

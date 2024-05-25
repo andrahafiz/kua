@@ -59,7 +59,8 @@
                         <div class="card-header">
                             <h4>Notifikasi</h4>
                             <div class="card-header-action">
-                                <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                                <a href="{{ route('catin.married.notification') }}" class="btn btn-danger">Selengkapnya <i
+                                        class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
                         <div class="card-body p-0">

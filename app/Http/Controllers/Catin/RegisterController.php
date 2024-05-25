@@ -44,51 +44,58 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        // try {
-        DB::transaction(function () use ($request) {
-            $akad_masehi = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_masehi . ' ' . $request->akad_time_masehi)->format('Y-m-d H:i');
-            $akad_hijriah = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_hijriah . ' ' . $request->akad_time_hijriah)->format('Y-m-d H:i');
+        try {
+            DB::transaction(function () use ($request) {
+                $akad_masehi = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_masehi . ' ' . $request->akad_time_masehi)->format('Y-m-d H:i');
+                $akad_hijriah = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_hijriah . ' ' . $request->akad_time_hijriah)->format('Y-m-d H:i');
 
-            $married = Married::updateOrCreate(
-                [
-                    'users_id' => Auth()->user()->id
-                ],
-                [
-                    'location_name' => $request->location_name,
-                    'akad_date_masehi' => $akad_masehi,
-                    'akad_date_hijriah' => $akad_hijriah,
-                    'akad_location' => $request->akad_location,
-                    'nationality_wife' => $request->nationality_wife,
-                    'nik_wife' => $request->nik_wife,
-                    'name_wife' => $request->name_wife,
-                    'location_birth_wife' => $request->location_birth_wife,
-                    'date_birth_wife' => $request->date_birth_wife,
-                    'old_wife' => $request->old_wife ?? 1,
-                    'status_wife' => $request->status_wife,
-                    'religion_wife' => $request->religion_wife,
-                    'address_wife' => $request->address_wife,
-                    'nationality_husband' => $request->nationality_husband,
-                    'nik_husband' => $request->nik_husband,
-                    'name_husband' => $request->name_husband,
-                    'location_birth_husband' => $request->location_birth_husband,
-                    'date_birth_husband' => $request->date_birth_husband,
-                    'old_husband' => $request->old_husband ?? 1,
-                    'status_husband' => $request->status_husband,
-                    'religion_husband' => $request->religion_husband,
-                    'address_husband' => $request->address_husband,
-                    'status_payment' => '0',
-                    'status' => 0,
-                ]
-            );
+                $married = Married::updateOrCreate(
+                    [
+                        'users_id' => Auth()->user()->id
+                    ],
+                    [
+                        'location_name' => $request->location_name,
+                        'akad_date_masehi' => $akad_masehi,
+                        'akad_date_hijriah' => $akad_hijriah,
+                        'akad_location' => $request->akad_location,
+                        'nationality_wife' => $request->nationality_wife,
+                        'nik_wife' => $request->nik_wife,
+                        'name_wife' => $request->name_wife,
+                        'location_birth_wife' => $request->location_birth_wife,
+                        'date_birth_wife' => $request->date_birth_wife,
+                        'old_wife' => $request->old_wife ?? 1,
+                        'status_wife' => $request->status_wife,
+                        'religion_wife' => $request->religion_wife,
+                        'address_wife' => $request->address_wife,
+                        'nationality_husband' => $request->nationality_husband,
+                        'nik_husband' => $request->nik_husband,
+                        'name_husband' => $request->name_husband,
+                        'location_birth_husband' => $request->location_birth_husband,
+                        'date_birth_husband' => $request->date_birth_husband,
+                        'old_husband' => $request->old_husband ?? 1,
+                        'status_husband' => $request->status_husband,
+                        'religion_husband' => $request->religion_husband,
+                        'address_husband' => $request->address_husband,
+                        'status_payment' => '0',
+                        'status' => 0,
+                    ]
+                );
 
-            $document = $this->saveDocument($married, $request);
-            $bukti_pembayaran = $this->uploadPayment($married, $request);
-        });
-        return redirect()->route('catin.married.index')
-            ->with('success', "Data kategori produk berhasil ditambah");
-        // } catch (\Throwable $e) {
-        //     return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        // }
+                $document = $this->saveDocument($married, $request);
+                $bukti_pembayaran = $this->uploadPayment($married, $request);
+
+                $married->notifications()->create([
+                    'description' => 'Data telah selesai diisi',
+                    'message' => 'Sukses',
+                    'type' => 'success',
+                    'is_read' => true
+                ]);
+            });
+            return redirect()->route('catin.married.index')
+                ->with('success', "Data berhasil ditambah");
+        } catch (\Throwable $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     private function saveDocument(Married $married, $request)

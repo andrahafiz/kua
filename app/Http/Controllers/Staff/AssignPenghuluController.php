@@ -23,6 +23,20 @@ class AssignPenghuluController extends Controller
             'pramarried_date' => $request->tgl_pranikah
         ]);
 
+        $married->notifications()->create([
+            'description' => 'Penetapan Penghulu : ' . $married->penghulu->name_penghulu,
+            'message' => 'Sukses',
+            'type' => 'success',
+            'is_read' => false
+        ]);
+
+        $married->notifications()->create([
+            'description' => 'Penetapan Jadwal Pranikah : ' . $request->tgl_pranikah,
+            'message' => 'Sukses',
+            'type' => 'success',
+            'is_read' => false
+        ]);
+
         return redirect()->route('staff.married.show', $married->id)->with('success', "Penghulu dan Tanggal Pranikah Sudah Ditentukan");
     }
 }
