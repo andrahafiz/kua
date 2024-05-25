@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-8 col-sm-12">
+                    <div class="col-lg-8 col-sm-12 @if ($married->status == 4) order-first @endif">
                         <div class="card card-warning">
                             <div class="card-body">
                                 <div class="section-title mt-0">Data Pernikahan</div>
