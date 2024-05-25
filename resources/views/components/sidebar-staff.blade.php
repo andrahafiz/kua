@@ -24,6 +24,10 @@
                 <a class="nav-link" href="{{ route('staff.married.index') }}"><i class="fas fa-list"></i>
                     <span>Data Pernikahan</span></a>
             </li>
+            <li class="{{ Request::routeIs('staff.married.schedule') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('staff.married.schedule') }}"><i class="fas fa-list"></i>
+                    <span>Jadwal Pernikahan</span></a>
+            </li>
             <li class="{{ Request::routeIs('staff.penghulu.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('staff.penghulu.index') }}"><i class="fas fa-user"></i>
                     <span>Penghulu</span></a>

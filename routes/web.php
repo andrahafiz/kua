@@ -72,6 +72,7 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
     Route::controller(MarriedController::class)->group(
         function () {
             Route::get('/pernikahan', 'index')->name('married.index');
+            Route::get('/jadwal-pernikahan', 'scheduleMarried')->name('married.schedule');
             Route::get('/pernikahan/{married}',  'show')->name('married.show');
         }
     );

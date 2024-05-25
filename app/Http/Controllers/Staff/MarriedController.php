@@ -22,10 +22,21 @@ class MarriedController extends Controller
     {
         $married->load(['user', 'married_documents', 'married_payment']);
         $penghulu = Penghulu::get();
-        // dd();
         return view('pages.staff.married.detail-married', [
             'married' => $married,
             'penghulu' => $penghulu,
+            'type_menu' => 'pernikahan'
+        ]);
+    }
+
+    public function scheduleMarried()
+    {
+        $marrieds = Married::with('penghulu')
+            ->where('status', 4)
+            ->select('id', 'registration_number', 'name_wife', 'name_husband', 'akad_date_masehi', 'penghulu_id')
+            ->get();
+        return view('pages.staff.married.schedule-married', [
+            'marrieds' => $marrieds,
             'type_menu' => 'pernikahan'
         ]);
     }
