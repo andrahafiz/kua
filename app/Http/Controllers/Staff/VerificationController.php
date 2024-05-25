@@ -40,7 +40,7 @@ class VerificationController extends Controller
                 'type' => 'danger',
                 'is_read' => false
             ]);
-        }d
+        }
 
         return redirect()->route('staff.married.show', $married->id)->with('success', "Status Pembayaran Berhasil Diubah");
     }
