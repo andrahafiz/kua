@@ -37,7 +37,7 @@ class MarriedController extends Controller
             ->get();
         return view('pages.staff.married.schedule-married', [
             'marrieds' => $marrieds,
-            'type_menu' => 'pernikahan'
+            'type_menu' => 'jadwal-pernikahan'
         ]);
     }
 }

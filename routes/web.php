@@ -13,6 +13,7 @@ use App\Http\Controllers\Staff\PenghuluController;
 use App\Http\Controllers\Staff\DashboardController;
 use App\Http\Controllers\Staff\VerificationController;
 use App\Http\Controllers\Staff\AssignPenghuluController;
+use App\Http\Controllers\Staff\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,10 +73,11 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
     Route::controller(MarriedController::class)->group(
         function () {
             Route::get('/pernikahan', 'index')->name('married.index');
-            Route::get('/jadwal-pernikahan', 'scheduleMarried')->name('married.schedule');
             Route::get('/pernikahan/{married}',  'show')->name('married.show');
+            Route::get('/jadwal-pernikahan', 'scheduleMarried')->name('schedule');
         }
     );
+
     Route::controller(PenghuluController::class)->group(
         function () {
             Route::get('/penghulu', 'index')->name('penghulu.index');
@@ -85,6 +87,17 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
             Route::put('/penghulu/{penghulu}',  'update')->name('penghulu.update');
             Route::delete('/penghulu/{penghulu}',  'destroy')->name('penghulu.destroy');
             Route::get('/penghulu/{penghulu}/edit',  'edit')->name('penghulu.edit');
+        }
+    );
+
+    Route::controller(DocumentController::class)->group(
+        function () {
+            Route::get('/document', 'index')->name('document.index');
+            Route::post('/document',  'store')->name('document.store');
+            Route::get('/document/tambah',  'create')->name('document.create');
+            Route::put('/document/{document}',  'update')->name('document.update');
+            Route::delete('/document/{document}',  'destroy')->name('document.destroy');
+            Route::get('/document/{document}/edit',  'edit')->name('document.edit');
         }
     );
 

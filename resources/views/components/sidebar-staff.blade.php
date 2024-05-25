@@ -24,13 +24,17 @@
                 <a class="nav-link" href="{{ route('staff.married.index') }}"><i class="fas fa-list"></i>
                     <span>Data Pernikahan</span></a>
             </li>
-            <li class="{{ Request::routeIs('staff.married.schedule') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('staff.married.schedule') }}"><i class="fas fa-list"></i>
+            <li class="{{ $type_menu === 'jadwal-pernikahan' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('staff.schedule') }}"><i class="fas fa-list"></i>
                     <span>Jadwal Pernikahan</span></a>
             </li>
             <li class="{{ Request::routeIs('staff.penghulu.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('staff.penghulu.index') }}"><i class="fas fa-user"></i>
                     <span>Penghulu</span></a>
+            </li>
+            <li class="{{ Request::routeIs('staff.document.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('staff.document.index') }}"><i class="fas fa-box-archive"></i>
+                    <span>Pengarsipan Dokumen</span></a>
             </li>
         </ul>
 
