@@ -33,6 +33,16 @@
                                 </div>
                                 <div class="ticket-item">
                                     <div class="ticket-title">
+                                        <h4>Nomor Akta Nikah</h4>
+                                    </div>
+                                    <div class="ticket-info">
+                                        <h4>
+                                            {{ $married->akta_nikah_number ?? '-' }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="ticket-item">
+                                    <div class="ticket-title">
                                         <h4>Penghulu</h4>
                                     </div>
                                     <div class="ticket-info">

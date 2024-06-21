@@ -72,14 +72,17 @@ class Married extends Model
         'status_payment' => 'int',
         'status' => 'int',
         'pramarried_date' => 'datetime',
-        'penghulu_id' => 'int'
+        'penghulu_id' => 'int',
+        'counter' => 'int',
     ];
 
     protected $fillable = [
         'users_id',
         'registration_number',
         'location_name',
+        'akta_nikah_number',
         'akad_date_masehi',
+        'counter',
         'akad_date_hijriah',
         'akad_location',
         'nationality_wife',
@@ -129,5 +132,23 @@ class Married extends Model
     public function notifications()
     {
         return $this->hasMany(Notification::class);
+    }
+
+    public function getNomorAkadAttribute()
+    {
+        $lastCounter = $this->max('counter') ?? 0;
+        $counter = $lastCounter + 1;
+        $akad = 'AKAD';
+        $tanggal = date('d');
+        $tahun = date('Y');
+        $bulanRomawi = $this->convertToRoman(date('n'));
+
+        return "$counter/$akad/$tanggal-$bulanRomawi/$tahun";
+    }
+
+    private function convertToRoman($month)
+    {
+        $romans = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+        return $romans[$month - 1];
     }
 }

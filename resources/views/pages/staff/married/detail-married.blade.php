@@ -95,7 +95,26 @@
                                                 <th class="p-3">Tanggal Pernikahan</th>
                                                 <td>{{ $married->pramarried_date->isoFormat('dddd, D MMMM Y') }}</td>
                                             </tr>
+                                            @if ($married->akta_nikah_number != null)
+                                                <tr>
+                                                    <th class="p-3">Nomor Akad Nikah</th>
+                                                    <td>{{ $married->akta_nikah_number }}</td>
+                                                </tr>
+                                            @endif
                                         </table>
+                                        <div class="mt-3">
+                                            <form method="POST"
+                                                action="{{ route('staff.generate_number', $married->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                @if ($married->akta_nikah_number == null)
+                                                    <button type="submit"
+                                                        class="btn btn-icon btn-block icon-left btn-success"><i
+                                                            class="fas fa-gears"></i> Generate Nomor Akad Nikah
+                                                    </button>
+                                                @endif
+                                            </form>
+                                        </div>
                                     @endif
                                     {{-- @if ($married->status == 1 && $married->status_payment == 1)
                                         <div class="alert alert-primary">

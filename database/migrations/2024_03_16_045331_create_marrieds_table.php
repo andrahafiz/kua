@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('marrieds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id');
+            $table->string('akta_nikah_number')->nullable()->unique();
+            $table->integer('counter')->default(0);
             $table->string('registration_number');
             $table->string('location_name')->nullable();
             $table->dateTime('akad_date_masehi')->nullable();

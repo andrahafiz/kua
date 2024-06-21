@@ -14,6 +14,7 @@ use App\Http\Controllers\Staff\DashboardController;
 use App\Http\Controllers\Staff\VerificationController;
 use App\Http\Controllers\Staff\AssignPenghuluController;
 use App\Http\Controllers\Staff\DocumentController;
+use App\Http\Controllers\Staff\GenerateAkadNumberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +103,7 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
     );
 
     Route::put('verification_payment/{married}', VerificationController::class)->name('verification_payment');
+    Route::put('generate_number/{married}', GenerateAkadNumberController::class)->name('generate_number');
     Route::post('assign_penghulu/{married}', AssignPenghuluController::class)->name('assign_penghulu');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

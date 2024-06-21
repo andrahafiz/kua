@@ -77,7 +77,7 @@
                                                     <td class="align-middle">{{ $married->registration_number }}</td>
                                                     <td class="align-middle">{{ $married->name_husband }}</td>
                                                     <td class="align-middle">{{ $married->name_wife }}</td>
-                                                    <td class="align-middle">{{ '123' }}</td>
+                                                    <td class="align-middle">{{ $married->akta_nikah_number ?? '-' }}</td>
                                                     <td class="align-middle">
                                                         {{ $married->akad_date_masehi?->isoFormat('dddd, D MMMM Y') }}</td>
                                                     <td class="align-middle">
