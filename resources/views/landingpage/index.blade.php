@@ -374,31 +374,31 @@
 
                 <div class="row gy-4">
 
-                    <div class="col-lg-6">
+                    <div class="col-lg">
 
                         <div class="row gy-4">
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="info-box">
                                     <i class="bi bi-geo-alt"></i>
                                     <h3>Alamat</h3>
                                     <p>Jl. .......... </p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="info-box">
                                     <i class="bi bi-telephone"></i>
                                     <h3>Telepon / Whatsapp</h3>
                                     <p>061 7273123<br>+628227485739</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="info-box">
                                     <i class="bi bi-envelope"></i>
                                     <h3>Email</h3>
                                     <p>info@example.com</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="info-box">
                                     <i class="bi bi-clock"></i>
                                     <h3>Jam Operasional</h3>
@@ -406,44 +406,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-                    <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" class="php-email-form">
-                            <div class="row gy-4">
-
-                                <div class="col-md-6">
-                                    <input type="text" name="name" class="form-control"
-                                        placeholder="Masukan Nama Mu" required>
-                                </div>
-
-                                <div class="col-md-6 ">
-                                    <input type="email" class="form-control" name="email"
-                                        placeholder="Masukan Email Mu" required>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <textarea class="form-control" name="message" rows="6" placeholder="Masukan Pesan Mu" required></textarea>
-                                </div>
-
-                                <div class="col-md-12 text-center">
-                                    <div class="loading">Loading</div>
-                                    <div class="error-message"></div>
-                                    <div class="sent-message">Pesan Anda telah terkirim. Terima kasih!</div>
-
-                                    <button type="submit">Kirim Pesan</button>
-                                </div>
-
-                            </div>
-                        </form>
-
-                    </div>
-
                 </div>
-
             </div>
-
         </section><!-- End Contact Section -->
 
     </main><!-- End #main -->
