@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Catin\NotificationController;
+use App\Http\Controllers\Catin\ProfileController;
+use App\Http\Controllers\Staff\ProfileController as StaffProfileController;
 use App\Http\Controllers\Staff\MarriedController;
 use App\Http\Controllers\Catin\RegisterController;
 use App\Http\Controllers\LandingPageController;
@@ -65,6 +67,8 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
             Route::get('/notification/read/{notification?}', 'read')->name('married.notification.read');
         }
     );
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
@@ -105,6 +109,8 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
     Route::put('verification_payment/{married}', VerificationController::class)->name('verification_payment');
     Route::put('generate_number/{married}', GenerateAkadNumberController::class)->name('generate_number');
     Route::post('assign_penghulu/{married}', AssignPenghuluController::class)->name('assign_penghulu');
+    Route::get('profile', [StaffProfileController::class, 'index'])->name('profile');
+    Route::put('profile/update', [StaffProfileController::class, 'update'])->name('profile.update');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
