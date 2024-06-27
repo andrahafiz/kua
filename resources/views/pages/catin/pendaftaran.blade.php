@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="{{ asset('library/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 @endpush
-
+@php
+    $maritalStatuses = ['BELUM KAWIN', 'KAWIN', 'CERAI', 'HIDUP'];
+@endphp
 @section('main')
     <div class="main-content">
         <section class="section">
@@ -86,6 +88,7 @@
                                                 role="tab" aria-controls="contact" aria-selected="false">Pembayaran</a>
                                         </li>
                                     </ul>
+
                                     <div class="tab-content" id="myTabContent2">
                                         <div class="tab-pane fade show active" id="jadwal" role="tabpanel"
                                             aria-labelledby="home-tab3">
