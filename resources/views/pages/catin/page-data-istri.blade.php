@@ -65,9 +65,10 @@
      <div class="form-group row">
          <label for="religion_wife" class="col-sm-3 col-lg-2 col-form-label">Agama</label>
          <div class="col-sm-9 col-lg-10">
-             <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
+             {{-- <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
                  id="religion_wife" name="religion_wife" placeholder="Agama Istri"
-                 value="{{ $married->religion_wife != null ? $married->religion_wife : old('religion_wife') }}">
+                 value="{{ $married->religion_wife != null ? $married->religion_wife : old('religion_wife') }}"> --}}
+             <x-religion :selected="$married->religion_wife != null ? $married->religion_wife : old('religion_wife')" :status="$married->status" />
          </div>
      </div>
      <div class="form-group row mb-0">

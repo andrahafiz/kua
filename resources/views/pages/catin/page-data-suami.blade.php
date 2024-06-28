@@ -54,17 +54,19 @@
     <div class="form-group row">
         <label for="status_husband" class="col-sm-3 col-lg-2 col-form-label">Status</label>
         <div class="col-sm-9 col-lg-10">
-            <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
+            {{-- <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
                 id="status_husband" placeholder="Status Suami" name="status_husband"
-                value="{{ $married->status_husband != null ? $married->status_husband : old('status_husband') }}">
+                value="{{ $married->status_husband != null ? $married->status_husband : old('status_husband') }}"> --}}
+            <x-martial-status :selected="$married->status_husband != null ? $married->status_husband : old('status_husband')" :status="$married->status" />
         </div>
     </div>
     <div class="form-group row">
         <label for="religion_husband" class="col-sm-3 col-lg-2 col-form-label">Agama</label>
         <div class="col-sm-9 col-lg-10">
-            <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
+            {{-- <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
                 id="religion_husband" placeholder="Agama Suami" name="religion_husband"
-                value="{{ $married->religion_husband != null ? $married->religion_husband : old('religion_husband') }}">
+                value="{{ $married->religion_husband != null ? $married->religion_husband : old('religion_husband') }}"> --}}
+            <x-religion :selected="$married->religion_husband != null ? $married->religion_husband : old('religion_husband')" :status="$married->status" />
         </div>
     </div>
     <div class="form-group row mb-0">
