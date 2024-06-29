@@ -114,7 +114,7 @@
         $("#table-1").dataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [0, 1, 5]
+                "targets": [4]
             }]
         });
     </script>
