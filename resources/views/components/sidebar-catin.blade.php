@@ -22,6 +22,10 @@
                     <span>Notifikasi</span></a>
                 {{-- <span class="badge badge-danger" style="width: 20%">5</span> --}}
             </li>
+            <li class="{{ Request::is('catin/document') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('catin.download.document') }}"><i class="far fa-file-lines"></i>
+                    <span>Template Dokumen</span></a>
+            </li>
         </ul>
 
         <div class="hide-sidebar-mini mt-4 mb-4 p-3">
