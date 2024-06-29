@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
 
         Married::create([
             'registration_number' => rand(),
+            'counter' => 1,
             'users_id' => $user->id,
             'location_name' => 'Medan',
             'akad_date_masehi' => '2024-03-23 14:30:04',
