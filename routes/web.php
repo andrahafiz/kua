@@ -4,6 +4,7 @@ use App\Models\Married;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Catin\DocumentDownloadController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Catin\NotificationController;
 use App\Http\Controllers\Catin\ProfileController;
@@ -67,6 +68,7 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
             Route::get('/notification/read/{notification?}', 'read')->name('married.notification.read');
         }
     );
+    Route::get('document', DocumentDownloadController::class)->name('download.document');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
@@ -74,7 +76,7 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
 
 //ROUTE STAGG
 Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('staff.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::controller(MarriedController::class)->group(
         function () {
             Route::get('/pernikahan', 'index')->name('married.index');

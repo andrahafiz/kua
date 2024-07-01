@@ -47,7 +47,6 @@ class RegisterController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 $akad_masehi = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_masehi . ' ' . $request->akad_time_masehi)->format('Y-m-d H:i');
-                $akad_hijriah = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_hijriah . ' ' . $request->akad_time_hijriah)->format('Y-m-d H:i');
 
                 $married = Married::updateOrCreate(
                     [
@@ -56,7 +55,6 @@ class RegisterController extends Controller
                     [
                         'location_name' => $request->location_name,
                         'akad_date_masehi' => $akad_masehi,
-                        'akad_date_hijriah' => $akad_hijriah,
                         'akad_location' => $request->akad_location,
                         'nationality_wife' => $request->nationality_wife,
                         'nik_wife' => $request->nik_wife,

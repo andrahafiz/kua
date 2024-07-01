@@ -42,7 +42,6 @@ class DatabaseSeeder extends Seeder
             'users_id' => $user->id,
             'location_name' => 'Medan',
             'akad_date_masehi' => '2024-03-23 14:30:04',
-            'akad_date_hijriah' => '2024-03-30 14:30:04',
             'akad_location' => 'Medan',
             'nationality_wife' => 'Indonesia',
             'nik_wife' => '123456',

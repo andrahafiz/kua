@@ -9,6 +9,28 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
+    protected $action;
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->action = $this->input('action');
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,13 +48,14 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rule = [
             "location_name" => ['required', 'string'],
             "akad_date_masehi" => ['required', 'date', 'date_format:Y-m-d'],
             "akad_time_masehi" => ['required',  'date_format:H:i'],
-            "akad_date_hijriah" =>  ['required', 'date', 'date_format:Y-m-d'],
             "akad_time_hijriah" => ['required',  'date_format:H:i'],
             "akad_location" => ['required', 'string'],
+            "desa_location" => ['required', 'string'],
+
             "nationality_wife" => ['required', 'string'],
             "nik_wife" => ['required', 'string'],
             "name_wife" => ['required', 'string'],
@@ -51,6 +74,7 @@ class RegisterRequest extends FormRequest
             "status_husband" => ['required', 'string'],
             "religion_husband" => ['required', 'string'],
             "address_husband" => ['required', 'string'],
+
             "N1" => [new DocumentValidaiton(), 'mimes:pdf'],
             "N3" => [new DocumentValidaiton(), 'mimes:pdf'],
             "N5" => ['sometimes', 'nullable', 'mimes:pdf'],
@@ -63,5 +87,6 @@ class RegisterRequest extends FormRequest
             "photo_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
             "proof_payment" => ['sometimes', 'mimes:png,jpg']
         ];
+        return $rule;
     }
 }

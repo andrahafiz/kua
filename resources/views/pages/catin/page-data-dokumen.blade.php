@@ -1,4 +1,5 @@
 <div class="data-dokumen">
+    <a href="" class="btn btn-info">Download Template Dokumen</a>
     <div class="form-group row">
         <label for="N1" class="col-sm-4 col-lg-3 col-form-label">N1-Surat
             Keterangan Untuk Nikah (Dari Kelurahan) *</label>

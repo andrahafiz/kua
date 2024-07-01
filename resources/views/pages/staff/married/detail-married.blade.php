@@ -166,10 +166,6 @@
                                         <th class="p-3 w-50">Tanggal Akad (Masehi)</th>
                                         <td>{{ $married->akad_date_masehi }}</td>
                                     </tr>
-                                    <tr>
-                                        <th class="p-3 w-50">Tanggal Akad (Hijriah)</th>
-                                        <td>{{ $married->akad_date_hijriah }}</td>
-                                    </tr>
                                 </table>
                                 <div class="section-title">Data Calon Mempelai</div>
                                 <table class="w-100">

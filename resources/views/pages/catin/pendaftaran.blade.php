@@ -68,15 +68,15 @@
                                     <ul class="nav nav-pills" id="myTab3" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#jadwal"
-                                                role="tab" aria-controls="home" aria-selected="true">Jadwal</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#istri"
-                                                role="tab" aria-controls="profile" aria-selected="false">Calon Istri</a>
+                                                role="tab" aria-controls="home" aria-selected="true">Jadwal & Lokasi</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#suami"
                                                 role="tab" aria-controls="contact" aria-selected="false">Calon Suami</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#istri"
+                                                role="tab" aria-controls="profile" aria-selected="false">Calon Istri</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#dokumen"
@@ -123,7 +123,11 @@
                                             <i class="fas fa-exclamation-triangle"></i> Data anda sudah validasi oleh
                                             staff kami. Data tidak dapat diubah lagi</button>
                                     @else
-                                        <button type="submit" class="btn btn-primary">Simpan Data</button>
+                                        {{-- <button type="submit" class="btn btn-primary">Simpan Data</button> --}}
+                                        <button type="submit" name="action" class="btn btn-info"
+                                            value="simpan">Simpan</button>
+                                        <button type="submit" name="action" class="btn btn-primary"
+                                            value="daftar">Daftar</button>
                                     @endif
                                 </div>
                             </div>

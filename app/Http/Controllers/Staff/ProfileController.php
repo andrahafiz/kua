@@ -28,6 +28,7 @@ class ProfileController extends Controller
     {
         $id = Auth::user()->id;
         $adminData = User::find($id);
+        
         return view('pages.staff.profile', compact('adminData'));
     }
 
