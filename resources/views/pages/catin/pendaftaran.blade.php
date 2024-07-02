@@ -194,6 +194,40 @@
                 console.log(e.target.files[0]);
                 reader.readAsDataURL(e.target.files[0]);
             })
+
+            function calculateAge(birthDate) {
+                var today = new Date();
+                var birthDate = new Date(birthDate);
+                var age = today.getFullYear() - birthDate.getFullYear();
+                var monthDiff = today.getMonth() - birthDate.getMonth();
+
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+
+                return age;
+            }
+
+            $('#date_birth_wife').change(function() {
+                var birthDate = $(this).val();
+                if (birthDate) {
+                    var age = calculateAge(birthDate);
+                    $('#old_wife').val(age);
+                } else {
+                    $('#old_wife').val('');
+                }
+            });
+
+            $('#date_birth_husband').change(function() {
+                var birthDate = $(this).val();
+                console.log(birthDate);
+                if (birthDate) {
+                    var age = calculateAge(birthDate);
+                    $('#old_husband').val(age);
+                } else {
+                    $('#old_husband').val('');
+                }
+            });
         });
     </script>
 @endpush

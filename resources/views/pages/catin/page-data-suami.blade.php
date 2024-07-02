@@ -92,7 +92,7 @@
                 <div class="form-group col-md-3">
                     <label for="date_birth_husband">Tanggal Lahir <span class="text-danger">*</span></label>
                     <input type="date" class="form-control" @if ($married->status > 2) disabled @endif
-                        id="date_birth_husband" name="date_birth_husband"
+                        id="date_birth_husband" name="date_birth_husband" max="{{ now()->format('Y-m-d') }}"
                         value="{{ $married->date_birth_husband != null ? $married->date_birth_husband->format('Y-m-d') : Carbon\Carbon::parse(old('date_birth_husband'))->format('Y-m-d') }}">
                     @error('date_birth_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="form-group col-md-1">
                     <label for="old_husband">Umur <span class="text-danger">*</span></label>
-                    <input type="text" name="old_husband"
+                    <input type="text" name="old_husband" id="old_husband"
                         class="form-control @error('old_husband') is-invalid @enderror" disabled
                         value="{{ $married->old_husband != null ? $married->old_husband : old('old_husband') }}">
                     @error('old_husband')
@@ -170,7 +170,11 @@
             </div>
             <div class="form-group">
                 <label>Foto 2 X 3 Dengan Background Biru <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" name="photo_husband" id="imageHusband" />
+                <input type="file" class="form-control @error('photo_husband') is-invalid @enderror"
+                    name="photo_husband" id="imageHusband" />
+                @error('photo_husband')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
                 <span class="text-muted">Maximal Ukuran 200KB Format .jpg/.png</span>
                 <div>
                     <img id="showImageHusband" class="img-thumbnail p-2" src=""
