@@ -41,6 +41,15 @@
                 <p class="section-lead">
                     On this page you can create a new post and fill in all fields.
                 </p> --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @if (session()->has('success'))
                     <div class="alert alert-success alert-dismissible alert-has-icon show fade">
                         <div class="alert-icon"><i class="far fa-circle-check"></i></div>
@@ -103,11 +112,14 @@
                                             @endif
                                         </table>
                                         <div class="mt-3">
-                                            <form method="POST"
+                                            <form method="POST" enctype="multipart/form-data"
                                                 action="{{ route('staff.generate_number', $married->id) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 @if ($married->akta_nikah_number == null)
+                                                    <label>Dokumen Akta Nikah</label>
+                                                    <input class="form-control mb-3" type="file" required
+                                                        name="document_akta_nikah" />
                                                     <button type="submit"
                                                         class="btn btn-icon btn-block icon-left btn-success"><i
                                                             class="fas fa-gears"></i> Generate Nomor Akad Nikah

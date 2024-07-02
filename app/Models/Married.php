@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property int $users_id
  * @property string|null $akta_nikah_number
+ * @property string|null $document_akta_nikah
  * @property int $counter
  * @property string $registration_number
  * @property string|null $location_name
@@ -150,6 +151,7 @@ class Married extends Model
         'counter',
         'registration_number',
         'location_name',
+        'document_akta_nikah',
         'akad_date_masehi',
         'akad_location',
         'desa_location',

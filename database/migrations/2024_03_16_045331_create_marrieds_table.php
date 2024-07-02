@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id');
             $table->string('akta_nikah_number')->nullable()->unique();
+            $table->string('document_akta_nikah')->nullable();
             $table->smallInteger('counter')->default(0);
             $table->string('registration_number');
             $table->string('location_name')->nullable();
@@ -93,7 +94,7 @@ return new class extends Migration
             $table->string('religion_father_husband')->nullable();
             $table->string('job_father_husband')->nullable();
             $table->text('address_father_husband')->nullable(); // Changed to text
-            
+
             $table->string('nik_mother_husband')->nullable();
             $table->boolean('is_unknown_mother_husband')->nullable();
             $table->enum('citizen_mother_husband', ['WNI', 'WNA'])->nullable();
