@@ -91,7 +91,8 @@
             <label for="date_birth_father_wife">Tanggal Lahir <span class="text-danger">*</span></label>
             <input type="date" class="form-control" @if ($married->status > 2) disabled @endif
                 id="date_birth_father_wife" name="date_birth_father_wife"
-                value="{{ $married->date_birth_father_wife != null ? $married->date_birth_father_wife->format('Y-m-d') : Carbon\Carbon::parse(old('date_birth_father_wife'))->format('Y-m-d') }}">
+                value="{{ old('date_birth_father_wife', optional($married->date_birth_father_wife)->format('Y-m-d')) }}">
+            {{-- value="{{ $married->date_birth_father_wife != null ? $married->date_birth_father_wife->format('Y-m-d') : Carbon\Carbon::parse(old('date_birth_father_wife'))->format('Y-m-d') }}"> --}}
             @error('date_birth_father_wife')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

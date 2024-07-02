@@ -71,7 +71,8 @@
                         <input type="date" name="akad_date_masehi"
                             class="form-control @error('akad_date_masehi') is-invalid @enderror"
                             @if ($married->status > 2) disabled @endif
-                            value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('Y-m-d') : Carbon\Carbon::parse(old('akad_date_masehi'))->format('Y-m-d') }}">
+                            value="{{ old('akad_date_masehi', optional($married->akad_date_masehi)->format('Y-m-d')) }}">
+                        {{-- value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('Y-m-d') : Carbon\Carbon::parse(old('akad_date_masehi'))->format('Y-m-d') }}"> --}}
                         @error('akad_date_masehi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -80,7 +81,8 @@
                         <input type="time" name="akad_time_masehi"
                             class="form-control @error('akad_time_masehi') is-invalid @enderror"
                             @if ($married->status > 2) disabled @endif
-                            value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('H:i') : old('akad_time_masehi') }}">
+                            value="{{ old('akad_time_masehi', optional($married->akad_date_masehi)->format('H:i')) }}">
+                        {{-- value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('H:i') : old('akad_time_masehi') }}"> --}}
                         @error('akad_time_masehi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
