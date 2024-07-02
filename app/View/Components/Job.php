@@ -4,23 +4,23 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Religion extends Component
+class Job extends Component
 {
     public $name;
     public $selected;
     public $status;
-    public $religion;
+    public $job;
 
     public function __construct($name, $selected = null, $status = 0)
     {
         $this->name = $name;
         $this->selected = $selected;
         $this->status = $status;
-        $this->religion = ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'];
+        $this->job = ['BELUM BEKERJA', 'PEGAWA', 'LAINNYA'];
     }
 
     public function render()
     {
-        return view('components.religion');
+        return view('components.job');
     }
 }

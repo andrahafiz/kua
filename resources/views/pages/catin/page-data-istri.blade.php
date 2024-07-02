@@ -59,7 +59,7 @@
              {{-- <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
                  id="status_wife" name="status_wife" placeholder="Status Istri"
                  value="{{ $married->status_wife != null ? $married->status_wife : old('status_wife') }}"> --}}
-             <x-martial-status :selected="$married->status_wife != null ? $married->status_wife : old('status_wife')" :status="$married->status" />
+             <x-martial-status name="status_wife" :selected="$married->status_wife != null ? $married->status_wife : old('status_wife')" :status="$married->status" />
          </div>
      </div>
      <div class="form-group row">
@@ -68,7 +68,7 @@
              {{-- <input type="text" class="form-control" @if ($married->status > 2) disabled @endif
                  id="religion_wife" name="religion_wife" placeholder="Agama Istri"
                  value="{{ $married->religion_wife != null ? $married->religion_wife : old('religion_wife') }}"> --}}
-             <x-religion :selected="$married->religion_wife != null ? $married->religion_wife : old('religion_wife')" :status="$married->status" />
+             <x-religion name="religion_wife" :selected="$married->religion_wife != null ? $married->religion_wife : old('religion_wife')" :status="$married->status" />
          </div>
      </div>
      <div class="form-group row mb-0">

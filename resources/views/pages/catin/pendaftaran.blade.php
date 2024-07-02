@@ -152,4 +152,48 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            function toggleFatherHusbandFields() {
+                var isChecked = $('#is_unknown_father_husband').is(":checked");
+                var fields = [
+                    '#citizen_father_husband',
+                    '#nationality_father_husband',
+                    '#nik_father_husband',
+                    '#no_passport_father_husband',
+                    '#location_birth_father_husband',
+                    '#date_birth_father_husband',
+                    '#religion_father_husband',
+                    '#job_father_husband',
+                    '#address_father_husband'
+                ];
+
+                fields.forEach(function(field) {
+                    $(field).attr('disabled', isChecked);
+                });
+            }
+
+            toggleFatherHusbandFields();
+
+            $('#is_unknown_father_husband').change(toggleFatherHusbandFields);
+
+            $('#imageHusband').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImageHusband').attr('src', e.target.result);
+                }
+                console.log(e.target.files[0]);
+                reader.readAsDataURL(e.target.files[0]);
+            })
+
+            $('#imageWife').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImageWife').attr('src', e.target.result);
+                }
+                console.log(e.target.files[0]);
+                reader.readAsDataURL(e.target.files[0]);
+            })
+        });
+    </script>
 @endpush

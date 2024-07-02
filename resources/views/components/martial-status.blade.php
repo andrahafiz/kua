@@ -1,12 +1,12 @@
-<select name="status_wife" id="status_wife" class="form-control" name="nationality_wife"
-    @error('status_wife') is-invalid @enderror @if ($status > 2) disabled @endif>
-    <option value="">Pilih Status Pernikahan</option>
-    @foreach ($maritalStatuses as $status)
+<select name="{{ $name }}" id="{{ $name }}" class="form-control @error($name) is-invalid @enderror"
+    @if ($status > 2) disabled @endif>
+    <option value="">Pilih Status</option>
+    @foreach ($martial_status as $status)
         <option value="{{ $status }}" {{ $selected == $status ? 'selected' : '' }}>
             {{ $status }}
         </option>
     @endforeach
 </select>
-@error('status_wife')
+@error($name)
     <div class="invalid-feedback">{{ $message }}</div>
 @enderror

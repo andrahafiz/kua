@@ -6,24 +6,21 @@ use Illuminate\View\Component;
 
 class MartialStatus extends Component
 {
+    public $name;
     public $selected;
     public $status;
+    public $martial_status;
 
-    public function __construct($selected = null, $status = 0)
+    public function __construct($name, $selected = null, $status = 0)
     {
+        $this->name = $name;
         $this->selected = $selected;
         $this->status = $status;
+        $this->martial_status = ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'];
     }
 
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
-        $maritalStatuses = ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'];
-        return view('components.martial-status', compact('maritalStatuses'));
+        return view('components.martial-status');
     }
 }

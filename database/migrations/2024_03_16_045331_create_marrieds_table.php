@@ -81,6 +81,7 @@ return new class extends Migration
             $table->string('email_husband')->nullable();
             $table->text('address_husband')->nullable(); // Changed to text
             $table->string('photo_husband')->nullable();
+
             $table->string('nik_father_husband')->nullable();
             $table->boolean('is_unknown_father_husband')->nullable();
             $table->enum('citizen_father_husband', ['WNI', 'WNA'])->nullable();
@@ -92,6 +93,7 @@ return new class extends Migration
             $table->string('religion_father_husband')->nullable();
             $table->string('job_father_husband')->nullable();
             $table->text('address_father_husband')->nullable(); // Changed to text
+            
             $table->string('nik_mother_husband')->nullable();
             $table->boolean('is_unknown_mother_husband')->nullable();
             $table->enum('citizen_mother_husband', ['WNI', 'WNA'])->nullable();

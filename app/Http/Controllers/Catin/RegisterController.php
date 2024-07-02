@@ -44,10 +44,10 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
+        // dd($request->validate());
         try {
             DB::transaction(function () use ($request) {
                 $akad_masehi = Carbon::createFromFormat('Y-m-d H:i', $request->akad_date_masehi . ' ' . $request->akad_time_masehi)->format('Y-m-d H:i');
-
                 $married = Married::updateOrCreate(
                     [
                         'users_id' => Auth()->user()->id
@@ -88,9 +88,9 @@ class RegisterController extends Controller
                     'type' => 'success',
                     'is_read' => true
                 ]);
+                return redirect()->route('catin.married.index')
+                    ->with('success', "Data berhasil simpan");
             });
-            return redirect()->route('catin.married.index')
-                ->with('success', "Data berhasil ditambah");
         } catch (\Throwable $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
