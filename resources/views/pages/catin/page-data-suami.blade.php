@@ -192,7 +192,7 @@
                 </label>
                 <div>
                     <img id="showImageHusband" class="img-thumbnail p-2"
-                        src="{{ Helper::setUrlDocument($documentmarried->photo_husband) }}"
+                        src="{{ Helper::setUrlDocument($documentmarried?->photo_husband) }}"
                         style="width: 155px; height:230px">
                 </div>
             </div>

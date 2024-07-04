@@ -173,7 +173,7 @@
             <div class="form-group">
                 <label>Foto 2 X 3 Dengan Background Biru <span class="text-danger">*</span></label>
                 <input type="file" class="form-control @error('photo_wife') is-invalid @enderror"
-                    name="photo_wife" id="imageHusband" />
+                    name="photo_wife" id="imageWife" />
                 @error('photo_wife')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -185,8 +185,8 @@
                     @endif
                 </label>
                 <div>
-                    <img id="showImageHusband" class="img-thumbnail p-2"
-                        src="{{ Helper::setUrlDocument($documentmarried->photo_wife) }}"
+                    <img id="showImageWife" class="img-thumbnail p-2"
+                        src="{{ Helper::setUrlDocument($documentmarried?->photo_wife) }}"
                         style="width: 155px; height:230px">
                 </div>
             </div>
