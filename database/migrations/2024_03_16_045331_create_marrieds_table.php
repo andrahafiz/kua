@@ -29,7 +29,7 @@ return new class extends Migration
 
             $table->smallInteger('status_payment')->nullable();
             $table->smallInteger('status')->default(0)->nullable();
-            $table->smallInteger('status_married')->default(0)->nullable();
+            $table->string('status_married', 10)->nullable();
             $table->softDeletes();
             $table->timestamps();
 

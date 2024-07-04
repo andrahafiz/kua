@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Requests\RegisterRequest;
 use App\Models\MarriedDocument;
 use App\Models\MarriedPayment;
+use App\Models\Wali;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,7 @@ class RegisterController extends Controller
                 $this->saveDocumentHusband($married, $request);
                 $this->saveWife($request, $married->id);
                 $this->saveDocumentWife($married, $request);
+                $this->saveWali($request, $married->id);
                 $this->uploadPayment($married, $request);
                 $this->addNotification($married, 'Data telah selesai diisi', 'Sukses', 'success');
             });
@@ -122,6 +124,31 @@ class RegisterController extends Controller
                 'religion_mother_husband' => $request->religion_mother_husband ?? null,
                 'job_mother_husband' => $request->job_mother_husband ?? null,
                 'address_mother_husband' => $request->address_mother_husband ?? null,
+            ]
+        );
+    }
+
+    private function saveWali($request, $marriedId)
+    {
+        Wali::updateOrCreate(
+            ['married_id' => $marriedId],
+            [
+                'nik_wali' => $request->nik_wali,
+                'hubungan_wali' => $request->hubungan_wali ?? null,
+                'status_wali' => $request->status_wali ?? null,
+                'citizen_wali' => $request->citizen_wali ?? null,
+                'nationality_wali' => $request->nationality_wali ?? null,
+                'no_passport_wali' => $request->no_passport_wali ?? null,
+                'name_wali' => $request->name_wali ?? null,
+                'name_father_wali' => $request->name_father_wali ?? 0,
+                'reason_wali' => $request->reason_wali ?? null,
+                'location_birth_wali' => $request->location_birth_wali ?? null,
+                'date_birth_wali' => $request->date_birth_wali ?? null,
+                'old_wali' => $request->old_wali ?? null,
+                'religion_wali' => $request->religion_wali ?? null,
+                'job_wali' => $request->job_wali ?? null,
+                'number_phone_wali' => $request->number_phone_wali ?? null,
+                'address_wali' => $request->address_wali ?? null,
             ]
         );
     }
@@ -249,10 +276,14 @@ class RegisterController extends Controller
         $path = 'public/photos/payment/';
         $path_payment = $this->uploadFile($request->file('proof_payment'), $married->registration_number, 'proof_payment');
 
-        $married->update(['status_payment' => 1, 'status' => 1]);
-        $married->married_payment()->updateOrCreate(
-            ['married_id' => $married->id],
-            ['proof_payment' => $path . $path_payment ?? $married->married_payment?->proof_payment]
-        );
+        if ($request->married_on == "DI KUA") {
+            $married->update(['status_payment' => 2, 'status' => 0]);
+        } else {
+            $married->update(['status_payment' => 1, 'status' => 1]);
+            $married->married_payment()->updateOrCreate(
+                ['married_id' => $married->id],
+                ['proof_payment' => $path . $path_payment ?? $married->married_payment?->proof_payment]
+            );
+        }
     }
 }

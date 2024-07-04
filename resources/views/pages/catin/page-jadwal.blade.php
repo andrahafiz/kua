@@ -25,8 +25,13 @@
                 <label for="married_on">Nikah Di <span class="text-danger">*</span></label>
                 <select class="form-control @error('married_on') is-invalid @enderror" id="married_on"
                     @if ($married->status > 2) disabled @endif name="married_on">
-                    <option value="DI LUAR KUA">DI LUAR KUA</option>
-                    <option value="DI KUA">DI KUA</option>
+                    <option value="DI LUAR KUA"
+                        {{ $married->married_on == 'DI LUAR KUA' || old('married_on') == 'DI LUAR KUA' ? 'selected' : '' }}>
+                        DI LUAR KUA</option>
+                    <option value="DI KUA"
+                        {{ $married->married_on == 'DI KUA' || old('married_on') == 'DI KUA' ? 'selected' : '' }}>
+                        DI KUA
+                    </option>
                 </select>
                 @error('married_on')
                     <div class="invalid-feedback">{{ $message }}</div>

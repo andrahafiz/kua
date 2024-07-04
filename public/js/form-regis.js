@@ -104,12 +104,18 @@ $(document).ready(function () {
 
     setupAgeCalculation("#date_birth_wife", "#old_wife");
     setupAgeCalculation("#date_birth_husband", "#old_husband");
+    setupAgeCalculation("#date_birth_wali", "#old_wali");
 
-    $("#married_on").on("change", function () {
-        if ($(this).val() === "DI LUAR KUA") {
+    function togglePaymentButton() {
+        if ($("#married_on").val() === "DI LUAR KUA") {
             $("#button-pembayaran").show();
         } else {
             $("#button-pembayaran").hide();
         }
-    });
+    }
+
+    $("#married_on").on("change", togglePaymentButton);
+
+    // Initial check on page load
+    togglePaymentButton();
 });

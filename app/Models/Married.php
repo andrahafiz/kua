@@ -58,7 +58,6 @@ class Married extends Model
         'akad_date_masehi' => 'datetime',
         'status_payment' => 'int',
         'status' => 'int',
-        'status_married' => 'int',
         'pramarried_date' => 'datetime',
         'penghulu_id' => 'int'
     ];

@@ -25,6 +25,14 @@
                             <div class="tickets-list">
                                 <div class="ticket-item">
                                     <div class="ticket-title">
+                                        <h4>Status Pernikahan</h4>
+                                    </div>
+                                    <div class="ticket-info">
+                                        <x-status-married status="{{ $married->status_married }}" />
+                                    </div>
+                                </div>
+                                <div class="ticket-item">
+                                    <div class="ticket-title">
                                         <h4>Status Berkas</h4>
                                     </div>
                                     <div class="ticket-info">

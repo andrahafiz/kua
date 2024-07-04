@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('married_id')->constrained()->restrictOnUpdate()->restrictOnDelete();
 
             $table->string('nik_wali')->nullable();
-            $table->string('status_wali')->nullable();
             $table->string('hubungan_wali')->nullable();
+            $table->enum('status_wali', ['NASAB', 'HAKIM'])->nullable();
             $table->enum('citizen_wali', ['WNI', 'WNA'])->nullable();
             $table->string('nationality_wali')->nullable();
             $table->string('no_passport_wali')->nullable();

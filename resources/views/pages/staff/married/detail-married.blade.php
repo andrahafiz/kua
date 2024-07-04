@@ -28,7 +28,8 @@
                     <a href="{{ url()->previous() }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
                 <h1>Detail Data Pernikahan
-                    <br><span class="text-muted">{{ $married->name_husband . ' & ' . $married->name_wife }}</span>
+                    <br><span
+                        class="text-muted">{{ $married->husbands->name_husband . ' & ' . $married->wives->name_wife }}</span>
                 </h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item"><a href="{{ route('staff.married.index') }}">Pernikahan</a></div>
@@ -92,7 +93,7 @@
                                 <div class="card-body">
                                     @if ($married->married_payment()->exists() == true && $married->status == 1 && $married->status_payment == 1)
                                         @include('pages.staff.married.action.verification-payment')
-                                    @elseif($married->status == 3 && $married->status_payment == 2)
+                                    @elseif(($married->status == 3 || $married->status == 0) && $married->status_payment == 2)
                                         @include('pages.staff.married.action.assign-penghulu')
                                     @elseif($married->status == 4)
                                         <table>
@@ -168,11 +169,19 @@
                                     </tr>
                                     <tr>
                                         <th class="p-3 w-50">Lokasi Nikah</th>
-                                        <td>{{ $married->location_name }}</td>
+                                        <td>{{ $married->akad_location }}</td>
                                     </tr>
                                     <tr>
                                         <th class="p-3 w-50">Lokasi Akad</th>
-                                        <td>{{ $married->akad_location }}</td>
+                                        <td>{{ $married->married_on }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">KUA</th>
+                                        <td>{{ $married->kua ?? '-' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Desa</th>
+                                        <td>{{ $married->desa_location ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <th class="p-3 w-50">Tanggal Akad (Masehi)</th>
@@ -191,48 +200,49 @@
                                     <tbody>
                                         <tr>
                                             <th class="p-3 w-25">NIK</th>
-                                            <td>{{ $married->nik_husband }}</td>
-                                            <td>{{ $married->nik_wife }}</td>
+                                            <td>{{ $married->husbands->nik_husband }}</td>
+                                            <td>{{ $married->wives->nik_wife }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Nama</th>
-                                            <td>{{ $married->name_husband }}</td>
-                                            <td>{{ $married->name_wife }}</td>
+                                            <td>{{ $married->husbands->name_husband }}</td>
+                                            <td>{{ $married->wives->name_wife }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Tempat Lahir</th>
-                                            <td>{{ $married->location_birth_husband }}</td>
-                                            <td>{{ $married->location_birth_wife }}</td>
+                                            <td>{{ $married->husbands->location_birth_husband }}</td>
+                                            <td>{{ $married->wives->location_birth_wife }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Tangal Lahir</th>
-                                            <td>{{ $married->date_birth_husband?->isoFormat('dddd, D MMMM Y') }}</td>
-                                            <td>{{ $married->date_birth_wife?->isoFormat('dddd, D MMMM Y') }}</td>
+                                            <td>{{ $married->husbands->date_birth_husband?->isoFormat('dddd, D MMMM Y') }}
+                                            </td>
+                                            <td>{{ $married->wives->date_birth_wife?->isoFormat('dddd, D MMMM Y') }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Umur</th>
-                                            <td>{{ $married->old_husband }}</td>
-                                            <td>{{ $married->old_wife }}</td>
+                                            <td>{{ $married->husbands->old_husband }}</td>
+                                            <td>{{ $married->wives->old_wife }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Agama</th>
-                                            <td>{{ $married->religion_husband }}</td>
-                                            <td>{{ $married->religion_wife }}</td>
+                                            <td>{{ $married->husbands->religion_husband }}</td>
+                                            <td>{{ $married->wives->religion_wife }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Status</th>
-                                            <td>{{ $married->status_husband }}</td>
-                                            <td>{{ $married->status_wife }}</td>
+                                            <td>{{ $married->husbands->status_husband }}</td>
+                                            <td>{{ $married->wives->status_wife }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Kewarganegaraan</th>
-                                            <td>{{ $married->nationality_husband }}</td>
-                                            <td>{{ $married->nationality_wife }}</td>
+                                            <td>{{ $married->husbands->nationality_husband }}</td>
+                                            <td>{{ $married->wives->nationality_wife }}</td>
                                         </tr>
                                         <tr>
                                             <th class="p-3 w-25">Alamat</th>
-                                            <td>{{ $married->address_husband }}</td>
-                                            <td>{{ $married->address_wife }}</td>
+                                            <td>{{ $married->husbands->address_husband }}</td>
+                                            <td>{{ $married->wives->address_wife }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

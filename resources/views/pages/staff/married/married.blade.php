@@ -75,15 +75,15 @@
                                                         {{ $loop->iteration }}
                                                     </td>
                                                     <td class="align-middle">{{ $married->registration_number }}</td>
-                                                    <td class="align-middle">{{ $married->name_husband }}</td>
-                                                    <td class="align-middle">{{ $married->name_wife }}</td>
+                                                    <td class="align-middle">{{ $married->husbands?->name_husband }}</td>
+                                                    <td class="align-middle">{{ $married->wives?->name_wife }}</td>
                                                     <td class="align-middle">{{ $married->akta_nikah_number ?? '-' }}</td>
                                                     <td class="align-middle">
                                                         {{ $married->akad_date_masehi?->isoFormat('dddd, D MMMM Y') }}</td>
                                                     <td class="align-middle">
                                                         <x-status-pernikahan status="{{ $married->status }}" />
                                                     </td>
-                                                    <td>
+                                                    <td class="align-middle">
                                                         <x-status-pembayaran status="{{ $married->status_payment }}" />
                                                     </td>
                                                     <td width="10%" class="align-middle">

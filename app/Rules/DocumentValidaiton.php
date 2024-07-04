@@ -25,76 +25,22 @@ class DocumentValidaiton implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        $married = Married::where('users_id', Auth()->user()->id)->first()->id;
-        $documentmarried = MarriedDocument::where('married_id', $married);
-        switch ($attribute) {
-            case 'N1':
-                $condition = $documentmarried->whereNotNull('N1')->count();
-                if (empty($value) && $condition <= 0) {
-                    return $fail('The ' . $attribute . ' is required.');
-                }
-                if (empty($value) && $condition > 0) {
-                    return true;
-                }
-                break;
-            case 'N3':
-                $condition = $documentmarried->whereNotNull('N3')->count();
-                if (empty($value) && $condition <= 0) {
-                    return $fail('The ' . $attribute . ' is required.');
-                }
-                if (empty($value) && $condition > 0) {
-                    return true;
-                }
-                break;
-            case 'ktp_husband':
-                $condition = $documentmarried->whereNotNull('ktp_husband')->count();
-                if (empty($value) && $condition <= 0) {
-                    return $fail('The ' . $attribute . ' is required.');
-                }
-                if (empty($value) && $condition > 0) {
-                    return true;
-                }
-                break;
-            case 'kk_husband':
-                $condition = $documentmarried->whereNotNull('kk_husband')->count();
-                if (empty($value) && $condition <= 0) {
-                    return $fail('The ' . $attribute . ' is required.');
-                }
-                if (empty($value) && $condition > 0) {
-                    return true;
-                }
-                break;
-            case 'akta_husband':
-                $condition = $documentmarried->whereNotNull('akta_husband')->count();
-                if (empty($value) && $condition <= 0) {
-                    return $fail('The ' . $attribute . ' is required.');
-                }
-                if (empty($value) && $condition > 0) {
-                    return true;
-                }
-                break;
-            case 'ijazah_husband':
-                $condition = $documentmarried->whereNotNull('ijazah_husband')->count();
-                if (empty($value) && $condition <= 0) {
-                    return $fail('The ' . $attribute . ' is required.');
-                }
-                if (empty($value) && $condition > 0) {
-                    return true;
-                }
-                break;
-            case 'photo_husband':
-                $condition = $documentmarried->whereNotNull('photo_husband')->count();
-                if (empty($value) && $condition <= 0) {
-                    return $fail('The ' . $attribute . ' is required.');
-                }
-                if (empty($value) && $condition > 0) {
-                    return true;
-                }
-                break;
+        $marriedId = Married::where('users_id', Auth()->user()->id)->first()->id;
+        $documentmarried = MarriedDocument::where('married_id', $marriedId);
 
-            default:
-                # code...
-                break;
+        $fields = [
+            'N1', 'N3', 'ktp_husband', 'kk_husband',
+            'akta_husband', 'ijazah_husband', 'photo_husband'
+        ];
+
+        if (in_array($attribute, $fields)) {
+            $condition = $documentmarried->whereNotNull($attribute)->count();
+            if (empty($value) && $condition <= 0) {
+                return $fail('The ' . $attribute . ' is required.');
+            }
+            if (empty($value) && $condition > 0) {
+                return true;
+            }
         }
     }
 }

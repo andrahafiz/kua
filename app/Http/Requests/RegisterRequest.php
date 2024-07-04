@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Rules\Uppercase;
 use App\Rules\DocumentValidaiton;
-use App\Rules\DocumentValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -132,6 +131,8 @@ class RegisterRequest extends FormRequest
             "religion_mother_wife"           => ['required_unless:is_unknown_mother_wife,true', 'nullable', 'string'],
             "job_mother_wife"                => ['required_unless:is_unknown_mother_wife,true', 'nullable', 'string'],
             "address_mother_wife"            => ['required_unless:is_unknown_mother_wife,true', 'nullable', 'string'],
+
+
 
             // "N1" => [new DocumentValidaiton(), 'mimes:pdf'],
             // "N3" => [new DocumentValidaiton(), 'mimes:pdf'],

@@ -46,12 +46,13 @@
 
                  <div class="lead">
                      <div class="form-group row">
-
-                     </div>
-                     <div class="form-group row">
-
                          <div class="images">
                              <img src="{{ asset('img/payment/norekening.jpeg') }}" width="50%" alt="norekening">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <div class="alert alert-primary">
+                             <h2 class="p-0 m-0">NOMINAL YANG ANDA HARUS BAYARKAN ADALAH Rp. 600.000</h2>
                          </div>
                      </div>
                      <div class="form-group row">

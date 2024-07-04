@@ -15,7 +15,7 @@
             <label for="is_unknown_mother_wife">Ceklis <span class="text-danger">*</span></label>
             <div class="form-check">
                 <input class="form-check-input @error('is_unknown_mother_wife') is-invalid @enderror" type="checkbox"
-                    value="true" id="is_unknown_mother_wife" name="is_unknown_mother_wife"
+                    value="1" id="is_unknown_mother_wife" name="is_unknown_mother_wife"
                     @checked(old('is_unknown_mother_wife', $married->is_unknown_mother_wife))>
                 <label class="form-check-label" for="is_unknown_mother_wife">
                     Jika Meninggal/Tidak Diketahui

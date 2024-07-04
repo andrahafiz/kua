@@ -34,6 +34,7 @@ class GenerateAkadNumberController extends Controller
         $married->update([
             'document_akta_nikah' =>    $path ?? null,
             'akta_nikah_number' => $married->nomor_akad,
+            'status_married' => 'Menikah',
             'counter' => $counter
         ]);
 
