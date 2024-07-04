@@ -14,8 +14,20 @@
             </li>
             <li class="menu-header">Starter</li>
             <li class="{{ Request::is('catin/pendaftaran') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('catin.married.index') }}"><i class="far fa-square"></i> <span>Form
+                <a class="nav-link" href="{{ route('catin.married.index') }}"><i class="far fa-file"></i>
+                    <span>Form
                         Pendaftaran</span></a>
+            </li>
+            <li class="{{ Request::is('catin/perceraian') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('catin.perceraian.index') }}"><i class="fa fa-heart-crack"
+                        style="margin-left: 4px;"></i>
+                    <span>Perceraian
+                    </span></a>
+            </li>
+            <li class="">
+                <a class="nav-link" href=""><i class="far fa-heart"></i>
+                    <span>Rujuk
+                    </span></a>
             </li>
             <li class="{{ Request::is('catin/notification') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('catin.married.notification') }}"><i class="far fa-bell"></i>

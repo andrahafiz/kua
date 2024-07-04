@@ -113,6 +113,11 @@ class Married extends Model
         return $this->hasOne(MarriedDocument::class);
     }
 
+    public function perceraian()
+    {
+        return $this->hasOne(Perceraian::class);
+    }
+
     public function married_payment()
     {
         return $this->hasOne(MarriedPayment::class);

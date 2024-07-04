@@ -17,6 +17,12 @@
                 <a class="nav-link" href="{{ route('staff.married.index') }}"><i class="fas fa-list"></i>
                     <span>Data Pernikahan</span></a>
             </li>
+            <li class="{{ Request::routeIs('staff.perceraian.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('staff.perceraian.index') }}"><i class="fa fa-heart-crack"
+                        style="margin-left: 4px;"></i>
+                    <span>Perceraian
+                    </span></a>
+            </li>
             <li class="{{ $type_menu === 'jadwal-pernikahan' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('staff.schedule') }}"><i class="fas fa-list"></i>
                     <span>Jadwal Pernikahan</span></a>

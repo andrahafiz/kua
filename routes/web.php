@@ -4,6 +4,7 @@ use App\Models\Married;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Staff\CeraiController;
 use App\Http\Controllers\Catin\DocumentDownloadController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Catin\NotificationController;
@@ -62,6 +63,14 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
             Route::get('/pendaftaran/{married}/edit',  'edit')->name('married.edit');
         }
     );
+
+    Route::controller(CeraiController::class)->group(
+        function () {
+            Route::get('/perceraian', 'index')->name('perceraian.index');
+            Route::post('/perceraian', 'store')->name('perceraian.store');
+        }
+    );
+
     Route::controller(NotificationController::class)->group(
         function () {
             Route::get('/notification', 'index')->name('married.notification');
@@ -82,6 +91,14 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
             Route::get('/pernikahan', 'index')->name('married.index');
             Route::get('/pernikahan/{married}',  'show')->name('married.show');
             Route::get('/jadwal-pernikahan', 'scheduleMarried')->name('schedule');
+        }
+    );
+
+    Route::controller(CeraiController::class)->group(
+        function () {
+            Route::get('/perceraian', 'index')->name('perceraian.index');
+            Route::get('/perceraian/{cerai}',  'show')->name('perceraian.show');
+            Route::put('/perceraian/{cerai}',  'approval')->name('perceraian.approval');
         }
     );
 
