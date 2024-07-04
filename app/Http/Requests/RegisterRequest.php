@@ -133,17 +133,17 @@ class RegisterRequest extends FormRequest
             "job_mother_wife"                => ['required_unless:is_unknown_mother_wife,true', 'nullable', 'string'],
             "address_mother_wife"            => ['required_unless:is_unknown_mother_wife,true', 'nullable', 'string'],
 
-            "N1" => [new DocumentValidaiton(), 'mimes:pdf'],
-            "N3" => [new DocumentValidaiton(), 'mimes:pdf'],
-            "N5" => ['sometimes', 'nullable', 'mimes:pdf'],
-            "surat_akta_cerai" =>  ['sometimes', 'nullable', 'mimes:pdf'],
-            "surat_izin_komandan" =>  ['sometimes', 'nullable', 'mimes:pdf'],
-            "ktp_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
-            "kk_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
-            "akta_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
-            "ijazah_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
-            "photo_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
-            "proof_payment" => ['sometimes', 'nullable', 'mimes:png,jpg']
+            // "N1" => [new DocumentValidaiton(), 'mimes:pdf'],
+            // "N3" => [new DocumentValidaiton(), 'mimes:pdf'],
+            // "N5" => ['sometimes', 'nullable', 'mimes:pdf'],
+            // "surat_akta_cerai" =>  ['sometimes', 'nullable', 'mimes:pdf'],
+            // "surat_izin_komandan" =>  ['sometimes', 'nullable', 'mimes:pdf'],
+            // "ktp_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            // "kk_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            // "akta_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            // "ijazah_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            // "photo_husband" => [new DocumentValidaiton(), 'mimes:pdf'],
+            // "proof_payment" => ['sometimes', 'nullable', 'mimes:png,jpg']
         ];
         return $rule;
     }

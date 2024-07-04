@@ -1,4 +1,4 @@
-{{-- DATA AYAH SUAMI --}}
+{{-- DATA AYAH ISTRI     --}}
 <div class="tab-pane fade" id="mother_wife" role="tabpanel" aria-labelledby="mother_wife-tab">
     <div class="form-row">
         <div class="form-group col-md-8">
@@ -122,4 +122,4 @@
         @enderror
     </div>
 </div>
-{{-- END  DATA AYAH SUAMI --}}
+{{-- END  DATA AYAH ISTRI    --}}

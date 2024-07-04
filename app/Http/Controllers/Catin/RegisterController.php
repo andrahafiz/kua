@@ -45,6 +45,8 @@ class RegisterController extends Controller
                 $married = $this->saveMarried($request);
                 $this->saveHusband($request, $married->id);
                 $this->saveDocumentHusband($married, $request);
+                $this->saveWife($request, $married->id);
+                $this->saveDocumentWife($married, $request);
                 $this->uploadPayment($married, $request);
                 $this->addNotification($married, 'Data telah selesai diisi', 'Sukses', 'success');
             });
@@ -83,12 +85,13 @@ class RegisterController extends Controller
         Husband::updateOrCreate(
             ['married_id' => $marriedId],
             [
-                'citizen_husband' => 'WNI',
+                'citizen_husband' => $request->citizen_husband,
                 'nationality_husband' => $request->nationality_husband ?? null,
                 'nik_husband' => $request->nik_husband ?? null,
                 'name_husband' => $request->name_husband ?? null,
                 'location_birth_husband' => $request->location_birth_husband ?? null,
                 'date_birth_husband' => $request->date_birth_husband ?? null,
+                'no_passport_husband' => $request->no_passport_husband ?? null,
                 'old_husband' => $request->old_husband ?? 0,
                 'status_husband' => $request->status_husband ?? null,
                 'religion_husband' => $request->religion_husband ?? null,
@@ -96,6 +99,7 @@ class RegisterController extends Controller
                 'education_husband' => $request->education_husband ?? null,
                 'email_husband' => $request->email_husband ?? null,
                 'address_husband' => $request->address_husband ?? null,
+                'phone_number_husband' => $request->phone_number_husband ?? null,
                 'name_father_husband' => $request->name_father_husband ?? null,
                 'is_unknown_father_husband' => $request->is_unknown_father_husband ?? null,
                 'citizen_father_husband' => $request->citizen_father_husband ?? null,
@@ -120,35 +124,6 @@ class RegisterController extends Controller
                 'address_mother_husband' => $request->address_mother_husband ?? null,
             ]
         );
-    }
-
-    private function saveWife($request, $marriedId)
-    {
-        Wife::updateOrCreate(
-            ['married_id' => $marriedId],
-            [
-                'citizen_wife' => 'WNI',
-                'nationality_wife' => $request->nationality_wife,
-                'nik_wife' => $request->nik_wife,
-                'name_wife' => $request->name_wife,
-                'location_birth_wife' => $request->location_birth_wife,
-                'date_birth_wife' => $request->date_birth_wife,
-                'old_wife' => $request->old_wife ?? 0,
-                'status_wife' => $request->status_wife,
-                'religion_wife' => $request->religion_wife,
-                'address_wife' => $request->address_wife,
-            ]
-        );
-    }
-
-    private function addNotification($married, $description, $message, $type)
-    {
-        $married->notifications()->create([
-            'description' => $description,
-            'message' => $message,
-            'type' => $type,
-            'is_read' => true,
-        ]);
     }
 
     private function saveDocumentHusband(Married $married, $request)
@@ -177,6 +152,78 @@ class RegisterController extends Controller
         );
     }
 
+    private function saveDocumentWife(Married $married, $request)
+    {
+        $documentPaths = [
+            'photo_wife' => $this->uploadFile($request->file('photo_wife'), $married->registration_number, 'photo_wife'),
+            'ktp_wife' => $this->uploadFile($request->file('ktp_wife'), $married->registration_number, 'ktp_wife'),
+            'kk_wife' => $this->uploadFile($request->file('kk_wife'), $married->registration_number, 'kk_wife'),
+            'akta_wife' => $this->uploadFile($request->file('akta_wife'), $married->registration_number, 'akta_wife'),
+            'ijazah_wife' => $this->uploadFile($request->file('ijazah_wife'), $married->registration_number, 'ijazah_wife'),
+            'surat_keterangan_wali_nikah_wife' => $this->uploadFile($request->file('surat_keterangan_wali_nikah_wife'), $married->registration_number, 'surat_keterangan_wali_nikah_wife'),
+            'N1_wife' => $this->uploadFile($request->file('N1_wife'), $married->registration_number, 'N1_wife'),
+            'N4_wife' => $this->uploadFile($request->file('N4_wife'), $married->registration_number, 'N4_wife'),
+            'N2_wife' => $this->uploadFile($request->file('N2_wife'), $married->registration_number, 'N2_wife'),
+            'N5_wife' => $this->uploadFile($request->file('N5_wife'), $married->registration_number, 'N5_wife'),
+            'akta_cerai_wife' => $this->uploadFile($request->file('akta_cerai_wife'), $married->registration_number, 'akta_cerai_wife'),
+            'akta_kematian_wife' => $this->uploadFile($request->file('akta_kematian_wife'), $married->registration_number, 'akta_kematian_wife'),
+            'rekomendasi_kua_wife' => $this->uploadFile($request->file('rekomendasi_kua_wife'), $married->registration_number, 'rekomendasi_kua_wife'),
+            'surat_kedutaan_wife' => $this->uploadFile($request->file('surat_kedutaan_wife'), $married->registration_number, 'surat_kedutaan_wife'),
+            'surat_izin_komandan_wife' => $this->uploadFile($request->file('surat_izin_komandan_wife'), $married->registration_number, 'surat_izin_komandan_wife'),
+            'surat_dispensasi_wife' => $this->uploadFile($request->file('surat_dispensasi_wife'), $married->registration_number, 'surat_dispensasi_wife'),
+        ];
+        $married->married_documents()->updateOrCreate(
+            ['married_id' => $married->id],
+            array_filter($documentPaths, fn ($path) => $path !== null)
+        );
+    }
+
+    private function saveWife($request, $marriedId)
+    {
+        Wife::updateOrCreate(
+            ['married_id' => $marriedId],
+            [
+                'citizen_wife' => $request->citizen_wife,
+                'nationality_wife' => $request->nationality_wife ?? null,
+                'nik_wife' => $request->nik_wife ?? null,
+                'name_wife' => $request->name_wife ?? null,
+                'location_birth_wife' => $request->location_birth_wife ?? null,
+                'date_birth_wife' => $request->date_birth_wife ?? null,
+                'no_passport_wife' => $request->no_passport_wife ?? null,
+                'old_wife' => $request->old_wife ?? 0,
+                'status_wife' => $request->status_wife ?? null,
+                'religion_wife' => $request->religion_wife ?? null,
+                'job_wife' => $request->job_wife ?? null,
+                'education_wife' => $request->education_wife ?? null,
+                'email_wife' => $request->email_wife ?? null,
+                'address_wife' => $request->address_wife ?? null,
+                'phone_number_wife' => $request->phone_number_wife ?? null,
+                'name_father_wife' => $request->name_father_wife ?? null,
+                'is_unknown_father_wife' => $request->is_unknown_father_wife ?? null,
+                'citizen_father_wife' => $request->citizen_father_wife ?? null,
+                'nik_father_wife' => $request->nik_father_wife ?? null,
+                'nationality_father_wife' => $request->nationality_father_wife ?? null,
+                'no_passport_father_wife' => $request->no_passport_father_wife ?? null,
+                'location_birth_father_wife' => $request->location_birth_father_wife ?? null,
+                'date_birth_father_wife' => $request->date_birth_father_wife ?? null,
+                'religion_father_wife' => $request->religion_father_wife ?? null,
+                'job_father_wife' => $request->job_father_wife ?? null,
+                'address_father_wife' => $request->address_father_wife ?? null,
+                'name_mother_wife' => $request->name_mother_wife ?? null,
+                'is_unknown_mother_wife' => $request->is_unknown_mother_wife ?? null,
+                'citizen_mother_wife' => $request->citizen_mother_wife ?? null,
+                'nik_mother_wife' => $request->nik_mother_wife ?? null,
+                'nationality_mother_wife' => $request->nationality_mother_wife ?? null,
+                'no_passport_mother_wife' => $request->no_passport_mother_wife ?? null,
+                'location_birth_mother_wife' => $request->location_birth_mother_wife ?? null,
+                'date_birth_mother_wife' => $request->date_birth_mother_wife ?? null,
+                'religion_mother_wife' => $request->religion_mother_wife ?? null,
+                'job_mother_wife' => $request->job_mother_wife ?? null,
+                'address_mother_wife' => $request->address_mother_wife ?? null,
+            ]
+        );
+    }
+
     private function uploadFile($file, $registrationNumber, $suffix)
     {
         if ($file instanceof UploadedFile) {
@@ -185,6 +232,16 @@ class RegisterController extends Controller
             return $path;
         }
         return null;
+    }
+
+    private function addNotification($married, $description, $message, $type)
+    {
+        $married->notifications()->create([
+            'description' => $description,
+            'message' => $message,
+            'type' => $type,
+            'is_read' => true,
+        ]);
     }
 
     private function uploadPayment(Married $married, $request)
