@@ -80,11 +80,10 @@
                                                 role="tab" aria-controls="profile" aria-selected="false">Calon Istri</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#dokumen"
-                                                role="tab" aria-controls="contact" aria-selected="false">Upload
-                                                Dokumen</a>
+                                            <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#wali"
+                                                role="tab" aria-controls="contact" aria-selected="false">Wali Nikah</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="nav-item" style=" display: block;" id="button-pembayaran">
                                             <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#pembayaran"
                                                 role="tab" aria-controls="contact" aria-selected="false">Pembayaran</a>
                                         </li>
@@ -105,9 +104,9 @@
                                             @includeIf('pages.catin.page-data-suami')
                                         </div>
 
-                                        <div class="tab-pane fade" id="dokumen" role="tabpanel"
+                                        <div class="tab-pane fade" id="wali" role="tabpanel"
                                             aria-labelledby="contact-tab3">
-                                            @includeIf('pages.catin.page-data-dokumen')
+                                            @includeIf('pages.catin.page-data-wali')
                                         </div>
 
                                         <div class="tab-pane fade" id="pembayaran" role="tabpanel"

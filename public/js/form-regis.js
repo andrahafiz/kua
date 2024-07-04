@@ -104,4 +104,12 @@ $(document).ready(function () {
 
     setupAgeCalculation("#date_birth_wife", "#old_wife");
     setupAgeCalculation("#date_birth_husband", "#old_husband");
+
+    $("#married_on").on("change", function () {
+        if ($(this).val() === "DI LUAR KUA") {
+            $("#button-pembayaran").show();
+        } else {
+            $("#button-pembayaran").hide();
+        }
+    });
 });

@@ -23,7 +23,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="married_on">Nikah Di <span class="text-danger">*</span></label>
-                <select class="form-control @error('married_on') is-invalid @enderror"
+                <select class="form-control @error('married_on') is-invalid @enderror" id="married_on"
                     @if ($married->status > 2) disabled @endif name="married_on">
                     <option value="DI LUAR KUA">DI LUAR KUA</option>
                     <option value="DI KUA">DI KUA</option>
