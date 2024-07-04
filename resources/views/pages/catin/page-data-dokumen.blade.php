@@ -1,19 +1,5 @@
-<div class="data-dokumen">
-    <a href="" class="btn btn-info">Download Template Dokumen</a>
-    <div class="form-group row">
-        <label for="N1" class="col-sm-4 col-lg-3 col-form-label">N1-Surat
-            Keterangan Untuk Nikah (Dari Kelurahan) *</label>
-        <div class="col-sm-8 col-lg-9">
-            <input type="file" class="form-control" @if ($married->status > 2) disabled @endif id="N1"
-                name="N1">
-            <label class="" for="N1">
-                @if ($documentmarried?->N1 != null)
-                    <a href="{{ Helper::setUrlDocument($documentmarried->N1) }}" target="blank">Lihat
-                        Dokumen</a>
-                @endif
-            </label>
-        </div>
-    </div>
+{{-- <div class="data-dokumen">
+
     <div class="form-group row">
         <label for="N3" class="col-sm-4 col-lg-3 col-form-label">N3-Surat
             Persetujuan Mempelai *</label>
@@ -143,4 +129,4 @@
         </div>
     </div>
     <h6>* Semua berkas dibawa ke KUA ketika pelaksanaan Pra Nikah</h6>
-</div>
+</div> --}}

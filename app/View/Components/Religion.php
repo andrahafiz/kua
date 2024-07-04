@@ -16,7 +16,7 @@ class Religion extends Component
         $this->name = $name;
         $this->selected = $selected;
         $this->status = $status;
-        $this->religion = ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'];
+        $this->religion = ['Islam', 'Kristen'];
     }
 
     public function render()

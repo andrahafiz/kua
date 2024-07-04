@@ -16,7 +16,12 @@ class MartialStatus extends Component
         $this->name = $name;
         $this->selected = $selected;
         $this->status = $status;
-        $this->martial_status = ['Belum Kawin', 'Kawin', 'Cerai Hidup', 'Cerai Mati'];
+        $this->martial_status = [
+            'BELUM KAWIN',
+            'KAWIN',
+            'CERAI HIDUP',
+            'CERAI MATI',
+        ];
     }
 
     public function render()

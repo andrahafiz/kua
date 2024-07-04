@@ -48,17 +48,35 @@
             <div class="form-group col-md-6">
                 <label for="desa_location">Desa/Kelurahan/Wali Nagari <span class="text-danger">*</span></label>
                 @php
-                    $desaData = ['KOTO PANGEAN'];
+                    $desaData = [
+                        'PASAR BARU PANGEAN',
+                        'KOTO PANGEAN',
+                        'PULAU KUMPAI',
+                        'PULAU TONGAH',
+                        'PULAU DERAS',
+                        'TELUK PAUH',
+                        'TANAH BEKALI',
+                        'PADANG TANGGUNG',
+                        'PADANG KUNIK',
+                        'PEMBATANG',
+                        'PAUH ANGIT',
+                        'SUKAPING',
+                        'PULAU RENGAS',
+                        'RAWANG BINJAI',
+                        'SAKO',
+                        'SUNGAI LANGSAT',
+                        'PAUH ANGIT HULU',
+                    ];
                 @endphp
                 <select class="form-control @error('desa_location') is-invalid @enderror"
                     @if ($married->status > 2) disabled @endif name="desa_location">
-                    <option value="">Pilih Desa/Kelurahan/Wali Nagari</option>
+                    <option value="">PILIH DESA/KELURAHAN/WALI NAGARI</option>
                     @foreach ($desaData as $desa)
-                        <option value="{{ $desa }}" {{ old('desa_location') == $desa ? 'selected' : '' }}>
+                        <option value="{{ $desa }}"
+                            {{ old('desa_location') == $desa || $married->desa_location == $desa ? 'selected' : '' }}>
                             {{ $desa }}
                         </option>
                     @endforeach
-
                 </select>
                 @error('desa_location')
                     <div class="invalid-feedback">{{ $message }}</div>
