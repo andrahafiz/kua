@@ -62,8 +62,8 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-22">
                             <div class="card">
-                                <div class="card-body pb-0">
-                                    @if ($married->status_married == 'Menikah')
+                                @if ($married->status_married == 'Menikah')
+                                    <div class="card-body pb-0">
                                         <div class="section-title">Data Pernikahan</div>
                                         <div class="row">
                                             <div class="col">
@@ -234,23 +234,26 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @else
-                                        Halaman ini belum di buka
-                                    @endif
+                                    </div>
+                                    <div class="card-footer pt-0">
+                                        <hr />
+                                        @if ($perceraian?->status == 2)
+                                            <button class="btn btn-icon btn-lg icon-left btn-warning btn-block">
+                                                <i class="fas fa-exclamation-triangle"></i> Data anda sudah validasi oleh
+                                                staff kami. Data tidak dapat diubah lagi</button>
+                                        @else
+                                            <button type="submit"
+                                                class="btn btn-icon btn-lg icon-left btn-primary btn-block">
+                                                <i class="fas fa-check"></i> Ajukan Perceraian</button>
+                                        @endif
+                                    </div>
+                                @else
+                                    <div class="card-body text-center">
+                                        <h3>Halaman ini belum di buka</h3>
+                                    </div>
+                                @endif
 
-                                </div>
-                                <div class="card-footer pt-0">
-                                    <hr />
-                                    @if ($perceraian?->status == 2)
-                                        <button class="btn btn-icon btn-lg icon-left btn-warning btn-block">
-                                            <i class="fas fa-exclamation-triangle"></i> Data anda sudah validasi oleh
-                                            staff kami. Data tidak dapat diubah lagi</button>
-                                    @else
-                                        <button type="submit"
-                                            class="btn btn-icon btn-lg icon-left btn-primary btn-block">
-                                            <i class="fas fa-check"></i> Ajukan Perceraian</button>
-                                    @endif
-                                </div>
+
                             </div>
                         </div>
                     </div>
