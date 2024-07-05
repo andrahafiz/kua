@@ -56,8 +56,40 @@
         @enderror
     </div>
     <div class="form-group col-md-3">
-        <label for="hubungan_wali">Hubungan Wali <span class="text-danger">*</span></label>
-        <x-hubunganwali name="hubungan_wali" :selected="$married->walis->hubungan_wali != null ? $married->walis->hubungan_wali : old('hubungan_wali')" :status="$married->status" />
+        <label for="hubungan_wali">Sebab/Alasan Wali Hakim <span class="text-danger">*</span></label>
+        @php
+            $reasonData = [
+                'AYAH KANDUNG',
+                'KAKEK (AYAH DARI AYAH KANDUNG)',
+                '⁠AYAH DARI KAKEK (BUYUT)',
+                '⁠SAUDARA LAK-LAKI SEBAPAK SEIBU',
+                '⁠SAUDARA LAKI-LAKI SEBAPAK',
+                '⁠ANAK LAKI-LAKI DARI SAUDARA LAKI-LAKI SEBAPAK SEIBU',
+                '⁠ANAK LAKI-LAKI DARI SAUDADA LAKI-LAKI SEBAPAK',
+                '⁠PAMAN (SAUDARA LAKI-LAKI BAPAK SEBAPAK SEIBU)',
+                '⁠PAMAN SEBAPAK (SAUDARA LAKI-LAKI BAPAK SEBAPAK)',
+                '⁠ANAK PAMAN SEBAPAK SEIBU',
+                '⁠CUCU PAMAN SEBAPAK SEIBU',
+                '⁠CUCU PAMAN SEBAPAK',
+                '⁠PAMAN BAPAK SEBAPAK SEIBU',
+                '⁠PAMAN BAPAK SEBAPAK',
+                '⁠ANAK PAMAN BAPAK SEBAPAK SEIBU',
+                '⁠ANAK PAMAN BAPAK SEBAPAK',
+            ];
+        @endphp
+        <select class="form-control @error('hubungan_wali') is-invalid @enderror"
+            @if ($married->status > 2) disabled @endif name="hubungan_wali">
+            <option value="">PILIH SEBAB WALI</option>
+            @foreach ($reasonData as $reason)
+                <option value="{{ $reason }}"
+                    {{ old('hubungan_wali') == $reason || $married->walis->hubungan_wali == $reason ? 'selected' : '' }}>
+                    {{ $reason }}
+                </option>
+            @endforeach
+        </select>
+        @error('hubungan_wali')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
     </div>
 </div>
 <div class="form-row">
@@ -96,7 +128,7 @@
 
 <div class="form-row">
     <div class="form-group col-md-5">
-        <label>Sebab/Alasan Wali Hakim <span class="text-danger">*</span></label>
+        <label><span class="text-danger">*</span></label>
         <input type="text" name="reason_wali" id="reason_wali"
             class="form-control @error('reason_wali') is-invalid @enderror"
             @if ($married->status > 2) disabled @endif
@@ -105,6 +137,7 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
+
     <div class="form-group col-md-3">
         <label>Tempat Lahir <span class="text-danger">*</span></label>
         <input type="text" name="location_birth_wali" id="location_birth_wali"
