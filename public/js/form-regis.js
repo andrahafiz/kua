@@ -118,4 +118,23 @@ $(document).ready(function () {
 
     // Initial check on page load
     togglePaymentButton();
+
+    // Additional function to check and toggle fields if toggle input is disabled
+    function checkAndToggleDisabledFields() {
+        if ($("#is_unknown_father_husband").is(":disabled")) {
+            toggleFields(true, fatherHusbandFields);
+        }
+        if ($("#is_unknown_mother_husband").is(":disabled")) {
+            toggleFields(true, motherHusbandFields);
+        }
+        if ($("#is_unknown_father_wife").is(":disabled")) {
+            toggleFields(true, fatherWifeFields);
+        }
+        if ($("#is_unknown_mother_wife").is(":disabled")) {
+            toggleFields(true, motherWifeFields);
+        }
+    }
+
+    // Initial check on page load for disabled fields
+    checkAndToggleDisabledFields();
 });

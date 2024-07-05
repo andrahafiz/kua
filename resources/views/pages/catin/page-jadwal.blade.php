@@ -2,7 +2,7 @@
     <div class="col">
         <div class="form-group">
             <label>Tanggal Daftar</label>
-            <input type="text" class="form-control" @if ($married->status > 2) disabled @endif readonly
+            <input type="text" class="form-control"@disabled($married->status > 2) readonly
                 value="{{ now()->format('Y-m-d') }}">
         </div>
         <div class="form-row">
@@ -24,7 +24,7 @@
             <div class="form-group col-md-6">
                 <label for="married_on">Nikah Di <span class="text-danger">*</span></label>
                 <select class="form-control @error('married_on') is-invalid @enderror" id="married_on"
-                    @if ($married->status > 2) disabled @endif name="married_on">
+                    @disabled($married->status > 2) name="married_on">
                     <option value="DI LUAR KUA"
                         {{ $married->married_on == 'DI LUAR KUA' || old('married_on') == 'DI LUAR KUA' ? 'selected' : '' }}>
                         DI LUAR KUA</option>
@@ -39,8 +39,8 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="kua">KUA <span class="text-danger">*</span></label>
-                <select class="form-control @error('kua') is-invalid @enderror"
-                    @if ($married->status > 2) disabled @endif name="kua">
+                <select class="form-control @error('kua') is-invalid @enderror" @disabled($married->status > 2)
+                    name="kua">
                     <option value="KUA PANGEAN">KUA PANGEAN</option>
                 </select>
                 @error('kua')
@@ -73,8 +73,8 @@
                         'PAUH ANGIT HULU',
                     ];
                 @endphp
-                <select class="form-control @error('desa_location') is-invalid @enderror"
-                    @if ($married->status > 2) disabled @endif name="desa_location">
+                <select class="form-control @error('desa_location') is-invalid @enderror" @disabled($married->status > 2)
+                    name="desa_location">
                     <option value="">PILIH DESA/KELURAHAN/WALI NAGARI</option>
                     @foreach ($desaData as $desa)
                         <option value="{{ $desa }}"
@@ -93,7 +93,7 @@
                     <div class="col">
                         <input type="date" name="akad_date_masehi"
                             class="form-control @error('akad_date_masehi') is-invalid @enderror"
-                            @if ($married->status > 2) disabled @endif
+                            @disabled($married->status > 2)
                             value="{{ old('akad_date_masehi', optional($married->akad_date_masehi)->format('Y-m-d')) }}">
                         {{-- value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('Y-m-d') : Carbon\Carbon::parse(old('akad_date_masehi'))->format('Y-m-d') }}"> --}}
                         @error('akad_date_masehi')
@@ -103,7 +103,7 @@
                     <div class="col">
                         <input type="time" name="akad_time_masehi"
                             class="form-control @error('akad_time_masehi') is-invalid @enderror"
-                            @if ($married->status > 2) disabled @endif
+                            @disabled($married->status > 2)
                             value="{{ old('akad_time_masehi', optional($married->akad_date_masehi)->format('H:i')) }}">
                         {{-- value="{{ $married->akad_date_masehi != null ? $married->akad_date_masehi->format('H:i') : old('akad_time_masehi') }}"> --}}
                         @error('akad_time_masehi')
@@ -119,7 +119,7 @@
         <div class="form-group mb-0">
             <label>Alamat Lokasi Akad Nikah <span class="text-danger">*</span></label>
             <input type="text" name="akad_location" class="form-control @error('akad_location') is-invalid @enderror"
-                @if ($married->status > 2) disabled @endif
+                @disabled($married->status > 2)
                 value="{{ $married->akad_location != null ? $married->akad_location : old('akad_location') }}">
             @error('akad_location')
                 <div class="invalid-feedback">{{ $message }}</div>

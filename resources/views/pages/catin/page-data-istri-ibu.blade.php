@@ -4,8 +4,7 @@
         <div class="form-group col-md-8">
             <label for="name_mother_wife">Nama <span class="text-danger">*</span></label>
             <input type="text" name="name_mother_wife"
-                class="form-control @error('name_mother_wife') is-invalid @enderror"
-                @if ($married->status > 2) disabled @endif
+                class="form-control @error('name_mother_wife') is-invalid @enderror" @disabled($married->status > 2)
                 value="{{ $married->name_mother_wife != null ? $married->name_mother_wife : old('name_mother_wife') }}">
             @error('name_mother_wife')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -16,7 +15,7 @@
             <div class="form-check">
                 <input class="form-check-input @error('is_unknown_mother_wife') is-invalid @enderror" type="checkbox"
                     value="1" id="is_unknown_mother_wife" name="is_unknown_mother_wife"
-                    @checked(old('is_unknown_mother_wife', $married->is_unknown_mother_wife))>
+                    @checked(old('is_unknown_mother_wife', $married->is_unknown_mother_wife)) @disabled($married->status > 2)>
                 <label class="form-check-label" for="is_unknown_mother_wife">
                     Jika Meninggal/Tidak Diketahui
                 </label>
@@ -30,7 +29,7 @@
         <div class="form-group col-md-3">
             <label for="citizen_mother_wife">Warga Negara <span class="text-danger">*</span></label>
             <select class="form-control @error('citizen_mother_wife') is-invalid @enderror" id="citizen_mother_wife"
-                @if ($married->status > 2) disabled @endif name="citizen_mother_wife">
+                @disabled($married->status > 2) name="citizen_mother_wife">
                 <option value="">Pilih Warga Negara</option>
                 <option value="WNI"
                     {{ $married->citizen_mother_wife == 'WNI' || old('citizen_mother_wife') == 'WNI' ? 'selected' : '' }}>
@@ -47,8 +46,7 @@
         <div class="form-group col-md-3">
             <label for="nik_mother_wife">NIK <span class="text-danger">*</span></label>
             <input type="text" name="nik_mother_wife" id="nik_mother_wife"
-                class="form-control @error('nik_mother_wife') is-invalid @enderror"
-                @if ($married->status > 2) disabled @endif
+                class="form-control @error('nik_mother_wife') is-invalid @enderror" @disabled($married->status > 2)
                 value="{{ $married->nik_mother_wife != null ? $married->nik_mother_wife : old('nik_mother_wife') }}">
             @error('nik_mother_wife')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -57,8 +55,7 @@
         <div class="form-group col-md-3">
             <label>Negara Asal <span class="text-danger">*</span></label>
             <input type="text" name="nationality_mother_wife" id="nationality_mother_wife"
-                class="form-control @error('nationality_mother_wife') is-invalid @enderror"
-                @if ($married->status > 2) disabled @endif
+                class="form-control @error('nationality_mother_wife') is-invalid @enderror" @disabled($married->status > 2)
                 value="{{ $married->nationality_mother_wife != null ? $married->nationality_mother_wife : old('nationality_mother_wife') }}"
                 placeholder="INDONESIA">
             @error('nationality_mother_wife')
@@ -68,8 +65,7 @@
         <div class="form-group col-md-3">
             <label for="no_passport_mother_wife">No. Passport <span class="text-danger">*</span></label>
             <input type="text" name="no_passport_mother_wife" id="no_passport_mother_wife"
-                class="form-control @error('no_passport_mother_wife') is-invalid @enderror"
-                @if ($married->status > 2) disabled @endif
+                class="form-control @error('no_passport_mother_wife') is-invalid @enderror" @disabled($married->status > 2)
                 value="{{ $married->no_passport_mother_wife != null ? $married->no_passport_mother_wife : old('no_passport_mother_wife') }}">
             @error('no_passport_mother_wife')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -81,7 +77,7 @@
             <label>Tempat Lahir <span class="text-danger">*</span></label>
             <input type="text" name="location_birth_mother_wife" id="location_birth_mother_wife"
                 class="form-control @error('location_birth_mother_wife') is-invalid @enderror"
-                @if ($married->status > 2) disabled @endif
+                @disabled($married->status > 2)
                 value="{{ $married->location_birth_mother_wife != null ? $married->location_birth_mother_wife : old('location_birth_mother_wife') }}">
             @error('location_birth_mother_wife')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -114,8 +110,7 @@
     <div class="form-row">
         <label>Alamat <span class="text-danger">*</span></label>
         <input type="text" name="address_mother_wife" id="address_mother_wife"
-            class="form-control @error('address_mother_wife') is-invalid @enderror"
-            @if ($married->status > 2) disabled @endif
+            class="form-control @error('address_mother_wife') is-invalid @enderror" @disabled($married->status > 2)
             value="{{ $married->address_mother_wife != null ? $married->address_mother_wife : old('address_mother_wife') }}">
         @error('address_mother_wife')
             <div class="invalid-feedback">{{ $message }}</div>
