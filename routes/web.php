@@ -4,14 +4,19 @@ use App\Models\Married;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Staff\CeraiController;
+
 use App\Http\Controllers\Catin\DocumentDownloadController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Catin\NotificationController;
 use App\Http\Controllers\Catin\ProfileController;
-use App\Http\Controllers\Staff\ProfileController as StaffProfileController;
-use App\Http\Controllers\Staff\MarriedController;
+use App\Http\Controllers\Catin\RujukController;
 use App\Http\Controllers\Catin\RegisterController;
+use App\Http\Controllers\Catin\CeraiController;
+
+use App\Http\Controllers\Staff\ProfileController as StaffProfileController;
+use App\Http\Controllers\Staff\CeraiController as StaffCeraiController;
+use App\Http\Controllers\Staff\RujukController as StaffRujukController;
+use App\Http\Controllers\Staff\MarriedController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Staff\PenghuluController;
 use App\Http\Controllers\Staff\DashboardController;
@@ -71,6 +76,13 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
         }
     );
 
+    Route::controller(RujukController::class)->group(
+        function () {
+            Route::get('/rujuk', 'index')->name('rujuk.index');
+            Route::post('/rujuk', 'store')->name('rujuk.store');
+        }
+    );
+
     Route::controller(NotificationController::class)->group(
         function () {
             Route::get('/notification', 'index')->name('married.notification');
@@ -94,11 +106,19 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
         }
     );
 
-    Route::controller(CeraiController::class)->group(
+    Route::controller(StaffCeraiController::class)->group(
         function () {
             Route::get('/perceraian', 'index')->name('perceraian.index');
             Route::get('/perceraian/{cerai}',  'show')->name('perceraian.show');
             Route::put('/perceraian/{cerai}',  'approval')->name('perceraian.approval');
+        }
+    );
+
+    Route::controller(StaffRujukController::class)->group(
+        function () {
+            Route::get('/rujuk', 'index')->name('rujuk.index');
+            Route::get('/rujuk/{rujuk}',  'show')->name('rujuk.show');
+            Route::put('/rujuk/{rujuk}',  'approval')->name('rujuk.approval');
         }
     );
 

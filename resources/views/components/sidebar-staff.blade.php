@@ -23,6 +23,12 @@
                     <span>Perceraian
                     </span></a>
             </li>
+            <li class="{{ Request::routeIs('staff.rujuk.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('staff.rujuk.index') }}"><i class="fa fa-heart"
+                        style="margin-left: 4px;"></i>
+                    <span>Rujuk
+                    </span></a>
+            </li>
             <li class="{{ $type_menu === 'jadwal-pernikahan' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('staff.schedule') }}"><i class="fas fa-list"></i>
                     <span>Jadwal Pernikahan</span></a>

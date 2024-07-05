@@ -118,6 +118,11 @@ class Married extends Model
         return $this->hasOne(Perceraian::class);
     }
 
+    public function rujuk()
+    {
+        return $this->hasOne(Rujuk::class);
+    }
+
     public function married_payment()
     {
         return $this->hasOne(MarriedPayment::class);

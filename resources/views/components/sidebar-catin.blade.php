@@ -24,8 +24,9 @@
                     <span>Perceraian
                     </span></a>
             </li>
-            <li class="">
-                <a class="nav-link" href=""><i class="far fa-heart"></i>
+            <li class="{{ Request::is('catin/rujuk') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('catin.rujuk.index') }}"><i class="fa fa-heart"
+                        style="margin-left: 4px;"></i>
                     <span>Rujuk
                     </span></a>
             </li>

@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class StatusMarried extends Component
+class StatusRujuk extends Component
 {
     public $status;
 
@@ -20,6 +20,6 @@ class StatusMarried extends Component
      */
     public function render()
     {
-        return view('components.status-married');
+        return view('components.status-rujuk');
     }
 }
