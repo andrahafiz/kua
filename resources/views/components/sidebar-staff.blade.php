@@ -37,9 +37,22 @@
                 <a class="nav-link" href="{{ route('staff.penghulu.index') }}"><i class="fas fa-user"></i>
                     <span>Penghulu</span></a>
             </li>
-            <li class="{{ Request::routeIs('staff.document.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('staff.document.index') }}"><i class="fas fa-box-archive"></i>
+            <li class="nav-item dropdown {{ $type_menu === 'document' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-box-archive"></i>
                     <span>Pengarsipan Dokumen</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::routeIs('staff.document.*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('staff.document.index') }}">Dokumen Umum</a>
+                    </li>
+                    <li class="{{ Request::routeIs('staff.archive.document.cerai') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('staff.archive.document.cerai') }}">Dokumen
+                            Perceraian</a>
+                    </li>
+                    <li class="{{ Request::routeIs('staff.archive.document.rujuk') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('staff.archive.document.rujuk') }}">Dokumen Rujuk</a>
+                    </li>
+                </ul>
             </li>
         </ul>
 

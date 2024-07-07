@@ -3,20 +3,21 @@
 namespace App\Http\Controllers\Catin;
 
 use Carbon\Carbon;
-use App\Models\Married;
-use App\Models\Husband;
+use App\Models\Wali;
 use App\Models\Wife;
+use App\Models\Husband;
+use App\Models\Married;
+use App\Models\Perceraian;
 use Illuminate\Http\Request;
+use App\Models\MarriedPayment;
+use App\Models\ArchiveDocument;
+use App\Models\MarriedDocument;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\RegisterRequest;
-use App\Models\MarriedDocument;
-use App\Models\MarriedPayment;
-use App\Models\Perceraian;
-use App\Models\Wali;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 
 class CeraiController extends Controller
 {
@@ -41,7 +42,8 @@ class CeraiController extends Controller
         try {
             DB::transaction(function () use ($request) {
                 $married = Married::where('akta_nikah_number', $request->akta_nikah)->first();
-                Perceraian::updateOrCreate(
+
+                $perceraian = Perceraian::updateOrCreate(
                     ['married_id' => $married->id],
                     [
                         'surat_putusan' => $this->uploadFile($request->file('surat_putusan'), $married->registration_number, 'surat_putusan'),
@@ -50,6 +52,10 @@ class CeraiController extends Controller
                         'status' => 1,
                     ]
                 );
+
+                $this->storeDocument($married, $request->file('surat_putusan'), 'Surat Putusan', $perceraian->surat_putusan);
+                $this->storeDocument($married, $request->file('surat_keterangan_hamil'), 'Surat Keterangan Hamil', $perceraian->surat_keterangan_hamil);
+                $this->storeDocument($married, $request->file('berita_acara_mediasi'), 'Berita Acara Mediasi', $perceraian->berita_acara_mediasi);
             });
 
             return redirect()->route('catin.perceraian.index')->with('success', "Data berhasil disimpan");
@@ -66,5 +72,17 @@ class CeraiController extends Controller
             return $path;
         }
         return null;
+    }
+
+    private function storeDocument($married, $file, $title, $path)
+    {
+        if ($file instanceof UploadedFile) {
+            ArchiveDocument::create([
+                'married_id' => $married->id,
+                'title_document' => $title,
+                'type_document' => 'cerai',
+                'path_document' => $path,
+            ]);
+        }
     }
 }

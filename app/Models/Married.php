@@ -113,6 +113,11 @@ class Married extends Model
         return $this->hasOne(MarriedDocument::class);
     }
 
+    public function archive_documents()
+    {
+        return $this->hasMany(ArchiveDocument::class);
+    }
+
     public function perceraian()
     {
         return $this->hasOne(Perceraian::class);

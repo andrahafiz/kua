@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Staff;
 
 use App\Models\Rujuk;
 use Illuminate\Http\Request;
+use App\Models\ArchiveDocument;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 
@@ -39,7 +40,6 @@ class RujukController extends Controller
         );
 
         $status = $data['action'] == 'approve' ? 2 : 3;
-        // dd($data['berita_acara'], $this->uploadFile($request->file('berita_acara', $rujuk->berita_acara), $rujuk->married->registration_number, 'berita_acara'));
         if ($status == 2) {
             $rujuk->update([
                 'status' => $status,
@@ -47,6 +47,7 @@ class RujukController extends Controller
                 'berita_acara' => $this->uploadFile($request->file('berita_acara', $rujuk?->berita_acara), $rujuk->married?->registration_number, 'berita_acara'),
 
             ]);
+            $this->storeDocument($rujuk, $request->file('berita_acara'), 'Akta Cerai', $rujuk->berita_acara);
             $rujuk->married->update(['status_married' => "Rujuk"]);
         } else if ($status == 3) {
             $rujuk->update([
@@ -65,5 +66,17 @@ class RujukController extends Controller
             return $path;
         }
         return $file;
+    }
+
+    private function storeDocument($rujuk, $file, $title, $path)
+    {
+        if ($file instanceof UploadedFile) {
+            ArchiveDocument::create([
+                'married_id' => $rujuk->married->id,
+                'title_document' => $title,
+                'type_document' => 'rujuk',
+                'path_document' => $path,
+            ]);
+        }
     }
 }

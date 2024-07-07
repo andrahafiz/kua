@@ -23,7 +23,7 @@ class DocumentController extends Controller
         $documents = Document::get();
         return view(
             'pages.staff.document.document',
-            ['type_menu' => 'docu', 'documents' => $documents]
+            ['type_menu' => 'document', 'documents' => $documents]
         );
     }
 

@@ -1,38 +1,41 @@
 <?php
 
 use App\Models\Married;
+use App\Models\ArchiveDocument;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+
 use App\Http\Controllers\AuthController;
-
-use App\Http\Controllers\Catin\DocumentDownloadController;
 use App\Http\Controllers\Catin\HomeController;
-use App\Http\Controllers\Catin\NotificationController;
-use App\Http\Controllers\Catin\ProfileController;
-use App\Http\Controllers\Catin\RujukController;
-use App\Http\Controllers\Catin\RegisterController;
 use App\Http\Controllers\Catin\CeraiController;
-
-use App\Http\Controllers\Staff\ProfileController as StaffProfileController;
-use App\Http\Controllers\Staff\CeraiController as StaffCeraiController;
-use App\Http\Controllers\Staff\RujukController as StaffRujukController;
+use App\Http\Controllers\Catin\RujukController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Catin\ProfileController;
 use App\Http\Controllers\Staff\MarriedController;
+
+use App\Http\Controllers\Catin\RegisterController;
+use App\Http\Controllers\Staff\DocumentController;
 use App\Http\Controllers\Staff\PenghuluController;
 use App\Http\Controllers\Staff\DashboardController;
+use App\Http\Controllers\Catin\NotificationController;
 use App\Http\Controllers\Staff\VerificationController;
 use App\Http\Controllers\Staff\AssignPenghuluController;
-use App\Http\Controllers\Staff\DocumentController;
+use App\Http\Controllers\Staff\DocumentArchiveController;
+use App\Http\Controllers\Catin\DocumentDownloadController;
 use App\Http\Controllers\Staff\GenerateAkadNumberController;
 
-use App\Http\Controllers\LandingPageController;
-
-use App\Http\Controllers\Kakua\ProfileController as KakuaProfileController;
 use App\Http\Controllers\Kakua\CeraiController as KakuaCeraiController;
+
 use App\Http\Controllers\Kakua\RujukController as KakuaRujukController;
+use App\Http\Controllers\Staff\CeraiController as StaffCeraiController;
+use App\Http\Controllers\Staff\RujukController as StaffRujukController;
 use App\Http\Controllers\Kakua\MarriedController as KakuaMarriedController;
+use App\Http\Controllers\Kakua\ProfileController as KakuaProfileController;
+use App\Http\Controllers\Staff\ProfileController as StaffProfileController;
+use App\Http\Controllers\Kakua\DocumentController as KakuaDocumentController;
 use App\Http\Controllers\Kakua\PenghuluController as KakuaPenghuluController;
 use App\Http\Controllers\Kakua\DashboardController as KakuaDashboardController;
-use App\Http\Controllers\Kakua\DocumentController as KakuaDocumentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,6 +100,7 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
             Route::get('/notification/read/{notification?}', 'read')->name('married.notification.read');
         }
     );
+
     Route::get('document', DocumentDownloadController::class)->name('download.document');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -147,6 +151,8 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
         }
     );
 
+    Route::get('document/rujuk', [DocumentArchiveController::class, 'rujuk'])->name('archive.document.rujuk');
+    Route::get('document/perceraian', [DocumentArchiveController::class, 'cerai'])->name('archive.document.cerai');
     Route::put('verification_payment/{married}', VerificationController::class)->name('verification_payment');
     Route::put('generate_number/{married}', GenerateAkadNumberController::class)->name('generate_number');
     Route::post('assign_penghulu/{married}', AssignPenghuluController::class)->name('assign_penghulu');
