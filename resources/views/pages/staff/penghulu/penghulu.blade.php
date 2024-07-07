@@ -47,11 +47,6 @@
                         <div class="card card-primary">
                             <div class="card-header">
                                 <h4>Data Penghulu</h4>
-                                <div class="card-header-action">
-                                    <a href="{{ route('staff.penghulu.create') }}" class="btn btn-primary">
-                                        Tambah Data Penghulu
-                                    </a>
-                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -65,7 +60,7 @@
                                                 <th>Nama</th>
                                                 <th>No HP</th>
                                                 <th>Alamat</th>
-                                                <th>Aksi</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -88,21 +83,12 @@
                                                     <td class="align-middle">{{ $penghulu->name_penghulu }}</td>
                                                     <td class="align-middle">{{ $penghulu->phone }}</td>
                                                     <td class="align-middle">{{ $penghulu->address }}</td>
-                                                    <td width="10%" class="align-middle">
-                                                        <a href="{{ route('staff.penghulu.edit', $penghulu->id) }}"
-                                                            class="btn btn-icon btn-sm btn-primary">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <form method="POST"
-                                                            action="{{ route('staff.penghulu.destroy', $penghulu->id) }}"
-                                                            class="d-inline">
-                                                            @csrf
-                                                            {{ method_field('delete') }}
-                                                            <button type="submit" class="btn btn-icon btn-sm btn-danger"
-                                                                title='Delete'
-                                                                onclick="return confirm('Data ini akan di hapus, anda yakin?')">
-                                                                <i class="fas fa-trash"></i></button>
-                                                        </form>
+                                                    <td class="align-middle">
+                                                        @if ($penghulu->status == 1)
+                                                            <span class="badge badge-success">Aktif</span>
+                                                        @else
+                                                            <span class="badge badge-danger">Non Aktif</span>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

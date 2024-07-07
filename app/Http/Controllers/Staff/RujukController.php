@@ -44,7 +44,7 @@ class RujukController extends Controller
             $rujuk->update([
                 'status' => $status,
                 'tanggal_verifikasi' => $data['tanggal_verifikasi'] . ' ' . $data['waktu_verifikasi'],
-                'berita_acara' => $this->uploadFile($request->file('berita_acara', $rujuk->berita_acara), $rujuk->married->registration_number, 'berita_acara'),
+                'berita_acara' => $this->uploadFile($request->file('berita_acara', $rujuk?->berita_acara), $rujuk->married?->registration_number, 'berita_acara'),
 
             ]);
             $rujuk->married->update(['status_married' => "Rujuk"]);

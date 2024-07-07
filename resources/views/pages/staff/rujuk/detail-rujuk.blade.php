@@ -188,7 +188,7 @@
                                                             class="form-control @error('tanggal_verifikasi') is-invalid @enderror"
                                                             @readonly($rujuk?->status == 2) id="tanggal_verifikasi"
                                                             value="{{ old('tanggal_verifikasi', optional($rujuk->tanggal_verifikasi)->format('Y-m-d')) }}"
-                                                            name="tanggal_verifikasi">
+                                                            name="tanggal_verifikasi" min="{{ now()->format('Y-m-d') }}">
                                                         @error('tanggal_verifikasi')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
