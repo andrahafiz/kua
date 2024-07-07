@@ -23,11 +23,11 @@
                         @disabled($married->status > 2) name="citizen_husband">
                         <option value="">Pilih Warga Negara</option>
                         <option value="WNI"
-                            {{ $married->husbands->citizen_husband == 'WNI' || old('citizen_husband') == 'WNI' ? 'selected' : '' }}>
+                            {{ $married->husbands?->citizen_husband == 'WNI' || old('citizen_husband') == 'WNI' ? 'selected' : '' }}>
                             WNI
                         </option>
                         <option value="WNA"
-                            {{ $married->husbands->citizen_husband == 'WNA' || old('citizen_husband') == 'WNA' ? 'selected' : '' }}>
+                            {{ $married->husbands?->citizen_husband == 'WNA' || old('citizen_husband') == 'WNA' ? 'selected' : '' }}>
                             WNA
                         </option>
                     </select>
@@ -40,7 +40,7 @@
                     <input type="text" name="nationality_husband"
                         class="form-control @error('nationality_husband') is-invalid @enderror"
                         @disabled($married->status > 2)
-                        value="{{ $married->husbands->nationality_husband != null ? $married->husbands->nationality_husband : old('nationality_husband') }}"
+                        value="{{ $married->husbands?->nationality_husband != null ? $married->husbands?->nationality_husband : old('nationality_husband') }}"
                         placeholder="INDONESIA">
                     @error('nationality_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -51,7 +51,7 @@
                     <input type="text" name="no_passport_husband"
                         class="form-control @error('no_passport_husband') is-invalid @enderror"
                         @disabled($married->status > 2)
-                        value="{{ $married->husbands->no_passport_husband != null ? $married->husbands->no_passport_husband : old('no_passport_husband') }}">
+                        value="{{ $married->husbands?->no_passport_husband != null ? $married->husbands?->no_passport_husband : old('no_passport_husband') }}">
                     @error('no_passport_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -60,7 +60,7 @@
                     <label for="nik_husband">NIK <span class="text-danger">*</span></label>
                     <input type="text" name="nik_husband"
                         class="form-control @error('nik_husband') is-invalid @enderror" @disabled($married->status > 2)
-                        value="{{ $married->husbands->nik_husband != null ? $married->husbands->nik_husband : old('nik_husband') }}">
+                        value="{{ $married->husbands?->nik_husband != null ? $married->husbands?->nik_husband : old('nik_husband') }}">
                     @error('nik_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -72,7 +72,7 @@
                     <label for="name_husband">Nama <span class="text-danger">*</span></label>
                     <input type="text" name="name_husband"
                         class="form-control @error('name_husband') is-invalid @enderror" @disabled($married->status > 2)
-                        value="{{ $married->husbands->name_husband != null ? $married->husbands->name_husband : old('name_husband') }}">
+                        value="{{ $married->husbands?->name_husband != null ? $married->husbands?->name_husband : old('name_husband') }}">
                     @error('name_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -82,7 +82,7 @@
                     <input type="text" name="location_birth_husband"
                         class="form-control @error('location_birth_husband') is-invalid @enderror"
                         @disabled($married->status > 2)
-                        value="{{ $married->husbands->location_birth_husband != null ? $married->husbands->location_birth_husband : old('location_birth_husband') }}">
+                        value="{{ $married->husbands?->location_birth_husband != null ? $married->husbands?->location_birth_husband : old('location_birth_husband') }}">
                     @error('location_birth_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -92,7 +92,7 @@
                     <input type="date" class="form-control @error('ktp_husband') is-invalid @enderror"
                         @disabled($married->status > 2) id="date_birth_husband" name="date_birth_husband"
                         max="{{ now()->format('Y-m-d') }}"
-                        value="{{ old('date_birth_husband', optional($married->husbands->date_birth_husband)->format('Y-m-d')) }}">
+                        value="{{ old('date_birth_husband', optional($married->husbands?->date_birth_husband)->format('Y-m-d')) }}">
                     @error('date_birth_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -101,7 +101,7 @@
                     <label for="old_husband">Umur <span class="text-danger">*</span></label>
                     <input type="text" name="old_husband" id="old_husband"
                         class="form-control @error('old_husband') is-invalid @enderror" readonly
-                        value="{{ $married->husbands->old_husband != null ? $married->husbands->old_husband : old('old_husband') }}">
+                        value="{{ $married->husbands?->old_husband != null ? $married->husbands?->old_husband : old('old_husband') }}">
                     @error('old_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -111,14 +111,14 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="status_husband">Status <span class="text-danger">*</span></label>
-                    <x-martial-status name="status_husband" :selected="$married->husbands->status_husband != null
-                        ? $married->husbands->status_husband
+                    <x-martial-status name="status_husband" :selected="$married->husbands?->status_husband != null
+                        ? $married->husbands?->status_husband
                         : old('status_husband')" :status="$married->status" />
                 </div>
                 <div class="form-group col-md-6">
                     <label for="religion_husband">Agama <span class="text-danger">*</span></label>
-                    <x-religion name="religion_husband" :selected="$married->husbands->religion_husband != null
-                        ? $married->husbands->religion_husband
+                    <x-religion name="religion_husband" :selected="$married->husbands?->religion_husband != null
+                        ? $married->husbands?->religion_husband
                         : old('religion_husband')" :status="$married->status" />
                 </div>
             </div>
@@ -126,14 +126,14 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="education_husband">Pendidikan <span class="text-danger">*</span></label>
-                    <x-education name="education_husband" :selected="$married->husbands->education_husband != null
-                        ? $married->husbands->education_husband
+                    <x-education name="education_husband" :selected="$married->husbands?->education_husband != null
+                        ? $married->husbands?->education_husband
                         : old('education_husband')" :status="$married->status" />
                 </div>
                 <div class="form-group col-md-6">
                     <label for="job_husband">Pekerjaan <span class="text-danger">*</span></label>
-                    <x-job name="job_husband" :selected="$married->husbands->job_husband != null
-                        ? $married->husbands->job_husband
+                    <x-job name="job_husband" :selected="$married->husbands?->job_husband != null
+                        ? $married->husbands?->job_husband
                         : old('job_husband')" :status="$married->status" />
                 </div>
             </div>
@@ -144,7 +144,7 @@
                     <input type="text" name="phone_number_husband"
                         class="form-control @error('phone_number_husband') is-invalid @enderror"
                         @disabled($married->status > 2)
-                        value="{{ $married->husbands->phone_number_husband != null ? $married->husbands->phone_number_husband : old('phone_number_husband') }}">
+                        value="{{ $married->husbands?->phone_number_husband != null ? $married->husbands?->phone_number_husband : old('phone_number_husband') }}">
                     @error('phone_number_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -153,7 +153,7 @@
                     <label>Email <span class="text-danger">*</span></label>
                     <input type="text" name="email_husband"
                         class="form-control @error('email_husband') is-invalid @enderror" @disabled($married->status > 2)
-                        value="{{ $married->husbands->email_husband != null ? $married->husbands->email_husband : old('email_husband') }}">
+                        value="{{ $married->husbands?->email_husband != null ? $married->husbands?->email_husband : old('email_husband') }}">
                     @error('email_husband')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -164,7 +164,7 @@
                 <label>Alamat <span class="text-danger">*</span></label>
                 <input type="text" name="address_husband"
                     class="form-control @error('address_husband') is-invalid @enderror" @disabled($married->status > 2)
-                    value="{{ $married->husbands->address_husband != null ? $married->husbands->address_husband : old('address_husband') }}">
+                    value="{{ $married->husbands?->address_husband != null ? $married->husbands?->address_husband : old('address_husband') }}">
                 @error('address_husband')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
