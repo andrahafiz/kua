@@ -185,7 +185,7 @@
                                     </tr>
                                     <tr>
                                         <th class="p-3 w-50">Tanggal Akad (Masehi)</th>
-                                        <td>{{ $married->akad_date_masehi }}</td>
+                                        <td>{{ $married->akad_date_masehi->isoFormat('dddd, D MMMM Y HH:mm') }}</td>
                                     </tr>
                                 </table>
                                 <div class="section-title">Data Calon Mempelai</div>
@@ -248,117 +248,353 @@
                                 </table>
                                 <div class="section-title">Dokumen</div>
                                 <table class="w-100">
-                                    <tr>
-                                        <th class="p-3 w-25">N1</th>
-                                        <td>
-                                            @if ($married->married_documents->N1 != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->N1) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                        <th class="p-3">Surat Akta Cerai</th>
-                                        <td>
-                                            @if ($married->married_documents->surat_akta_cerai != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->surat_akta_cerai) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="p-3 w-25">N3</th>
-                                        <td>
-                                            @if ($married->married_documents->N3 != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->N3) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                        <th class="p-3 w-25">Surat Izin Komandan</th>
-                                        <td>
-                                            @if ($married->married_documents->surat_izin_komandan != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->surat_izin_komandan) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="p-3 w-25">N5</th>
-                                        <td>
-                                            @if ($married->married_documents->N5 != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->N5) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                        <th class="p-3 w-25">Kartu Tanda Penduduk</th>
-                                        <td>
-                                            @if ($married->married_documents->ktp_husband != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->ktp_husband) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="p-3 w-25">Ijazah</th>
-                                        <td>
-                                            @if ($married->married_documents->ijazah_husband != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->ijazah_husband) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                        <th class="p-3 w-25">Kartu Keluarga</th>
-                                        <td>
-                                            @if ($married->married_documents->kk_husband != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->kk_husband) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="p-3 w-25">Akta</th>
-                                        <td>
-                                            @if ($married->married_documents->akta_husband != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->akta_husband) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                        <th class="p-3 w-25">Photo Latar Biru</th>
-                                        <td>
-                                            @if ($married->married_documents->photo_husband != null)
-                                                <a href="{{ Helper::setUrlDocument($married->married_documents->photo_husband) }}"
-                                                    target="blank">Lihat
-                                                    Dokumen</a>
-                                            @else
-                                                Tidak ada
-                                            @endif
-                                        </td>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th class="p-3 w-25"></th>
+                                            <th class="p-3">Data Suami</th>
+                                            <th class="p-3">Data Istri</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="p-3 w-25">Photo</th>
+                                            <td>
+                                                @if ($married->married_documents?->photo_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->photo_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->photo_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->photo_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Kartu Tanda Penduduk</th>
+                                            <td>
+                                                @if ($married->married_documents?->ktp_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->ktp_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->ktp_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->ktp_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Kartu Keluarga</th>
+                                            <td>
+                                                @if ($married->married_documents?->kk_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->kk_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->kk_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->kk_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Akta Lahir</th>
+                                            <td>
+                                                @if ($married->married_documents?->akta_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->akta_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->akta_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->akta_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Ijazah</th>
+                                            <td>
+                                                @if ($married->married_documents?->ijazah_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->ijazah_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->ijazah_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->ijazah_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Surat Keterangan Wali Nikah</th>
+                                            <td>
+                                                @if ($married->married_documents?->surat_keterangan_wali_nikah_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->surat_keterangan_wali_nikah_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->surat_keterangan_wali_nikah_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->surat_keterangan_wali_nikah_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">N1</th>
+                                            <td>
+                                                @if ($married->married_documents?->N1_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N1_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->N1_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N1_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">N2</th>
+                                            <td>
+                                                @if ($married->married_documents?->N2_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N2_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->N2_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N2_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">N4</th>
+                                            <td>
+                                                @if ($married->married_documents?->N4_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N4_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->N4_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N4_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">N5</th>
+                                            <td>
+                                                @if ($married->married_documents?->N5_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N5_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->N5_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N5_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Surat Dispensasi</th>
+                                            <td>
+                                                @if ($married->married_documents?->surat_dispensasi_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->surat_dispensasi_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->surat_dispensasi_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->surat_dispensasi_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Akta Cerai</th>
+                                            <td>
+                                                @if ($married->married_documents?->akta_cerai_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->akta_cerai_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->akta_cerai_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->akta_cerai_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Akta Kematian</th>
+                                            <td>
+                                                @if ($married->married_documents?->akta_kematian_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->akta_kematian_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->akta_kematian_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->akta_kematian_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Surat Izin Komandan</th>
+                                            <td>
+                                                @if ($married->married_documents?->N5_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N5_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->N5_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->N5_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Rekomendasi KUA</th>
+                                            <td>
+                                                @if ($married->married_documents?->rekomendasi_kua_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->rekomendasi_kua_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->rekomendasi_kua_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->rekomendasi_kua_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-3 w-25">Surat Kedutaan</th>
+                                            <td>
+                                                @if ($married->married_documents?->surat_kedutaan_husband != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->surat_kedutaan_husband) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($married->married_documents?->surat_kedutaan_wife != null)
+                                                    <a href="{{ Helper::setUrlDocument($married->married_documents?->surat_kedutaan_wife) }}"
+                                                        target="blank">Lihat
+                                                        Dokumen</a>
+                                                @else
+                                                    Tidak ada
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>

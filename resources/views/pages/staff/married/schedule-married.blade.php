@@ -73,8 +73,8 @@
                                                         {{ $loop->iteration }}
                                                     </td>
                                                     <td class="align-middle">{{ $married->registration_number }}</td>
-                                                    <td class="align-middle">{{ $married->name_husband }} &
-                                                        {{ $married->name_wife }}</td>
+                                                    <td class="align-middle">{{ $married->husbands?->name_husband }} &
+                                                        {{ $married->wives?->name_wife }}</td>
                                                     <td class="align-middle">
                                                         {{ $married->akad_date_masehi?->isoFormat('dddd, D MMMM Y') }}</td>
                                                     <td class="align-middle">

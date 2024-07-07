@@ -51,7 +51,7 @@ class AuthController extends Controller
             }
         } else {
             return back()->withErrors([
-                'error' => 'Username atau passowrd tidak ditemukan',
+                'error' => 'Username atau passoword tidak ditemukan',
             ])->withInput($request->only('username'));
         }
     }
