@@ -34,6 +34,7 @@ class Penghulu extends Model
         'name_penghulu',
         'phone',
         'address',
+        'status',
         'photo'
     ];
 

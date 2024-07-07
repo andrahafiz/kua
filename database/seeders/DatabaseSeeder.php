@@ -37,6 +37,14 @@ class DatabaseSeeder extends Seeder
             'role' => 'staff'
         ]);
 
+        $kakua = \App\Models\User::factory()->create([
+            'name' => 'Kepala KUA',
+            'email' => 'kakua@example.com',
+            'username' => 'kakua',
+            'password' => Hash::make('password'),
+            'role' => 'kakua'
+        ]);
+
         // Married::create([
         //     'registration_number' => rand(),
         //     'counter' => 1,

@@ -27,6 +27,7 @@ class PenghuluUpdateRequest extends FormRequest
             'name_penghulu' => ['string', 'sometimes', 'max:50'],
             'phone' => ['numeric', 'sometimes', 'unique:penghulu,phone,' . $this->penghulu->id],
             'address' => ['string'],
+            'status' => ['required', 'boolean'],
             'photo' => ['file', 'image', 'mimes:png,jpg'],
         ];
     }
@@ -41,7 +42,8 @@ class PenghuluUpdateRequest extends FormRequest
 
             'address.string' => 'Alamat harus karakter',
 
-            'photo.mimes' => 'Gambar harus berformat png atau jpg'
+            'photo.mimes' => 'Gambar harus berformat png atau jpg',
+            'status.required' => 'Status Harus diisi'
         ];
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('photo');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
