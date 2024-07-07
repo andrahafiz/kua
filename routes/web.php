@@ -17,7 +17,6 @@ use App\Http\Controllers\Staff\ProfileController as StaffProfileController;
 use App\Http\Controllers\Staff\CeraiController as StaffCeraiController;
 use App\Http\Controllers\Staff\RujukController as StaffRujukController;
 use App\Http\Controllers\Staff\MarriedController;
-use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Staff\PenghuluController;
 use App\Http\Controllers\Staff\DashboardController;
 use App\Http\Controllers\Staff\VerificationController;
@@ -25,6 +24,15 @@ use App\Http\Controllers\Staff\AssignPenghuluController;
 use App\Http\Controllers\Staff\DocumentController;
 use App\Http\Controllers\Staff\GenerateAkadNumberController;
 
+use App\Http\Controllers\LandingPageController;
+
+use App\Http\Controllers\Kakua\ProfileController as KakuaProfileController;
+use App\Http\Controllers\Kakua\CeraiController as KakuaCeraiController;
+use App\Http\Controllers\Kakua\RujukController as KakuaRujukController;
+use App\Http\Controllers\Kakua\MarriedController as KakuaMarriedController;
+use App\Http\Controllers\Kakua\PenghuluController as KakuaPenghuluController;
+use App\Http\Controllers\Kakua\DashboardController as KakuaDashboardController;
+use App\Http\Controllers\Kakua\DocumentController as KakuaDocumentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,12 +133,6 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
     Route::controller(PenghuluController::class)->group(
         function () {
             Route::get('/penghulu', 'index')->name('penghulu.index');
-            Route::post('/penghulu',  'store')->name('penghulu.store');
-            Route::get('/penghulu/tambah',  'create')->name('penghulu.create');
-            Route::get('/penghulu/{penghulu}',  'show')->name('penghulu.show');
-            Route::put('/penghulu/{penghulu}',  'update')->name('penghulu.update');
-            Route::delete('/penghulu/{penghulu}',  'destroy')->name('penghulu.destroy');
-            Route::get('/penghulu/{penghulu}/edit',  'edit')->name('penghulu.edit');
         }
     );
 
@@ -153,7 +155,59 @@ Route::middleware(['web', 'auth', 'checkRole:staff'])->prefix('staff')->name('st
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+Route::middleware(['web', 'auth', 'checkRole:kakua'])->prefix('kakua')->name('kakua.')->group(function () {
+    Route::get('dashboard', [KakuaDashboardController::class, 'index'])->name('dashboard');
+    Route::controller(KakuaMarriedController::class)->group(
+        function () {
+            Route::get('/pernikahan', 'index')->name('married.index');
+            Route::get('/pernikahan/{married}',  'show')->name('married.show');
+            Route::get('/jadwal-pernikahan', 'scheduleMarried')->name('schedule');
+        }
+    );
 
+    Route::controller(KakuaCeraiController::class)->group(
+        function () {
+            Route::get('/perceraian', 'index')->name('perceraian.index');
+            Route::get('/perceraian/{cerai}',  'show')->name('perceraian.show');
+            Route::put('/perceraian/{cerai}',  'approval')->name('perceraian.approval');
+        }
+    );
+
+    Route::controller(KakuaRujukController::class)->group(
+        function () {
+            Route::get('/rujuk', 'index')->name('rujuk.index');
+            Route::get('/rujuk/{rujuk}',  'show')->name('rujuk.show');
+            Route::put('/rujuk/{rujuk}',  'approval')->name('rujuk.approval');
+        }
+    );
+
+    Route::controller(KakuaPenghuluController::class)->group(
+        function () {
+            Route::get('/penghulu', 'index')->name('penghulu.index');
+            Route::post('/penghulu',  'store')->name('penghulu.store');
+            Route::get('/penghulu/tambah',  'create')->name('penghulu.create');
+            Route::get('/penghulu/{penghulu}',  'show')->name('penghulu.show');
+            Route::put('/penghulu/{penghulu}',  'update')->name('penghulu.update');
+            Route::delete('/penghulu/{penghulu}',  'destroy')->name('penghulu.destroy');
+            Route::get('/penghulu/{penghulu}/edit',  'edit')->name('penghulu.edit');
+        }
+    );
+
+    Route::controller(KakuaDocumentController::class)->group(
+        function () {
+            Route::get('/document', 'index')->name('document.index');
+            Route::post('/document',  'store')->name('document.store');
+            Route::get('/document/tambah',  'create')->name('document.create');
+            Route::put('/document/{document}',  'update')->name('document.update');
+            Route::delete('/document/{document}',  'destroy')->name('document.destroy');
+            Route::get('/document/{document}/edit',  'edit')->name('document.edit');
+        }
+    );
+
+    Route::get('profile', [KakuaProfileController::class, 'index'])->name('profile');
+    Route::put('profile/update', [KakuaProfileController::class, 'update'])->name('profile.update');
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 
 

@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-22">
                             <div class="card">
-                                @if ($married->status_married == 'Menikah')
+                                @if ($married->status_married == 'Menikah' || $married->status_married == 'Cerai' || $married->status_married == 'Rujuk')
                                     <div class="card-body pb-0">
                                         <div class="section-title">Data Pernikahan</div>
                                         <div class="row">

@@ -34,25 +34,26 @@ class RujukController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            DB::transaction(function () use ($request) {
-                $married = Married::where('akta_nikah_number', $request->akta_nikah)->first();
-                Rujuk::updateOrCreate(
-                    ['married_id' => $married->id],
-                    [
-                        'ktp_husband' => $this->uploadFile($request->file('ktp_husband', $married->rujuk->ktp_husband), $married->registration_number, 'ktp_husband'),
-                        'ktp_wife' => $this->uploadFile($request->file('ktp_wife', $married->rujuk->ktp_wife), $married->registration_number, 'ktp_wife'),
-                        'akta_cerai' => $this->uploadFile($request->file('akta_cerai', $married->rujuk->akta_cerai), $married->registration_number, 'akta_cerai'),
-                        'buku_nikah' => $this->uploadFile($request->file('buku_nikah', $married->rujuk->buku_nikah), $married->registration_number, 'buku_nikah'),
-                        'status' => 1,
-                    ]
-                );
-            });
+        // dd($request->all());
+        // try {
+        DB::transaction(function () use ($request) {
+            $married = Married::where('akta_nikah_number', $request->akta_nikah)->first();
+            Rujuk::updateOrCreate(
+                ['married_id' => $married->id],
+                [
+                    'ktp_husband' => $this->uploadFile($request->file('ktp_husband', $married->rujuk?->ktp_husband), $married->registration_number, 'ktp_husband'),
+                    'ktp_wife' => $this->uploadFile($request->file('ktp_wife', $married->rujuk?->ktp_wife), $married->registration_number, 'ktp_wife'),
+                    'akta_cerai' => $this->uploadFile($request->file('akta_cerai', $married->rujuk?->akta_cerai), $married->registration_number, 'akta_cerai'),
+                    'buku_nikah' => $this->uploadFile($request->file('buku_nikah', $married->rujuk?->buku_nikah), $married->registration_number, 'buku_nikah'),
+                    'status' => 1,
+                ]
+            );
+        });
 
-            return redirect()->route('catin.rujuk.index')->with('success', "Data berhasil disimpan");
-        } catch (\Throwable $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
+        return redirect()->route('catin.rujuk.index')->with('success', "Data berhasil disimpan");
+        // } catch (\Throwable $e) {
+        //     return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        // }
     }
 
     private function uploadFile($file, $registrationNumber, $suffix)
