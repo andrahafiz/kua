@@ -22,10 +22,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Total Admin</h4>
+                                <h4>Pernikahan Hari Ini</h4>
                             </div>
                             <div class="card-body">
-                                10
+                                {{ $marriedToday }}
                             </div>
                         </div>
                     </div>
@@ -37,10 +37,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>News</h4>
+                                <h4>Pendaftar Hari Ini</h4>
                             </div>
                             <div class="card-body">
-                                42
+                                {{ $registerToday }}
                             </div>
                         </div>
                     </div>
@@ -52,10 +52,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Reports</h4>
+                                <h4>Perceraian Hari Ini</h4>
                             </div>
                             <div class="card-body">
-                                1,201
+                                {{ $ceraiToday }}
                             </div>
                         </div>
                     </div>
@@ -67,10 +67,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Online Users</h4>
+                                <h4>Rujuk Hari Ini</h4>
                             </div>
                             <div class="card-body">
-                                47
+                                {{ $rujukToday }}
                             </div>
                         </div>
                     </div>
@@ -80,10 +80,42 @@
                 <div class="col-lg-6 col-md-12 col-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Pendaftar</h4>
+                            <h4>Pernikahan {{ now()->format('Y') }}</h4>
                         </div>
                         <div class="card-body pt-0">
                             <canvas id="marriageChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Perceraian {{ now()->format('Y') }}</h4>
+                        </div>
+                        <div class="card-body pt-0">
+                            <canvas id="ceraiChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Rujuk {{ now()->format('Y') }}</h4>
+                        </div>
+                        <div class="card-body pt-0">
+                            <canvas id="rujukChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Perceraian {{ now()->format('Y') }}</h4>
+                        </div>
+                        <div class="card-body pt-0">
+                            <canvas id="locationChart" height="150"></canvas>
                         </div>
                     </div>
                 </div>
@@ -166,7 +198,7 @@
                     datasets: [{
                         label: 'Jumlah Pernikahan',
                         data: @json($monthlyMarriageCounts),
-                        backgroundColor: '#6777ef',
+                        backgroundColor: '#006c00',
                         pointBackgroundColor: '#ffffff',
                         pointRadius: 4
                     }]
@@ -183,8 +215,94 @@
                 }
             });
 
+            var ctx = document.getElementById('ceraiChart').getContext('2d');
 
+            var ceraiChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                        'September', 'October', 'November', 'December'
+                    ],
+                    datasets: [{
+                        label: 'Jumlah Perceraian',
+                        data: @json($monthlyCeraiCounts),
+                        backgroundColor: '#006c00',
+                        pointBackgroundColor: '#ffffff',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
 
+            var ctx = document.getElementById('rujukChart').getContext('2d');
+
+            var rujukChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                        'September', 'October', 'November', 'December'
+                    ],
+                    datasets: [{
+                        label: 'Jumlah Rujuk',
+                        data: @json($monthlyRujukCounts),
+                        backgroundColor: '#006c00',
+                        pointBackgroundColor: '#ffffff',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+
+            var ctx = document.getElementById('locationChart').getContext('2d');
+            const marriageCounts = @json($marriageLocationCounts);
+            var locationChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                        'September', 'October', 'November', 'December'
+                    ],
+                    datasets: [{
+                            label: 'Nikah Di KUA',
+                            data: marriageCounts.kua,
+                            backgroundColor: '#1f2d91',
+
+                        },
+                        {
+                            label: 'Nikah Di Luar KUA',
+                            data: marriageCounts.non_kua,
+                            backgroundColor: '#006c00',
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
         });
     </script>
 @endpush
