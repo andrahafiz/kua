@@ -26,18 +26,14 @@ class RegisterController extends Controller
 
     public function index()
     {
-        try {
-            $married = Married::with(['husbands'])->where('users_id', Auth::user()->id)->first();
-            $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
-            $paymentmarried = MarriedPayment::where('married_id', $married->id)->first();
+        $married = Married::with(['husbands'])->where('users_id', Auth::user()->id)->first();
+        $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
+        $paymentmarried = MarriedPayment::where('married_id', $married->id)->first();
 
-            return view('pages.catin.pendaftaran', compact('married', 'documentmarried', 'paymentmarried'));
-        } catch (\Throwable $e) {
-            return 'error';
-        }
+        return view('pages.catin.pendaftaran', compact('married', 'documentmarried', 'paymentmarried'));
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
         try {
             DB::transaction(function () use ($request) {
@@ -140,7 +136,7 @@ class RegisterController extends Controller
                 'nationality_wali' => $request->nationality_wali ?? null,
                 'no_passport_wali' => $request->no_passport_wali ?? null,
                 'name_wali' => $request->name_wali ?? null,
-                'name_father_wali' => $request->name_father_wali ?? 0,
+                'name_father_wali' => $request->name_father_wali ?? null,
                 'reason_wali' => $request->reason_wali ?? null,
                 'location_birth_wali' => $request->location_birth_wali ?? null,
                 'date_birth_wali' => $request->date_birth_wali ?? null,

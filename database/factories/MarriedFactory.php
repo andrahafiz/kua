@@ -26,8 +26,8 @@ class MarriedFactory extends Factory
             'married_on' => $this->faker->randomElement(['DI KUA', 'DI LUAR KUA']),
             'kua' => $this->faker->company,
             'status_payment' => $this->faker->numberBetween(0, 1),
-            'status' => $this->faker->numberBetween(0, 1),
-            'status_married' => $this->faker->numberBetween(0, 1),
+            'status' => $this->faker->numberBetween(0, 4),
+            'status_married' => $this->faker->randomElement(['Menikah', 'Rujuk', 'Cerai']),
             'pramarried_date' => $this->faker->dateTime,
             'penghulu_id' => null // Change this if you have a penghulu factory
         ];

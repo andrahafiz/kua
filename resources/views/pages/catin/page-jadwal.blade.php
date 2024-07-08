@@ -39,10 +39,12 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="kua">KUA <span class="text-danger">*</span></label>
-                <select class="form-control @error('kua') is-invalid @enderror" @disabled($married->status > 2)
+                {{-- <select class="form-control @error('kua') is-invalid @enderror" @disabled($married->status > 2)
                     name="kua">
                     <option value="KUA PANGEAN">KUA PANGEAN</option>
-                </select>
+                </select> --}}
+                <input type="text" name="kua" class="form-control @error('kua') is-invalid @enderror" readonly
+                    value="KUA PANGEAN">
                 @error('kua')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

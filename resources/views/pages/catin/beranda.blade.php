@@ -74,11 +74,18 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card">
+                        <div class="card-body">
+                            <h3 class="mb-3"> Daftar Nikah Online</h3>
+                            <a class="btn btn-lg btn-block btn-primary p-3" href="{{ route('catin.married.index') }}"
+                                style="font-size: 25px; font-weight: bold">DAFTAR NIKAH</a>
+                        </div>
+                    </div>
+                    <div class="card">
                         <div class="card-header">
                             <h4>Notifikasi</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('catin.married.notification') }}" class="btn btn-danger">Selengkapnya <i
-                                        class="fas fa-chevron-right"></i></a>
+                                <a href="{{ route('catin.married.notification') }}" class="btn btn-danger">Selengkapnya
+                                    <i class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
                         <div class="card-body p-0">

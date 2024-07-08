@@ -117,9 +117,11 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="religion_husband">Agama <span class="text-danger">*</span></label>
-                    <x-religion name="religion_husband" :selected="$married->husbands?->religion_husband != null
-                        ? $married->husbands?->religion_husband
-                        : old('religion_husband')" :status="$married->status" />
+                    <input type="text" name="religion_husband" id="religion_husband"
+                        class="form-control @error('religion_husband') is-invalid @enderror" readonly value="Islam">
+                    @error('religion_husband')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 

@@ -65,7 +65,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-22">
                             <div class="card">
-                                <div class="card-body pb-0">
+                                <div class="card-body">
                                     <ul class="nav nav-pills" id="myTab3" role="tablist">
                                         <li class="nav-item">
                                             <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#jadwal"
@@ -116,20 +116,7 @@
                                     </div>
 
                                 </div>
-                                <div class="card-footer pt-0">
-                                    <hr />
-                                    @if ($married->status > 2)
-                                        <button class="btn btn-icon btn-lg icon-left btn-warning btn-block">
-                                            <i class="fas fa-exclamation-triangle"></i> Data anda sudah validasi oleh
-                                            staff kami. Data tidak dapat diubah lagi</button>
-                                    @else
-                                        {{-- <button type="submit" class="btn btn-primary">Simpan Data</button> --}}
-                                        <button type="submit" name="action" class="btn btn-info"
-                                            value="simpan">Simpan</button>
-                                        <button type="submit" name="action" class="btn btn-primary"
-                                            value="daftar">Daftar</button>
-                                    @endif
-                                </div>
+
                             </div>
                         </div>
                     </div>

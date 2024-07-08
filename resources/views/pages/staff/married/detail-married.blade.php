@@ -117,7 +117,7 @@
                                                 action="{{ route('staff.generate_number', $married->id) }}">
                                                 @csrf
                                                 @method('PUT')
-                                                @if ($married->akta_nikah_number == null)
+                                                @if ($married->akta_nikah_number == null && $married->document_akta_nikah == null)
                                                     <label>Dokumen Akta Nikah</label>
                                                     <input class="form-control mb-3" type="file" required
                                                         name="document_akta_nikah" />

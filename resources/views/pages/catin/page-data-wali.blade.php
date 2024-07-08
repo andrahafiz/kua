@@ -123,7 +123,7 @@
 
 <div class="form-row">
     <div class="form-group col-md-5">
-        <label><span class="text-danger">*</span></label>
+        <label>Sebab/Alasan Wali Hakim<span class="text-danger">*</span></label>
         <input type="text" name="reason_wali" id="reason_wali"
             class="form-control @error('reason_wali') is-invalid @enderror" @disabled($married->status > 2)
             value="{{ $married->walis?->reason_wali != null ? $married->walis?->reason_wali : old('reason_wali') }}">
@@ -195,3 +195,15 @@
     </div>
 </div>
 {{-- END  DATA AYAH SUAMI --}}
+
+<hr />
+<div class="form-row">
+    @if ($married->status > 2)
+        <button class="btn btn-icon btn-lg icon-left btn-warning btn-block">
+            <i class="fas fa-exclamation-triangle"></i> Data anda sudah validasi oleh
+            staff kami. Data tidak dapat diubah lagi</button>
+    @else
+        {{-- <button type="submit" class="btn btn-primary">Simpan Data</button> --}}
+        <button type="submit" name="action" class="btn btn-primary btn-lg" value="daftar">Daftar</button>
+    @endif
+</div>

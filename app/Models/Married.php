@@ -150,28 +150,5 @@ class Married extends Model
         return "$counter/$akad/$tanggal-$bulanRomawi/$tahun";
     }
 
-    protected static function convertToRoman($month)
-    {
-        $romans = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-        return $romans[$month - 1];
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            $year = date('Y');
-            $romawiMonth = self::convertToRoman(date('n'));
-            $latestCounter = Married::max('counter') + 1 ?? 1;
-
-            if (isset($model->akta_nikah_number)) {
-                $model->akta_nikah_number = str_pad($latestCounter, 5, "0", STR_PAD_LEFT) . '/AKAD/' . $romawiMonth . '/' . $year;
-                $model->counter = $latestCounter;
-                return;
-            }
-
-            $model->akta_nikah_number = str_pad($latestCounter, 5, "0", STR_PAD_LEFT) . '/AKAD/' . $romawiMonth . '/' . $year;
-            $model->counter = $latestCounter;
-        });
-    }
+    
 }
