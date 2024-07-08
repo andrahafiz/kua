@@ -1,18 +1,20 @@
 <?php
 
 use App\Models\Married;
+use App\Mail\SendScheduleEmail;
 use App\Models\ArchiveDocument;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Catin\HomeController;
 use App\Http\Controllers\Catin\CeraiController;
 use App\Http\Controllers\Catin\RujukController;
 use App\Http\Controllers\LandingPageController;
+
 use App\Http\Controllers\Catin\ProfileController;
 use App\Http\Controllers\Staff\MarriedController;
-
 use App\Http\Controllers\Catin\RegisterController;
 use App\Http\Controllers\Staff\DocumentController;
 use App\Http\Controllers\Staff\PenghuluController;
@@ -21,11 +23,11 @@ use App\Http\Controllers\Catin\NotificationController;
 use App\Http\Controllers\Staff\VerificationController;
 use App\Http\Controllers\Staff\AssignPenghuluController;
 use App\Http\Controllers\Staff\DocumentArchiveController;
+
 use App\Http\Controllers\Catin\DocumentDownloadController;
+
 use App\Http\Controllers\Staff\GenerateAkadNumberController;
-
 use App\Http\Controllers\Kakua\CeraiController as KakuaCeraiController;
-
 use App\Http\Controllers\Kakua\RujukController as KakuaRujukController;
 use App\Http\Controllers\Staff\CeraiController as StaffCeraiController;
 use App\Http\Controllers\Staff\RujukController as StaffRujukController;
@@ -54,6 +56,29 @@ Route::get('reset', function () {
     Artisan::call('config:cache');
 });
 
+Route::get('/send-email', function () {
+    $married = Married::first();
+    $data = [
+        'tanggal' => $married->pramarried_date?->isoFormat('dddd, D MMMM Y'),
+        'jam' => $married->pramarried_date?->format('H:i'),
+    ];
+    Mail::to('joyoom34@gmail.com')->send(new SendScheduleEmail($data));
+
+    dd("Email Berhasil dikirim.");
+});
+
+Route::get('/email', function () {
+    $married = Married::first();
+    $data = [
+        'tanggal' => $married->pramarried_date?->isoFormat('dddd, D MMMM Y'),
+        'jam' => $married->pramarried_date?->format('H:i'),
+
+    ];
+    return view('email_schedule', [
+        'type_menu' => 'bootstrap',
+        'data' => $data
+    ]);
+});
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [LandingPageController::class, 'index'])->name('landingpage');

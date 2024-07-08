@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Http\Controllers\Controller;
 use App\Models\Married;
 use Illuminate\Http\Request;
+use App\Mail\SendScheduleEmail;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class AssignPenghuluController extends Controller
 {
@@ -36,6 +38,15 @@ class AssignPenghuluController extends Controller
             'type' => 'success',
             'is_read' => false
         ]);
+
+        $data = [
+            'tanggal' => $married->pramarried_date?->isoFormat('dddd, D MMMM Y'),
+            'jam' => $married->pramarried_date?->format('H:i'),
+        ];
+
+        if ($married->user->email != null)
+            Mail::to($married->user->email)->send(new SendScheduleEmail($data));
+
 
         return redirect()->route('staff.married.show', $married->id)->with('success', "Penghulu dan Tanggal Pranikah Sudah Ditentukan");
     }
