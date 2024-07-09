@@ -41,14 +41,13 @@ class CeraiController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                $married = Married::where('akta_nikah_number', $request->akta_nikah)->first();
-
+                $married = Married::with('perceraian')->where('akta_nikah_number', $request->akta_nikah)->first();
                 $perceraian = Perceraian::updateOrCreate(
                     ['married_id' => $married->id],
                     [
-                        'surat_putusan' => $this->uploadFile($request->file('surat_putusan'), $married->registration_number, 'surat_putusan'),
-                        'surat_keterangan_hamil' => $this->uploadFile($request->file('surat_keterangan_hamil'), $married->registration_number, 'surat_keterangan_hamil'),
-                        'berita_acara_mediasi' => $this->uploadFile($request->file('berita_acara_mediasi'), $married->registration_number, 'berita_acara_mediasi'),
+                        'surat_putusan' => $this->uploadFile($request->file('surat_putusan', $married->perceraian?->surat_putusan), $married->registration_number, 'surat_putusan'),
+                        'surat_keterangan_hamil' => $this->uploadFile($request->file('surat_keterangan_hamil', $married->perceraian?->surat_keterangan_hamil), $married->registration_number, 'surat_keterangan_hamil'),
+                        'berita_acara_mediasi' => $this->uploadFile($request->file('berita_acara_mediasi', $married->perceraian?->berita_acara_mediasi), $married->registration_number, 'berita_acara_mediasi'),
                         'status' => 1,
                     ]
                 );
@@ -71,7 +70,7 @@ class CeraiController extends Controller
             $file->storeAs('public/documents/cerai', $path);
             return $path;
         }
-        return null;
+        return $file;
     }
 
     private function storeDocument($married, $file, $title, $path)

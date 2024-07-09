@@ -93,8 +93,8 @@
                                 <table class="table-striped table">
                                     <tr>
                                         <th style="width:30%">Tanggal</th>
-                                        <th style="width:10%">Pesan</th>
-                                        <th>Status</th>
+                                        <th style="width:10%">Status</th>
+                                        <th>Pesan</th>
                                         <th>Read ?</th>
                                     </tr>
                                     @foreach ($notifications as $notification)
