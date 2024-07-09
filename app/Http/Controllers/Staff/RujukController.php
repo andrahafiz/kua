@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Models\Rujuk;
+use App\Mail\RujukEmail;
 use Illuminate\Http\Request;
 use App\Models\ArchiveDocument;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class RujukController extends Controller
 {
     public function index()
     {
-        $rujuks = Rujuk::all();
+        $rujuks = Rujuk::orderBy('created_at', 'desc')->orderBy('tanggal_verifikasi', 'desc')->get();
         return view('pages.staff.rujuk.rujuk', [
             'rujuks' => $rujuks,
             'type_menu' => 'pernikahan',
@@ -49,10 +51,27 @@ class RujukController extends Controller
             ]);
             $this->storeDocument($rujuk, $request->file('berita_acara'), 'Akta Cerai', $rujuk->berita_acara);
             $rujuk->married->update(['status_married' => "Rujuk"]);
+            $rujuk->married->notifications()->create([
+                'description' =>  'Pengajuan rujuk diterima',
+                'message' => 'Sukses',
+                'type' => 'success',
+                'is_read' => false
+            ]);
+
+            Mail::to($rujuk->married->user->email)->send(new RujukEmail('approve'));
         } else if ($status == 3) {
             $rujuk->update([
                 'status' => $status
             ]);
+
+            $rujuk->married->notifications()->create([
+                'description' => 'Pengajuan rujuk ditolak',
+                'message' => 'Ditolak',
+                'type' => 'danger',
+                'is_read' => false
+            ]);
+
+            Mail::to($rujuk->married->user->email)->send(new RujukEmail('declined'));
         }
 
         return redirect()->route('staff.rujuk.index')->with('success', "Data berhasil disimpan");

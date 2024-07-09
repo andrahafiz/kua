@@ -74,9 +74,10 @@ Route::get('/email', function () {
         'jam' => $married->pramarried_date?->format('H:i'),
 
     ];
-    return view('email_schedule', [
+    return view('email_cerai', [
         'type_menu' => 'bootstrap',
-        'data' => $data
+        'data' => $data,
+        'status' => 'approve'
     ]);
 });
 

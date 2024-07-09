@@ -33,7 +33,7 @@ class RegisterController extends Controller
         return view('pages.catin.pendaftaran', compact('married', 'documentmarried', 'paymentmarried'));
     }
 
-    public function store(RegisterRequest $request)
+    public function store(Request $request)
     {
         try {
             DB::transaction(function () use ($request) {

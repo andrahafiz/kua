@@ -382,7 +382,7 @@
                 </tr><!-- end tr -->
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding:0.5em 0 0.5em 0;">
-                        <img src="{{ asset('landingpage') }}/img/divorce.svg" alt=""
+                        <img src="{{ asset('landingpage') }}/img/married.png" alt=""
                             style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
                     </td>
                 </tr><!-- end tr -->
@@ -392,34 +392,32 @@
                             <tr>
                                 <td>
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        <h2 style="margin-bottom: 20px">Permohonan Perceraian</h2>
+                                        <h2 style="margin-bottom: 20px">Permohonan Rujuk</h2>
                                         @if ($status == 'approve')
-                                            <p style="margin-bottom: 0px">Kami sampaikan bahwa dokumen perceraian
-                                                yang Anda ajukan melalui website SIMKAH telah kami terima dan periksa.
-                                                Berdasarkan verifikasi yang telah dilakukan, dokumen Anda telah memenuhi
-                                                persyaratan yang diperlukan.
+                                            <p style="margin-bottom: 0px">Kami sampaikan bahwa permohonan rujuk yang
+                                                Anda ajukan melalui website SIMKAH telah kami terima dan periksa.
+                                                Berdasarkan verifikasi yang telah
+                                                dilakukan, permohonan Anda telah memenuhi persyaratan yang diperlukan.
                                             </p>
                                             <p>
-                                                Dengan ini kami menyatakan bahwa dokumen perceraian Anda telah <span
-                                                    class="approve">DISETUJUI</span> .
-                                                Untuk langkah selanjutnya, Anda dapat mengunjungi kantor KUA setempat
-                                                untuk
-                                                proses administrasi lebih lanjut.
+                                                Dengan ini kami menyatakan bahwa permohonan rujuk Anda telah <span
+                                                    class="approve">DISETUJUI</span>.
+                                                Dokumen berita acara terkait persetujuan rujuk ini dapat Anda akses dan
+                                                unduh melalui akun Anda di website SIMKAH.
                                             </p>
                                         @else
                                             <p style="margin-bottom: 0px">Kami ingin menginformasikan bahwa permohonan
-                                                perceraian yang Anda ajukan melalui website SIMKAH saat ini belum dapat
-                                                <span class="declined">TIDAK
-                                                    DISETUJUI</span>.
-                                                Hal ini disebabkan oleh ketidaksesuaian informasi yang diberikan dengan
-                                                ketentuan yang berlaku.
+                                                rujuk yang Anda ajukan melalui website SIMKAH saat ini belum dapat <span
+                                                    class="declined">TIDAK
+                                                    DISETUJUI</span>. Hal ini disebabkan oleh ketidaksesuaian informasi
+                                                yang diberikan dengan ketentuan yang berlaku.
                                             </p>
                                             <p> Silakan periksa kembali persyaratan yang diperlukan dan ajukan ulang
-                                                permohonan perceraian setelah semua persyaratan terpenuhi.</p>
+                                                permohonan rujuk setelah semua persyaratan terpenuhi.</p>
                                             </p>
                                         @endif
-                                        <a href="{{ route('catin.perceraian.index') }}" class="btn btn-primary">Lihat
-                                            Permohonan Perceraian</a>
+                                        <a href="{{ route('catin.rujuk.index') }}" class="btn btn-primary">Lihat
+                                            Permohonan Rujuk</a>
                                     </div>
                                 </td>
                             </tr>
