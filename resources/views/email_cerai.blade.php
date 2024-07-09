@@ -408,14 +408,12 @@
                                             </p>
                                         @else
                                             <p style="margin-bottom: 0px">Kami ingin menginformasikan bahwa permohonan
-                                                rujuk
-                                                yang Anda ajukan melalui
-                                                website SIMKAH saat ini belum dapat <span class="declined">TIDAK
+                                                perceraian yang Anda ajukan melalui website SIMKAH saat ini belum dapat
+                                                <span class="declined">TIDAK
                                                     DISETUJUI</span>.
-                                                Hal ini disebabkan oleh
-                                                ketidaksesuaian informasi yang diberikan dengan ketentuan yang berlaku.
+                                                Hal ini disebabkan oleh ketidaksesuaian informasi yang diberikan dengan
+                                                ketentuan yang berlaku.
                                             </p>
-
                                             <p> Silakan periksa kembali persyaratan yang diperlukan dan ajukan ulang
                                                 permohonan rujuk setelah semua persyaratan terpenuhi.</p>
                                             </p>
