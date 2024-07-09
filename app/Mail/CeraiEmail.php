@@ -32,7 +32,7 @@ class CeraiEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Pengajuan Percerain',
+            subject: 'Permohonan Percerain',
         );
     }
 
