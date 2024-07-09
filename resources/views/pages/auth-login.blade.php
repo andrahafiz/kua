@@ -51,13 +51,13 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                         Login
                     </button>
+                    <a href="{{ route('register') }}" class="btn btn-light btn-lg btn-block">
+                        Daftar Akun
+                    </a>
                 </div>
             </form>
 
         </div>
-    </div>
-    <div class="text-muted mt-5 text-center">
-        Sudah punya akun? <a href="{{ route('register') }}">Daftar</a>
     </div>
 @endsection
 

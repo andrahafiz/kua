@@ -71,6 +71,9 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
                         Register
                     </button>
+                    <a href="{{ route('login') }}" class="btn btn-light btn-lg btn-block">
+                        Sudah Punya Akun?
+                    </a>
                 </div>
             </form>
         </div>
