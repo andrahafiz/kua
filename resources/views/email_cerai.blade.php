@@ -415,7 +415,7 @@
                                                 ketentuan yang berlaku.
                                             </p>
                                             <p> Silakan periksa kembali persyaratan yang diperlukan dan ajukan ulang
-                                                permohonan rujuk setelah semua persyaratan terpenuhi.</p>
+                                                permohonan perceraian setelah semua persyaratan terpenuhi.</p>
                                             </p>
                                         @endif
                                         <a href="{{ route('catin.perceraian.index') }}" class="btn btn-primary">Lihat
