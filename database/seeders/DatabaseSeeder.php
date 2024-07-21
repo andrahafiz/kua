@@ -88,7 +88,8 @@ class DatabaseSeeder extends Seeder
             'pramarried_date' => null,
             'penghulu_id' => null,
             'married_on' => 'DI KUA',
-            'kua' => 'KUA Medan'
+            'kua' => 'KUA Medan',
+            'mahar' => 'Mahar',
         ]);
 
         // Membuat instans Husband dan menghubungkannya dengan Married

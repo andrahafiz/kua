@@ -59,6 +59,21 @@
                     </div>
                 @endif
                 <div class="section-body">
+                    @if ($rujuk?->status == 3 && $rujuk->reason_approval != null)
+                        <div class="row">
+                            <div class="col">
+                                <div class="alert alert-danger alert-has-icon">
+                                    <div class="alert-icon"><i class="far fa-lightbulb"></i>
+                                    </div>
+                                    <div class="alert-body">
+                                        <div class="alert-title">Verifikasi Dokumen Rujuk Anda Ditolak</div>
+                                        Alasan : {{ $rujuk->reason_approval }}<br />
+                                        Mohon untuk melakukan pengupload ulang
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-22">
                             <div class="card">

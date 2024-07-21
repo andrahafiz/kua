@@ -82,7 +82,7 @@
                                                     <td class="align-middle">{{ $cerai->married->wives?->name_wife ?? '-' }}
                                                     </td>
                                                     <td class="align-middle">
-                                                        {{ $cerai->created_at?->isoFormat('dddd, D MMMM Y') }}</td>
+                                                        {{ $cerai->created_at?->isoFormat('dddd, D MMMM Y HH:mm') }}</td>
                                                     <td class="align-middle">
                                                         <x-status-cerai status="{{ $cerai->status }}" />
                                                     </td>

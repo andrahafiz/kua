@@ -292,6 +292,11 @@
                                             <i class="fas fa-exclamation-triangle"></i> Data anda sudah validasi oleh
                                             staff kami. Data tidak dapat diubah lagi</button>
                                     @else
+                                        <div class="form-group">
+                                            <label>Keterangan</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Diisi hanya jika menolak" name="reason_approval">
+                                        </div>
                                         <button type="submit" name="action" value="approve"
                                             class="btn btn-icon btn-lg icon-left btn-primary btn-block">
                                             <i class="fas fa-check"></i> Terima</button>

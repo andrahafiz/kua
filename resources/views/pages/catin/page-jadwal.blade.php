@@ -33,6 +33,13 @@
                         DI KUA
                     </option>
                 </select>
+                <p class="text-primary mb-0">Catatan: DI KUA (Biaya Gratis) </p>
+                <p class="text-primary mb-0">DI LUAR KUA (Bayar, Dapat Di Lakukan Di Fitur
+                    Pembayaran)</p>
+                {{-- <ul class="text-muted mb-0">
+                    <li class="mb-0">sad</li>
+                    <li class="mb-0">sadas</li>
+                </ul> --}}
                 @error('married_on')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -118,14 +125,30 @@
             </div>
         </div>
 
-        <div class="form-group mb-0">
-            <label>Alamat Lokasi Akad Nikah <span class="text-danger">*</span></label>
-            <input type="text" name="akad_location" class="form-control @error('akad_location') is-invalid @enderror"
-                @disabled($married->status > 2)
-                value="{{ $married->akad_location != null ? $married->akad_location : old('akad_location') }}">
-            @error('akad_location')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Alamat Lokasi Akad Nikah <span class="text-danger">*</span></label>
+                {{-- <input type="text" name="akad_location"
+                    class="form-control @error('akad_location') is-invalid @enderror" @disabled($married->status > 2)
+                    value="{{ $married->akad_location != null ? $married->akad_location : old('akad_location') }}"> --}}
+                {{-- <textarea rows="10" name="akad_location" class="form-control @error('akad_location') is-invalid @enderror"
+                    @disabled($married->status > 2)>
+
+                    </textarea> --}}
+                <textarea class="form-control" name="akad_location" class="form-control @error('akad_location') is-invalid @enderror"
+                    @disabled($married->status > 2)>{{ $married->akad_location != null ? $married->akad_location : old('akad_location') }}</textarea>
+                @error('akad_location')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group col-md-6">
+                <label>Mahar Pernikahan <span class="text-danger">*</span></label>
+                <textarea class="form-control" name="mahar" class="form-control @error('mahar') is-invalid @enderror"
+                    @disabled($married->status > 2)>{{ $married->mahar != null ? $married->mahar : old('mahar') }}</textarea>
+                @error('mahar')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
     </div>
 </div>

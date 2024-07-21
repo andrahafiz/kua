@@ -108,6 +108,8 @@
                                                 </tr>
                                             @endif
                                         </table>
+                                    @else
+                                        <h6 class="text-center">Data masih dalam tahapan pengisian/verifikasi</h6>
                                     @endif
                                 </div>
                             </div>
@@ -150,6 +152,10 @@
                                     <tr>
                                         <th class="p-3 w-50">Tanggal Akad (Masehi)</th>
                                         <td>{{ $married->akad_date_masehi->isoFormat('dddd, D MMMM Y HH:mm') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-3 w-50">Mahar</th>
+                                        <td>{{ $married->mahar }}</td>
                                     </tr>
                                 </table>
                                 <div class="section-title">Data Calon Mempelai</div>

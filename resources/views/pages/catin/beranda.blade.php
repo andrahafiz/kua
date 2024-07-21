@@ -64,7 +64,7 @@
                                         <h4>Tanggal Pranikah</h4>
                                     </div>
                                     <div class="ticket-info">
-                                        <h4>{{ $married?->pramarried_date?->isoFormat('dddd, D MMMM Y') ?? 'Belum ditentukan' }}
+                                        <h4>{{ $married?->pramarried_date?->isoFormat('dddd, D MMMM Y HH:mm') ?? 'Belum ditentukan' }}
                                         </h4>
                                     </div>
                                 </div>
@@ -73,13 +73,23 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="mb-3"> Daftar Nikah Online</h3>
-                            <a class="btn btn-lg btn-block btn-primary p-3" href="{{ route('catin.married.index') }}"
-                                style="font-size: 25px; font-weight: bold">DAFTAR NIKAH</a>
+                    @if ($married->status < 2)
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="mb-3"> Daftar Nikah Online</h3>
+                                <a class="btn btn-lg btn-block btn-warning p-3" href="{{ route('catin.married.index') }}"
+                                    style="font-size: 25px; font-weight: bold">DAFTAR NIKAH</a>
+                                <p class="mt-3 mb-0 text-primary">Sebelum melakukan pendaftaran, pastikan anda telah
+                                    menyiapkan
+                                    dokumen
+                                    sesuai dengan
+                                    template dokumen yang telah ditentukan. </p>
+                                <a href="{{ route('catin.download.document') }}" class="text-info mt-0">Link Download
+                                    Template
+                                    Dokumen</a>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <h4>Notifikasi</h4>
@@ -101,7 +111,7 @@
                                         <tr
                                             {{ $notification->is_read != true ? 'style=background-color:rgba(163,229,255,0.319);' : '' }}>
                                             <td>
-                                                {{ $notification->created_at?->isoFormat('dddd, D MMMM Y H:m') }}
+                                                {{ $notification->created_at?->isoFormat('dddd, D MMMM Y HH:mm') }}
                                             </td>
                                             <td>
                                                 <div class="badge badge-{{ $notification->type }}">

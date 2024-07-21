@@ -25,6 +25,7 @@ class MarriedFactory extends Factory
             'desa_location' => $this->faker->address,
             'married_on' => $this->faker->randomElement(['DI KUA', 'DI LUAR KUA']),
             'kua' => $this->faker->company,
+            'mahar' => $this->faker->paragraph(1),
             'status_payment' => $this->faker->numberBetween(0, 1),
             'status' => $this->faker->numberBetween(0, 4),
             'status_married' => $this->faker->randomElement(['Menikah', 'Rujuk', 'Cerai']),

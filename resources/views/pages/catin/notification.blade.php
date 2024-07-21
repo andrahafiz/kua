@@ -73,7 +73,7 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>
-                                                        {{ $notification->created_at?->isoFormat('dddd, D MMMM Y H:m') }}
+                                                        {{ $notification->created_at?->isoFormat('dddd, D MMMM Y HH:mm') }}
                                                     </td>
                                                     <td>
                                                         <div class="badge badge-{{ $notification->type }}">

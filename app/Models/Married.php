@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $desa_location
  * @property string|null $married_on
  * @property string|null $kua
+ * @property string|null $mahar
  * @property int|null $status_payment
  * @property int|null $status
  * @property int|null $status_married
@@ -74,9 +75,11 @@ class Married extends Model
         'desa_location',
         'married_on',
         'kua',
+        'mahar',
         'status_payment',
         'status',
         'status_married',
+        'reason_approval',
         'pramarried_date',
         'penghulu_id'
     ];
@@ -149,6 +152,4 @@ class Married extends Model
 
         return "$counter/$akad/$tanggal-$bulanRomawi/$tahun";
     }
-
-    
 }

@@ -37,7 +37,12 @@ class RujukController extends Controller
                 'tanggal_verifikasi' => 'required_if:action,approve', 'date_format:Y-m-d',
                 'waktu_verifikasi' => 'required_if:action,approve', 'date_format:H:i',
                 'berita_acara' => 'required_if:action,approve', 'file',
-                'action' => 'in:approve,declined'
+                'action' => ['required', 'in:approve,declined'],
+                'reason_approval' => ['required_if:action,declined']
+            ],
+            [
+                'reason_approval.required_if' => 'Keterangan harus diisi jika anda memilih menolak',
+                'action.in' => 'Tipe approval tidak terdaftar',
             ]
         );
 
@@ -58,20 +63,23 @@ class RujukController extends Controller
                 'is_read' => false
             ]);
 
-            Mail::to($rujuk->married->user->email)->send(new RujukEmail('approve'));
+            if ($rujuk->married->user->email != null)
+                Mail::to($rujuk->married->user->email)->send(new RujukEmail('approve'));
         } else if ($status == 3) {
             $rujuk->update([
-                'status' => $status
+                'status' => $status,
+                'reason_approval' => $data['reason_approval']
             ]);
 
             $rujuk->married->notifications()->create([
-                'description' => 'Pengajuan rujuk ditolak',
+                'description' => 'Pengajuan rujuk ditolak. Alasan : ' . ucwords($data['reason_approval']),
                 'message' => 'Ditolak',
                 'type' => 'danger',
                 'is_read' => false
             ]);
 
-            Mail::to($rujuk->married->user->email)->send(new RujukEmail('declined'));
+            if ($rujuk->married->user->email != null)
+                Mail::to($rujuk->married->user->email)->send(new RujukEmail('declined'));
         }
 
         return redirect()->route('staff.rujuk.index')->with('success', "Data berhasil disimpan");

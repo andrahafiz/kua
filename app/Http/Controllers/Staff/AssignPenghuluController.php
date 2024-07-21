@@ -44,8 +44,8 @@ class AssignPenghuluController extends Controller
             'jam' => $married->pramarried_date?->format('H:i'),
         ];
 
-        if ($married->user->email != null)
-            Mail::to($married->user->email)->send(new SendScheduleEmail($data));
+        // if ($married->user->email != null)
+        //     Mail::to($married->user->email)->send(new SendScheduleEmail($data));
 
 
         return redirect()->route('staff.married.show', $married->id)->with('success', "Penghulu dan Tanggal Pranikah Sudah Ditentukan");

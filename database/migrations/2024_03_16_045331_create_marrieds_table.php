@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('desa_location')->nullable();
             $table->enum('married_on', ['DI KUA', 'DI LUAR KUA'])->nullable();
             $table->string('kua')->nullable();
+            $table->text('mahar')->nullable();
+            $table->text('reason_approval')->nullable();
 
             $table->smallInteger('status_payment')->nullable();
             $table->smallInteger('status')->default(0)->nullable();

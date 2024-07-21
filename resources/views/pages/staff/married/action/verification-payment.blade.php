@@ -8,6 +8,11 @@
         <form method="POST" action="{{ route('staff.verification_payment', $married->id) }}">
             @csrf
             @method('PUT')
+            <div class="form-group">
+                <label>Keterangan</label>
+                <input type="text" class="form-control" placeholder="Diisi hanya jika menolak"
+                    name="reason_approval">
+            </div>
             <button type="submit" name="type" value="tolak" class="btn btn-icon btn-lg icon-left btn-danger"><i
                     class="fas fa-times"></i> Tolak
             </button>

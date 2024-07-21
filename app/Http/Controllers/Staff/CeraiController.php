@@ -32,8 +32,19 @@ class CeraiController extends Controller
     public function approval(Request $request, Perceraian $cerai)
     {
         DB::transaction(function () use ($request, $cerai) {
-            $status = $request->action == 'approve' ? 2 : 3;
-            $cerai->update(['status' => $status]);
+            $data = $request->validate([
+                'action' => ['required', 'in:approve,declined'],
+                'reason_approval' => ['required_if:action,declined']
+            ], [
+                'reason_approval.required_if' => 'Keterangan harus diisi jika anda memilih menolak',
+                'action.in' => 'Tipe approval tidak terdaftar',
+            ]);
+
+            $status = $data['action'] == 'approve' ? 2 : 3;
+            $cerai->update([
+                'status' => $status,
+                'reason_approval' => $data['reason_approval']
+            ]);
 
             if ($status == 2) {
                 $cerai->married->update(['status_married' => "Cerai"]);
@@ -44,16 +55,18 @@ class CeraiController extends Controller
                     'is_read' => false
                 ]);
 
-                Mail::to($cerai->married->user->email)->send(new CeraiEmail('approve'));
+                if ($cerai->married->user->email != null)
+                    Mail::to($cerai->married->user->email)->send(new CeraiEmail('approve'));
             } else if ($status == 3) {
                 $cerai->married->notifications()->create([
-                    'description' => 'Pengajuan cerai ditolak',
+                    'description' => 'Pengajuan cerai ditolak. Alasan : ' . ucwords($data['reason_approval']),
                     'message' => 'Ditolak',
                     'type' => 'danger',
                     'is_read' => false
                 ]);
 
-                Mail::to($cerai->married->user->email)->send(new CeraiEmail('declined'));
+                if ($cerai->married->user->email != null)
+                    Mail::to($cerai->married->user->email)->send(new CeraiEmail('declined'));
             }
         });
 

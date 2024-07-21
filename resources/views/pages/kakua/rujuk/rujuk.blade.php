@@ -84,7 +84,7 @@
                                                     <td>{{ $rujuk->married->wives?->name_wife ?? '-' }}
                                                     </td>
                                                     <td>
-                                                        {{ $rujuk->created_at?->isoFormat('dddd, D MMMM Y') }}</td>
+                                                        {{ $rujuk->created_at?->isoFormat('dddd, D MMMM Y HH:mm') }}</td>
                                                     <td>
                                                         {{ $rujuk->tanggal_verifikasi?->isoFormat('dddd, D MMMM Y HH:mm') ?? 'Belum ditentukan' }}
                                                     </td>

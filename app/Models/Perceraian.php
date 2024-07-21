@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Perceraian
- * 
+ *
  * @property int $id
  * @property int $married_id
  * @property string|null $surat_putusan
@@ -22,31 +22,32 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * 
+ *
  * @property Married $married
  *
  * @package App\Models
  */
 class Perceraian extends Model
 {
-	use SoftDeletes;
-	protected $table = 'perceraian';
+    use SoftDeletes;
+    protected $table = 'perceraian';
 
-	protected $casts = [
-		'married_id' => 'int',
-		'status' => 'int'
-	];
+    protected $casts = [
+        'married_id' => 'int',
+        'status' => 'int'
+    ];
 
-	protected $fillable = [
-		'married_id',
-		'surat_putusan',
-		'surat_keterangan_hamil',
-		'berita_acara_mediasi',
-		'status'
-	];
+    protected $fillable = [
+        'married_id',
+        'surat_putusan',
+        'surat_keterangan_hamil',
+        'berita_acara_mediasi',
+        'status',
+        'reason_approval'
+    ];
 
-	public function married()
-	{
-		return $this->belongsTo(Married::class);
-	}
+    public function married()
+    {
+        return $this->belongsTo(Married::class);
+    }
 }

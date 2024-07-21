@@ -45,6 +45,7 @@ class RegisterRequest extends FormRequest
             "akad_time_hijriah" => ['required',  'date_format:H:i'],
             "akad_location" => ['required', 'string'],
             "desa_location" => ['required', 'string'],
+            "mahar" => ['required', 'string'],
 
             "citizen_husband" => ['required', 'in:WBI,WNA'],
             "nationality_husband" => ['required', 'string'],

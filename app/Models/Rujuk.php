@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Rujuk
- * 
+ *
  * @property int $id
  * @property int $married_id
  * @property string|null $ktp_husband
@@ -25,35 +25,36 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * 
+ *
  * @property Married $married
  *
  * @package App\Models
  */
 class Rujuk extends Model
 {
-	use SoftDeletes;
-	protected $table = 'rujuk';
+    use SoftDeletes;
+    protected $table = 'rujuk';
 
-	protected $casts = [
-		'married_id' => 'int',
-		'tanggal_verifikasi' => 'datetime',
-		'status' => 'int'
-	];
+    protected $casts = [
+        'married_id' => 'int',
+        'tanggal_verifikasi' => 'datetime',
+        'status' => 'int'
+    ];
 
-	protected $fillable = [
-		'married_id',
-		'ktp_husband',
-		'ktp_wife',
-		'akta_cerai',
-		'buku_nikah',
-		'tanggal_verifikasi',
-		'berita_acara',
-		'status'
-	];
+    protected $fillable = [
+        'married_id',
+        'ktp_husband',
+        'ktp_wife',
+        'akta_cerai',
+        'buku_nikah',
+        'tanggal_verifikasi',
+        'berita_acara',
+        'status',
+        'reason_approval'
+    ];
 
-	public function married()
-	{
-		return $this->belongsTo(Married::class);
-	}
+    public function married()
+    {
+        return $this->belongsTo(Married::class);
+    }
 }

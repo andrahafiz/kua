@@ -6,9 +6,9 @@
                      <div class="alert-icon"><i class="far fa-lightbulb"></i>
                      </div>
                      <div class="alert-body">
-                         <div class="alert-title">Info</div>
-                         Verifikasi pembayaran anda ditolak, mohon untuk
-                         melakukan transfer ulang atau mengupload ulang bukti
+                         <div class="alert-title"> Verifikasi Pembayaran Anda Ditolak</div>
+                         Alasan : {{ $married->reason_approval }}<br />
+                         Mohon untuk melakukan transfer ulang atau mengupload ulang bukti
                      </div>
                  </div>
              </div>
@@ -63,6 +63,9 @@
                                  @if ($married->status > 2) disabled @endif>
                          </div>
                      </div>
+                     <hr />
+                     <button type="submit" name="action" class="btn btn-primary btn-lg btn-block"
+                         value="daftar">Daftar</button>
                  </div>
              </div>
          </div>
@@ -79,6 +82,14 @@
                                  <div class="alert-title">Pemberitahuan</div>
                                  Pembayaran anda sedang dalam proses verifikasi.
                              </div>
+                             <a href="{{ Helper::setUrlImage($paymentmarried?->proof_payment) }}"
+                                 class="chocolat-image">
+                                 <div>
+                                     <img alt="image"
+                                         src="{{ Helper::setUrlImage($paymentmarried?->proof_payment) }}"
+                                         class="img-fluid img-thumbnail w-50">
+                                 </div>
+                             </a>
                          @else
                              <a href="{{ Helper::setUrlImage($paymentmarried?->proof_payment) }}"
                                  class="chocolat-image">
@@ -92,6 +103,7 @@
                      @endif
 
                  </div>
+
                  {{-- <div class="lead">
                                                                 <div class="form-group row">
 

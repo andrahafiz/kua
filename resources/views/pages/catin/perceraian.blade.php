@@ -59,6 +59,21 @@
                     </div>
                 @endif
                 <div class="section-body">
+                    @if ($perceraian->status == 3 && $perceraian->reason_approval != null)
+                        <div class="row">
+                            <div class="col">
+                                <div class="alert alert-danger alert-has-icon">
+                                    <div class="alert-icon"><i class="far fa-lightbulb"></i>
+                                    </div>
+                                    <div class="alert-body">
+                                        <div class="alert-title">Verifikasi Dokumen Perceraian Anda Ditolak</div>
+                                        Alasan : {{ $perceraian->reason_approval }}<br />
+                                        Mohon untuk melakukan pengupload ulang
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-22">
                             <div class="card">
@@ -252,8 +267,6 @@
                                         <h3>Halaman ini belum di buka</h3>
                                     </div>
                                 @endif
-
-
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,6 @@ class RegisterController extends Controller
         $married = Married::with(['husbands'])->where('users_id', Auth::user()->id)->first();
         $documentmarried = MarriedDocument::where('married_id', $married->id)->first();
         $paymentmarried = MarriedPayment::where('married_id', $married->id)->first();
-
         return view('pages.catin.pendaftaran', compact('married', 'documentmarried', 'paymentmarried'));
     }
 
@@ -72,6 +71,7 @@ class RegisterController extends Controller
                 'kua' => $request->kua,
                 'married_on' => $request->married_on,
                 'desa_location' => $request->desa_location,
+                'mahar' => $request->mahar,
                 'status_payment' => '0',
                 'status' => 0,
             ]
@@ -152,22 +152,22 @@ class RegisterController extends Controller
     private function saveDocumentHusband(Married $married, $request)
     {
         $documentPaths = [
-            'photo_husband' => $this->uploadFile($request->file('photo_husband'), $married->registration_number, 'photo_husband'),
-            'ktp_husband' => $this->uploadFile($request->file('ktp_husband'), $married->registration_number, 'ktp_husband'),
-            'kk_husband' => $this->uploadFile($request->file('kk_husband'), $married->registration_number, 'kk_husband'),
-            'akta_husband' => $this->uploadFile($request->file('akta_husband'), $married->registration_number, 'akta_husband'),
-            'ijazah_husband' => $this->uploadFile($request->file('ijazah_husband'), $married->registration_number, 'ijazah_husband'),
-            'surat_keterangan_wali_nikah_husband' => $this->uploadFile($request->file('surat_keterangan_wali_nikah_husband'), $married->registration_number, 'surat_keterangan_wali_nikah_husband'),
-            'N1_husband' => $this->uploadFile($request->file('N1_husband'), $married->registration_number, 'N1_husband'),
-            'N4_husband' => $this->uploadFile($request->file('N4_husband'), $married->registration_number, 'N4_husband'),
-            'N2_husband' => $this->uploadFile($request->file('N2_husband'), $married->registration_number, 'N2_husband'),
-            'N5_husband' => $this->uploadFile($request->file('N5_husband'), $married->registration_number, 'N5_husband'),
-            'akta_cerai_husband' => $this->uploadFile($request->file('akta_cerai_husband'), $married->registration_number, 'akta_cerai_husband'),
-            'akta_kematian_husband' => $this->uploadFile($request->file('akta_kematian_husband'), $married->registration_number, 'akta_kematian_husband'),
-            'rekomendasi_kua_husband' => $this->uploadFile($request->file('rekomendasi_kua_husband'), $married->registration_number, 'rekomendasi_kua_husband'),
-            'surat_kedutaan_husband' => $this->uploadFile($request->file('surat_kedutaan_husband'), $married->registration_number, 'surat_kedutaan_husband'),
-            'surat_izin_komandan_husband' => $this->uploadFile($request->file('surat_izin_komandan_husband'), $married->registration_number, 'surat_izin_komandan_husband'),
-            'surat_dispensasi_husband' => $this->uploadFile($request->file('surat_dispensasi_husband'), $married->registration_number, 'surat_dispensasi_husband'),
+            'photo_husband' => $this->uploadFile('documents', $request->file('photo_husband'), $married->registration_number, 'photo_husband'),
+            'ktp_husband' => $this->uploadFile('documents', $request->file('ktp_husband'), $married->registration_number, 'ktp_husband'),
+            'kk_husband' => $this->uploadFile('documents', $request->file('kk_husband'), $married->registration_number, 'kk_husband'),
+            'akta_husband' => $this->uploadFile('documents', $request->file('akta_husband'), $married->registration_number, 'akta_husband'),
+            'ijazah_husband' => $this->uploadFile('documents', $request->file('ijazah_husband'), $married->registration_number, 'ijazah_husband'),
+            'surat_keterangan_wali_nikah_husband' => $this->uploadFile('documents', $request->file('surat_keterangan_wali_nikah_husband'), $married->registration_number, 'surat_keterangan_wali_nikah_husband'),
+            'N1_husband' => $this->uploadFile('documents', $request->file('N1_husband'), $married->registration_number, 'N1_husband'),
+            'N4_husband' => $this->uploadFile('documents', $request->file('N4_husband'), $married->registration_number, 'N4_husband'),
+            'N2_husband' => $this->uploadFile('documents', $request->file('N2_husband'), $married->registration_number, 'N2_husband'),
+            'N5_husband' => $this->uploadFile('documents', $request->file('N5_husband'), $married->registration_number, 'N5_husband'),
+            'akta_cerai_husband' => $this->uploadFile('documents', $request->file('akta_cerai_husband'), $married->registration_number, 'akta_cerai_husband'),
+            'akta_kematian_husband' => $this->uploadFile('documents', $request->file('akta_kematian_husband'), $married->registration_number, 'akta_kematian_husband'),
+            'rekomendasi_kua_husband' => $this->uploadFile('documents', $request->file('rekomendasi_kua_husband'), $married->registration_number, 'rekomendasi_kua_husband'),
+            'surat_kedutaan_husband' => $this->uploadFile('documents', $request->file('surat_kedutaan_husband'), $married->registration_number, 'surat_kedutaan_husband'),
+            'surat_izin_komandan_husband' => $this->uploadFile('documents', $request->file('surat_izin_komandan_husband'), $married->registration_number, 'surat_izin_komandan_husband'),
+            'surat_dispensasi_husband' => $this->uploadFile('documents', $request->file('surat_dispensasi_husband'), $married->registration_number, 'surat_dispensasi_husband'),
         ];
         $married->married_documents()->updateOrCreate(
             ['married_id' => $married->id],
@@ -178,22 +178,22 @@ class RegisterController extends Controller
     private function saveDocumentWife(Married $married, $request)
     {
         $documentPaths = [
-            'photo_wife' => $this->uploadFile($request->file('photo_wife'), $married->registration_number, 'photo_wife'),
-            'ktp_wife' => $this->uploadFile($request->file('ktp_wife'), $married->registration_number, 'ktp_wife'),
-            'kk_wife' => $this->uploadFile($request->file('kk_wife'), $married->registration_number, 'kk_wife'),
-            'akta_wife' => $this->uploadFile($request->file('akta_wife'), $married->registration_number, 'akta_wife'),
-            'ijazah_wife' => $this->uploadFile($request->file('ijazah_wife'), $married->registration_number, 'ijazah_wife'),
-            'surat_keterangan_wali_nikah_wife' => $this->uploadFile($request->file('surat_keterangan_wali_nikah_wife'), $married->registration_number, 'surat_keterangan_wali_nikah_wife'),
-            'N1_wife' => $this->uploadFile($request->file('N1_wife'), $married->registration_number, 'N1_wife'),
-            'N4_wife' => $this->uploadFile($request->file('N4_wife'), $married->registration_number, 'N4_wife'),
-            'N2_wife' => $this->uploadFile($request->file('N2_wife'), $married->registration_number, 'N2_wife'),
-            'N5_wife' => $this->uploadFile($request->file('N5_wife'), $married->registration_number, 'N5_wife'),
-            'akta_cerai_wife' => $this->uploadFile($request->file('akta_cerai_wife'), $married->registration_number, 'akta_cerai_wife'),
-            'akta_kematian_wife' => $this->uploadFile($request->file('akta_kematian_wife'), $married->registration_number, 'akta_kematian_wife'),
-            'rekomendasi_kua_wife' => $this->uploadFile($request->file('rekomendasi_kua_wife'), $married->registration_number, 'rekomendasi_kua_wife'),
-            'surat_kedutaan_wife' => $this->uploadFile($request->file('surat_kedutaan_wife'), $married->registration_number, 'surat_kedutaan_wife'),
-            'surat_izin_komandan_wife' => $this->uploadFile($request->file('surat_izin_komandan_wife'), $married->registration_number, 'surat_izin_komandan_wife'),
-            'surat_dispensasi_wife' => $this->uploadFile($request->file('surat_dispensasi_wife'), $married->registration_number, 'surat_dispensasi_wife'),
+            'photo_wife' => $this->uploadFile('documents', $request->file('photo_wife'), $married->registration_number, 'photo_wife'),
+            'ktp_wife' => $this->uploadFile('documents', $request->file('ktp_wife'), $married->registration_number, 'ktp_wife'),
+            'kk_wife' => $this->uploadFile('documents', $request->file('kk_wife'), $married->registration_number, 'kk_wife'),
+            'akta_wife' => $this->uploadFile('documents', $request->file('akta_wife'), $married->registration_number, 'akta_wife'),
+            'ijazah_wife' => $this->uploadFile('documents', $request->file('ijazah_wife'), $married->registration_number, 'ijazah_wife'),
+            'surat_keterangan_wali_nikah_wife' => $this->uploadFile('documents', $request->file('surat_keterangan_wali_nikah_wife'), $married->registration_number, 'surat_keterangan_wali_nikah_wife'),
+            'N1_wife' => $this->uploadFile('documents', $request->file('N1_wife'), $married->registration_number, 'N1_wife'),
+            'N4_wife' => $this->uploadFile('documents', $request->file('N4_wife'), $married->registration_number, 'N4_wife'),
+            'N2_wife' => $this->uploadFile('documents', $request->file('N2_wife'), $married->registration_number, 'N2_wife'),
+            'N5_wife' => $this->uploadFile('documents', $request->file('N5_wife'), $married->registration_number, 'N5_wife'),
+            'akta_cerai_wife' => $this->uploadFile('documents', $request->file('akta_cerai_wife'), $married->registration_number, 'akta_cerai_wife'),
+            'akta_kematian_wife' => $this->uploadFile('documents', $request->file('akta_kematian_wife'), $married->registration_number, 'akta_kematian_wife'),
+            'rekomendasi_kua_wife' => $this->uploadFile('documents', $request->file('rekomendasi_kua_wife'), $married->registration_number, 'rekomendasi_kua_wife'),
+            'surat_kedutaan_wife' => $this->uploadFile('documents', $request->file('surat_kedutaan_wife'), $married->registration_number, 'surat_kedutaan_wife'),
+            'surat_izin_komandan_wife' => $this->uploadFile('documents', $request->file('surat_izin_komandan_wife'), $married->registration_number, 'surat_izin_komandan_wife'),
+            'surat_dispensasi_wife' => $this->uploadFile('documents', $request->file('surat_dispensasi_wife'), $married->registration_number, 'surat_dispensasi_wife'),
         ];
         $married->married_documents()->updateOrCreate(
             ['married_id' => $married->id],
@@ -247,11 +247,11 @@ class RegisterController extends Controller
         );
     }
 
-    private function uploadFile($file, $registrationNumber, $suffix)
+    private function uploadFile($folder, $file, $registrationNumber, $suffix)
     {
         if ($file instanceof UploadedFile) {
             $path = $registrationNumber . "_" . $suffix . "." . $file->getClientOriginalExtension();
-            $file->storeAs('public/documents', $path);
+            $file->storeAs('public/' . $folder, $path);
             return $path;
         }
         return null;
@@ -270,8 +270,7 @@ class RegisterController extends Controller
     private function uploadPayment(Married $married, $request)
     {
         $path = 'public/photos/payment/';
-        $path_payment = $this->uploadFile($request->file('proof_payment'), $married->registration_number, 'proof_payment');
-
+        $path_payment = $this->uploadFile('photos/payment', $request->file('proof_payment'), $married->registration_number, 'proof_payment');
         if ($request->married_on == "DI KUA") {
             $married->update(['status_payment' => 2, 'status' => 0]);
         } else {
