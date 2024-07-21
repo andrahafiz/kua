@@ -28,6 +28,7 @@ class PenghuluCreateRequest extends FormRequest
             'phone' => ['numeric', 'required', 'unique:penghulu,phone'],
             'address' => ['string'],
             'photo' => ['file', 'image', 'mimes:png,jpg'],
+            'status' => ['required', 'in:1,0'],
         ];
     }
     public function messages()

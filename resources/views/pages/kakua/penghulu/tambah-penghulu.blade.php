@@ -90,6 +90,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
+                                        <div class="col-sm-12 col-md-8">
+                                            <div class="form-check form-check-inline mt-2">
+                                                <input class="form-check-input" type="radio" name="status" id="radiotrue"
+                                                    value="1" @checked(old('status') == 1)>
+                                                <label class="form-check-label" for="radiotrue">Aktif</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mt-2">
+                                                <input class="form-check-input" type="radio" name="status"
+                                                    id="radiofalse" value="0" @checked(old('status') == 0)>
+                                                <label class="form-check-label" for="radiofalse">Non Aktif</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                         <div class="col-sm-12 col-md-8">
                                             <button class="btn btn-primary btn-lg btn-block" type="submit">Tambah
