@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('surat_putusan')->nullable();
             $table->string('surat_keterangan_hamil')->nullable();
             $table->string('berita_acara_mediasi')->nullable();
+            $table->string('reason_approval')->nullable();
             $table->smallInteger('status')->default(0);
+
             $table->timestamps();
             $table->softDeletes();
 

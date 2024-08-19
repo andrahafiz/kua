@@ -79,7 +79,8 @@
                                                         {{ $married->akad_date_masehi?->isoFormat('dddd, D MMMM Y') }}</td>
                                                     <td class="align-middle">
                                                         {{ $married->akad_date_masehi?->isoFormat('HH:mm') }}</td>
-                                                    <td class="align-middle">{{ $married->penghulu->name_penghulu }}</td>
+                                                    <td class="align-middle">
+                                                        {{ $married->penghulu?->name_penghulu ?? '-' }}</td>
                                                     <td width="10%" class="align-middle">
                                                         <a href="{{ route('kakua.married.show', $married->id) }}"
                                                             class="btn btn-icon btn-sm btn-primary">

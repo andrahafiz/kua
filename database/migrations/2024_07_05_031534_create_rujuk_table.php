@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('buku_nikah')->nullable();
             $table->dateTime('tanggal_verifikasi')->nullable();
             $table->string('berita_acara')->nullable();
+            $table->string('reason_approval')->nullable();
             $table->smallInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();

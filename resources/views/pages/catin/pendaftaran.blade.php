@@ -1,4 +1,7 @@
 @extends('layouts.app-catin')
+@php
+    dump($married->rujuk()->exists(), $married->married_payment()->exists());
+@endphp
 
 @section('title', 'Pendaftaran')
 
@@ -87,6 +90,7 @@
                                             <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#pembayaran"
                                                 role="tab" aria-controls="contact" aria-selected="false">Pembayaran</a>
                                         </li>
+
                                     </ul>
 
                                     <div class="tab-content" id="myTabContent2">

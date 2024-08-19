@@ -77,7 +77,9 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-lg-22">
                             <div class="card">
-                                @if ($married->status_married == 'Cerai' || $married->status_married == 'Rujuk')
+                                @if ($married->status_married == null)
+                                    @includeIf('pages.catin.rujuk-non')
+                                @elseif ($married->status_married == 'Cerai' || $married->status_married == 'Rujuk')
                                     <div class="card-body pb-0">
                                         <div class="section-title">Data Pernikahan</div>
                                         <div class="row">
@@ -343,7 +345,7 @@
                                                 <i class="fas fa-exclamation-triangle"></i> Data anda sudah validasi oleh
                                                 staff kami. Data tidak dapat diubah lagi</button>
                                         @else
-                                            <button type="submit"
+                                            <button type="submit" value="rujuk-regis" name="action"
                                                 class="btn btn-icon btn-lg icon-left btn-primary btn-block">
                                                 <i class="fas fa-check"></i> Ajukan Rujuk</button>
                                         @endif

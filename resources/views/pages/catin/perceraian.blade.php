@@ -59,7 +59,7 @@
                     </div>
                 @endif
                 <div class="section-body">
-                    @if ($perceraian->status == 3 && $perceraian->reason_approval != null)
+                    @if ($perceraian?->status == 3 && $perceraian?->reason_approval != null)
                         <div class="row">
                             <div class="col">
                                 <div class="alert alert-danger alert-has-icon">
