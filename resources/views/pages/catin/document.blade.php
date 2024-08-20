@@ -50,7 +50,12 @@
                                                 <td>Model N4</td>
                                                 <td><a target="blank" href="{{ asset('document/Model N4.pdf') }}"
                                                         class="btn btn-icon btn-sm btn-info"><i
-                                                            class="fas fa-download"></i></a></td>
+                                                            class="fas fa-download"></i></a>
+                                                    <a target="blank"
+                                                        href="{{ route('catin.download.document.show', 'N4') }}"
+                                                        class="btn btn-icon btn-sm btn-primary"><i
+                                                            class="fas fa-file"></i></a>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>

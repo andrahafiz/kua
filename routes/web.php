@@ -127,7 +127,8 @@ Route::middleware(['web', 'auth', 'checkRole:catin'])->prefix('catin')->name('ca
         }
     );
 
-    Route::get('document', DocumentDownloadController::class)->name('download.document');
+    Route::get('document', [DocumentDownloadController::class, 'index'])->name('download.document');
+    Route::get('document/{type}', [DocumentDownloadController::class, 'download'])->name('download.document.show');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

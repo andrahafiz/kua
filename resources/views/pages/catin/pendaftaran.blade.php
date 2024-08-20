@@ -1,7 +1,7 @@
 @extends('layouts.app-catin')
-@php
+{{-- @php
     dump($married->rujuk()->exists(), $married->married_payment()->exists());
-@endphp
+@endphp --}}
 
 @section('title', 'Pendaftaran')
 

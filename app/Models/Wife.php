@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -113,6 +114,11 @@ class Wife extends Model
         'job_mother_wife',
         'address_mother_wife'
     ];
+
+    protected function getDateBirthAttribute()
+    {
+        return $this->location_birth_wife . ', ' . $this->date_birth_wife?->isoFormat('D MMMM Y');
+    }
 
     public function married()
     {

@@ -114,6 +114,12 @@ class Husband extends Model
         'address_mother_husband'
     ];
 
+    protected function getDateBirthAttribute()
+    {
+        return $this->location_birth_husband . ', ' . $this->date_birth_husband?->isoFormat('D MMMM Y');
+    }
+
+
     public function married()
     {
         return $this->belongsTo(Married::class);
