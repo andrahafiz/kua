@@ -39,9 +39,7 @@
         }
 
         .sign-line {
-            margin-top: 30px;
-
-            text-align: center;
+            margin-top: 90px;
         }
 
         #suami td {
@@ -162,16 +160,20 @@
             <p>Pangean, {{ now()->isoFormat('D MMMM Y') }}</p>
         </div>
         <div class="sign-line">
-            <table border="1" style="width: 60%; text-align:center">
+            <table style="width: 100%; text-align:center">
                 <tr>
+                    <td></td>
                     <td style="border-bottom:2px solid black">{{ $data->husbands?->name_husband }}</td>
                     <td></td>
                     <td style="border-bottom:2px solid black">{{ $data->wives?->name_wife }}</td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>Calon Suami</td>
                     <td></td>
-                    <td>Calon Istri</td>
+                    <td style="width: 40%">Calon Suami</td>
+                    <td></td>
+                    <td style="width: 40%">Calon Istri</td>
+                    <td></td>
                 </tr>
             </table>
         </div>
